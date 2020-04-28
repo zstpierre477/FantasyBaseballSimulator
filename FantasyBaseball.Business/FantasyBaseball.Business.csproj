@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataManager\FantasyBaseball.Repository.csproj" />
+    <ProjectReference Include="..\Entities\FantasyBaseball.Entities.csproj" />
+    <ProjectReference Include="..\FantasyBaseballUI\FantasyBaseball.UI.csproj" />
+  </ItemGroup>
+
+</Project>
