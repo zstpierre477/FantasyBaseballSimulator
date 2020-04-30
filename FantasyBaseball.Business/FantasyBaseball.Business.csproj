@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataManager\FantasyBaseball.Repository.csproj" />
-    <ProjectReference Include="..\Entities\FantasyBaseball.Entities.csproj" />
-    <ProjectReference Include="..\FantasyBaseballUI\FantasyBaseball.UI.csproj" />
+    <ProjectReference Include="..\FantasyBaseball.Entities\FantasyBaseball.Entities.csproj" />
+    <ProjectReference Include="..\FantasyBaseball.Repository\FantasyBaseball.Repository.csproj" />
+    <ProjectReference Include="..\FantasyBaseball.UI\FantasyBaseball.UI.csproj" />
   </ItemGroup>
 
 </Project>

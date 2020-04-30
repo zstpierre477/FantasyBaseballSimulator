@@ -18,7 +18,7 @@ namespace FantasyBaseball.Entities
         [ForeignKey("League")]
         public int LeagueId { get; set; }
 
-        public League League { get; set;; }
+        public League League { get; set; }
 
         [ForeignKey("Person")]
         public int PersonId { get; set; }

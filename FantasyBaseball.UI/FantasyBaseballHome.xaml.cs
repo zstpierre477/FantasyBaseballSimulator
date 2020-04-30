@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace FantasyBaseball.UI
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for FantasyBaseballHome.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class FantasyBaseballHome : Page
     {
-        public MainWindow()
+        public FantasyBaseballHome()
         {
             InitializeComponent();
         }

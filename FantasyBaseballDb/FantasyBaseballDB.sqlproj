@@ -7,22 +7,23 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{e6ded316-da20-4e3e-81aa-b994de190c1f}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>FantasyBaseballDB</RootNamespace>
+    <RootNamespace>FantasyBaseballDb</RootNamespace>
     <AssemblyName>FantasyBaseballDB</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
     <TargetDatabase>FantasyBaseballDb</TargetDatabase>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -57,32 +58,43 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="Scripts" />
+    <Folder Include="Scripts\InitializeDbScripts" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="CreateDatabase.sql" />
-    <Build Include="AllStarData.sql" />
-    <Build Include="AppearancesData.sql" />
-    <Build Include="AwardData.sql" />
-    <Build Include="AwardVotingData.sql" />
-    <Build Include="BattingStintData.sql" />
-    <Build Include="BattingPostseasonRound.sql" />
-    <Build Include="CollegeStintData.sql" />
-    <Build Include="DivisionData.sql" />
-    <Build Include="FieldingOutfieldStintData.sql" />
-    <Build Include="FieldingStintData.sql" />
-    <Build Include="FieldingPostseasonRound.sql" />
-    <Build Include="HallOfFameMemberData.sql" />
-    <Build Include="ParkStintData.sql" />
-    <Build Include="LeagueData.sql" />
-    <Build Include="ManagerStintData.sql" />
-    <Build Include="ParkData.sql" />
-    <Build Include="PersonData.sql" />
-    <Build Include="PitchingStintData.sql" />
-    <Build Include="PitchingPostseasonRound.sql" />
-    <Build Include="SalaryData.sql" />
-    <Build Include="SchoolData.sql" />
-    <Build Include="PostseasonSeriesData.sql" />
-    <Build Include="TeamData.sql" />
-    <Build Include="FranchiseData.sql" />
+    <None Include="Scripts\InitializeDbScripts\AllStarData.sql" />
+    <None Include="Scripts\InitializeDbScripts\AppearancesData.sql" />
+    <None Include="Scripts\InitializeDbScripts\AwardData.sql" />
+    <None Include="Scripts\InitializeDbScripts\AwardVotingData.sql" />
+    <None Include="Scripts\InitializeDbScripts\BattingPostseasonRoundData.sql" />
+    <None Include="Scripts\InitializeDbScripts\BattingStintData.sql" />
+    <None Include="Scripts\InitializeDbScripts\CollegeStintData.sql" />
+    <None Include="Scripts\InitializeDbScripts\DivisionData.sql" />
+    <None Include="Scripts\InitializeDbScripts\FieldingOutfieldStintData.sql" />
+    <None Include="Scripts\InitializeDbScripts\FieldingPostseasonRoundData.sql" />
+    <None Include="Scripts\InitializeDbScripts\FieldingStintData.sql" />
+    <None Include="Scripts\InitializeDbScripts\FranchiseData.sql" />
+    <None Include="Scripts\InitializeDbScripts\HallOfFameMemberData.sql" />
+    <None Include="Scripts\InitializeDbScripts\LeagueData.sql" />
+    <None Include="Scripts\InitializeDbScripts\ManagerStintData.sql" />
+    <None Include="Scripts\InitializeDbScripts\ParkData.sql" />
+    <None Include="Scripts\InitializeDbScripts\ParkStintData.sql" />
+    <None Include="Scripts\InitializeDbScripts\PersonData.sql" />
+    <None Include="Scripts\InitializeDbScripts\PitchingPostseasonRoundData.sql" />
+    <None Include="Scripts\InitializeDbScripts\PitchingStintData.sql" />
+    <None Include="Scripts\InitializeDbScripts\PostseasonSeriesData.sql" />
+    <None Include="Scripts\InitializeDbScripts\SalaryData.sql" />
+    <None Include="Scripts\InitializeDbScripts\SchoolData.sql" />
+    <None Include="Scripts\InitializeDbScripts\TeamData.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\CreateDatabase.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="publish.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <PostDeploy Include="Scripts\Main.sql" />
   </ItemGroup>
 </Project>

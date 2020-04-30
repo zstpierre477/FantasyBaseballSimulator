@@ -1,5 +1,3 @@
-GO
-
 CREATE TABLE AllStar (
   AllStarId int NOT NULL IDENTITY(1,1),
   PlayerId int NOT NULL,
