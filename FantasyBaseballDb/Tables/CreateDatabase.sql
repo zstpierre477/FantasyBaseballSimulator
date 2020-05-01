@@ -1,6 +1,6 @@
 CREATE TABLE AllStar (
   AllStarId int NOT NULL IDENTITY(1,1),
-  PlayerId int NOT NULL,
+  PersonId int NOT NULL,
   Year smallint DEFAULT NULL,
   GameNumber smallint NOT NULL,
   GameId varchar(12) DEFAULT NULL,
@@ -11,7 +11,8 @@ CREATE TABLE AllStar (
   StartingPositionId smallint DEFAULT NULL,
   PRIMARY KEY (AllStarId),
   FOREIGN KEY (LeagueId) REFERENCES League(LeagueId),
-  FOREIGN KEY (TeamId) REFERENCES Team(TeamId)
+  FOREIGN KEY (TeamId) REFERENCES Team(TeamId),
+  FOREIGN KEY (PersonId) REFERENCES Person(PersonId)
 );
 
 GO
@@ -282,7 +283,7 @@ GO
 CREATE TABLE League (
   LeagueId int IDENTITY(1,1),
   LeagueAbbreviation char(2) NOT NULL,
-  League varchar(50) NOT NULL,
+  LeagueName varchar(50) NOT NULL,
   Active bit NOT NULL,
   PRIMARY KEY (LeagueId)
 );
@@ -342,7 +343,7 @@ CREATE TABLE ParkStint (
   PRIMARY KEY (ParkStintId),
   FOREIGN KEY (LeagueId) REFERENCES League (LeagueId),
   FOREIGN KEY (TeamId) REFERENCES Team (TeamId),
-  FOREIGN KEY (ParkId) REFERENCES Park (PArkId)
+  FOREIGN KEY (ParkId) REFERENCES Park (ParkId)
 );
 
 GO
@@ -533,7 +534,7 @@ CREATE TABLE Team (
   Losses smallint DEFAULT NULL,
   WonDivision bit DEFAULT NULL,
   WonWildCard bit DEFAULT NULL,
-  WonLEague bit DEFAULT NULL,
+  WonLeague bit DEFAULT NULL,
   WonWorldSeries bit DEFAULT NULL,
   Runs smallint DEFAULT NULL,
   AtBats smallint DEFAULT NULL,

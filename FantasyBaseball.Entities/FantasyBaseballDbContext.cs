@@ -67,7 +67,7 @@ namespace FantasyBaseball.Entities
                 .IsUnique(true);
 
             modelBuilder.Entity<Team>()
-                .HasIndex(m => new { m.Year, m.LeagueId, m.TeamName })
+                .HasIndex(m => new { m.Year, m.LeagueId, m.TeamAbbreviation })
                 .IsUnique(true);
         }
 

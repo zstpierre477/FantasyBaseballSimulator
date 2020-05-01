@@ -95,6 +95,6 @@
     <None Include="publish.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <PostDeploy Include="Scripts\Main.sql" />
+    <None Include="Scripts\PostDeploy.sql" />
   </ItemGroup>
 </Project>
