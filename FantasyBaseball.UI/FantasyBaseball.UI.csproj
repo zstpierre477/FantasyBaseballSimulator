@@ -6,4 +6,26 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Images\fenway-top-view.jpg" />
+    <None Remove="Images\fenway.jpg" />
+    <None Remove="Images\PlayBall.png" />
+    <None Remove="ViewModels\xr4zqm1j.xkv~" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.3" />
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FantasyBaseball.Business\FantasyBaseball.Business.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\fenway-top-view.jpg" />
+    <Resource Include="Images\fenway.jpg" />
+    <Resource Include="Images\PlayBall.png" />
+  </ItemGroup>
+
 </Project>

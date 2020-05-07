@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FantasyBaseball.UI.Windows;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using FantasyBaseball.UI.ViewModels;
 
 namespace FantasyBaseball.UI
 {
@@ -18,9 +10,20 @@ namespace FantasyBaseball.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+
+        private IViewModelFactory ViewModelFactory { get; set; }
+
+        public MainWindow(IViewModelFactory viewModelFactory)
         {
             InitializeComponent();
+            ViewModelFactory = viewModelFactory;
+        }
+
+        private void PlayBallButton_Click(object sender, RoutedEventArgs e)
+        {
+            var gameSelectorWindow = new GameSelectorWindow(ViewModelFactory);
+            gameSelectorWindow.ShowDialog();
+            Close();
         }
     }
 }
