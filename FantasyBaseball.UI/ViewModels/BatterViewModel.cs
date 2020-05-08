@@ -52,5 +52,17 @@ namespace FantasyBaseball.UI.ViewModels
         {
             throw new NotImplementedException();
         }
+
+        public int CurrentGameAtBats { get; set; }
+
+        public int CurrentGameHits { get; set; }
+
+        public int CurrentGameRuns { get; set; }
+
+        public int CurrentGameRunsBattedIn { get; set; }
+
+        public int CurrentGameHomeRuns { get; set; }
+
+        public int CurrentGameWalks { get; set; }
     }
 }

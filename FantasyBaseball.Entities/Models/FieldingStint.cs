@@ -1,4 +1,6 @@
-﻿namespace FantasyBaseball.Entities.Models
+﻿using FantasyBaseball.Entities.Enums;
+
+namespace FantasyBaseball.Entities.Models
 {
     public partial class FieldingStint
     {
@@ -9,7 +11,16 @@
         public string TeamAbbreviation { get; set; }
         public int? TeamId { get; set; }
         public int? LeagueId { get; set; }
-        public string Position { get; set; }
+        private string _position;
+        public string Position
+        {
+            get { return _position; }
+            set
+            {
+                _position = value;
+                PositionType = PositionTypeHelpers.ToPositionType(_position);
+            }
+        }
         public short? Games { get; set; }
         public short? GamesStarted { get; set; }
         public short? InningsPlayedOuts { get; set; }
@@ -26,5 +37,7 @@
         public virtual League League { get; set; }
         public virtual Person Person { get; set; }
         public virtual Team Team { get; set; }
+
+        public PositionType PositionType { get; set; }
     }
 }

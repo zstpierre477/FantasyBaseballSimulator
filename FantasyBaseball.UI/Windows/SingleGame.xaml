@@ -54,48 +54,65 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="Black"/>
+            <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="Black"/>
+            <Border Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="Black"/>
+            <Border Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="Black"/>
+            <Border Grid.Column="4" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="Black"/>
+            <Border Grid.Column="5" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="Black"/>
+            <Border Grid.Column="6" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="Black"/>
+            <Border Grid.Column="7" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="Black"/>
+            <Border Grid.Column="8" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="Black"/>
+            <Border Grid.Column="9" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="Black"/>
+            <Border Grid.Column="10" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="Black"/>
+            <Border Grid.Column="11" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="Black"/>
+            <Border Grid.Column="12" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="Black"/>
+            <Border Grid.Column="13" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="Black"/>
+            <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="14" BorderThickness="1" BorderBrush="Black"/>
+            <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="14" BorderThickness="1" BorderBrush="Black"/>
+            <Border Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="14" BorderThickness="1" BorderBrush="Black"/>
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Team" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Away" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Home" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <TextBlock Grid.Row="0" Grid.Column="1" Text="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="inning1AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="inning1HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="inning1AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning1Runs}"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="inning1HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning1Runs}"/>
             <TextBlock Grid.Row="0" Grid.Column="2" Text="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Grid.Column="2" x:Name="inning2AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="2" Grid.Column="2" x:Name="inning2omeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" x:Name="inning2AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning2Runs}"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" x:Name="inning2HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning2Runs}"/>
             <TextBlock Grid.Row="0" Grid.Column="3" Text="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Grid.Column="3" x:Name="inning3AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="2" Grid.Column="3" x:Name="inning3HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="3" x:Name="inning3AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning3Runs}"/>
+            <TextBlock Grid.Row="2" Grid.Column="3" x:Name="inning3HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning3Runs}"/>
             <TextBlock Grid.Row="0" Grid.Column="4" Text="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Grid.Column="4" x:Name="inning4AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="2" Grid.Column="4" x:Name="inning4HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="4" x:Name="inning4AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning4Runs}"/>
+            <TextBlock Grid.Row="2" Grid.Column="4" x:Name="inning4HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning4Runs}"/>
             <TextBlock Grid.Row="0" Grid.Column="5" Text="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Grid.Column="5" x:Name="inning5AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="2" Grid.Column="5" x:Name="inning5HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="5" x:Name="inning5AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning5Runs}"/>
+            <TextBlock Grid.Row="2" Grid.Column="5" x:Name="inning5HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning5Runs}"/>
             <TextBlock Grid.Row="0" Grid.Column="6" Text="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Grid.Column="6" x:Name="inning6AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="2" Grid.Column="6" x:Name="inning6HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="6" x:Name="inning6AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning6Runs}"/>
+            <TextBlock Grid.Row="2" Grid.Column="6" x:Name="inning6HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning6Runs}"/>
             <TextBlock Grid.Row="0" Grid.Column="7" Text="7" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Grid.Column="7" x:Name="inning7AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="2" Grid.Column="7" x:Name="inning7HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="7" x:Name="inning7AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning7Runs}"/>
+            <TextBlock Grid.Row="2" Grid.Column="7" x:Name="inning7HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning7Runs}"/>
             <TextBlock Grid.Row="0" Grid.Column="8" Text="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Grid.Column="8" x:Name="inning8AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="2" Grid.Column="8" x:Name="inning8HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="8" x:Name="inning8AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning8Runs}"/>
+            <TextBlock Grid.Row="2" Grid.Column="8" x:Name="inning8HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning8Runs}"/>
             <TextBlock Grid.Row="0" Grid.Column="9" Text="9" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Grid.Column="9" x:Name="inning9AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="2" Grid.Column="9" x:Name="inning9HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="9" x:Name="inning9AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning9Runs}"/>
+            <TextBlock Grid.Row="2" Grid.Column="9" x:Name="inning9HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning9Runs}"/>
             <TextBlock Grid.Row="0" Grid.Column="10" Text="X" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Grid.Column="10" x:Name="extraInningsAwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="2" Grid.Column="10" x:Name="extraInningsHomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="10" x:Name="extraInningsAwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamExtraInningsRuns}"/>
+            <TextBlock Grid.Row="2" Grid.Column="10" x:Name="extraInningsHomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamExtraInningsRuns}"/>
             <TextBlock Grid.Row="0" Grid.Column="11" Text="R" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Grid.Column="11" x:Name="totalAwayTeamRuns" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="2" Grid.Column="11" x:Name="totalHomeTeamRuns" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="11" x:Name="totalAwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamTotalRuns}"/>
+            <TextBlock Grid.Row="2" Grid.Column="11" x:Name="totalHomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamTotalRuns}"/>
             <TextBlock Grid.Row="0" Grid.Column="12" Text="H" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Grid.Column="12" x:Name="totalAwayTeamHits" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="2" Grid.Column="12" x:Name="totalHomeTeamHits" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="12" x:Name="totalAwayTeamHits" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamTotalHits}"/>
+            <TextBlock Grid.Row="2" Grid.Column="12" x:Name="totalHomeTeamHits" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamTotalHits}"/>
             <TextBlock Grid.Row="0" Grid.Column="13" Text="E" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Grid.Column="13" x:Name="totalAwayTeamErrors" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="2" Grid.Column="13" x:Name="totalHomeTeamErrors" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="13" x:Name="totalAwayTeamErrors" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamTotalErrors}"/>
+            <TextBlock Grid.Row="2" Grid.Column="13" x:Name="totalHomeTeamErrors" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamTotalErrors}"/>
 
         </Grid>
         <Grid Grid.Column="1" Grid.Row="1">
@@ -128,41 +145,67 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height=".1*"/>
             </Grid.RowDefinitions>
-            <Image Source="/Images/fenway-top-view.jpg" Stretch="Fill" Grid.ColumnSpan="11" Grid.RowSpan="14" />
-            <TextBlock x:Name="activePitcherTextBlock" Background="LightSalmon" Grid.Column="5" Grid.Row="8"/>
-            <TextBlock x:Name="activeCatcherTextBlock" Background="LightSalmon" Grid.Column="5" Grid.Row="12"/>
-            <TextBlock x:Name="activeFirstBasemanTextBlock" Background="LightSalmon" Grid.Column="8" Grid.Row="6"/>
-            <TextBlock x:Name="activeSecondBasemanTextBlock" Background="LightSalmon" Grid.Column="7" Grid.Row="4"/>
-            <TextBlock x:Name="activeThirdBasemanTextBlock" Background="LightSalmon" Grid.Column="2" Grid.Row="6"/>
-            <TextBlock x:Name="activeShortstopTextBlock" Background="LightSalmon" Grid.Column="3" Grid.Row="4"/>
-            <TextBlock x:Name="activeLeftFielderTextBlock" Background="LightSalmon" Grid.Column="1" Grid.Row="3"/>
-            <TextBlock x:Name="activeCenterFielderTextBlock" Background="LightSalmon" Grid.Column="5" Grid.Row="1"/>
-            <TextBlock x:Name="activeRightFielderTextBlock" Background="LightSalmon" Grid.Column="9" Grid.Row="3"/>
-            <TextBlock x:Name="activeBatterTextBlock" Background="MediumPurple" Grid.Column="4" Grid.Row="11"/>
-            <Viewbox Grid.Column="1" Grid.Row="10" Stretch="Fill">
-                <Label Content="Outs:" Background="LightSteelBlue" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Viewbox>
-            <Viewbox Grid.Column="2" Grid.Row="10" Stretch="Fill">
-                <Label Name="outsLabel" Content="0" Background="LightSteelBlue" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="sans serif"/>
-            </Viewbox>
-            <Viewbox Grid.Column="1" Grid.Row="11" Stretch="Fill">
-                <Label Content="Pitcher Status:" Background="LightSteelBlue" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Viewbox>
-            <Viewbox Grid.Column="2" Grid.Row="11" Stretch="Fill">
-                <Label x:Name="pitcherStatusLabel" Background="LightSteelBlue" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Viewbox>
-            <Viewbox Grid.Column="1" Grid.Row="12" Stretch="Fill">
-                <Label Content="On Deck" Background="LightSteelBlue" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Viewbox>
-            <Viewbox Grid.Column="2" Grid.Row="12" Stretch="Fill">
-                <Label x:Name="onDeckLabel" Background="LightSteelBlue" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Viewbox>
-            <Button x:Name="swingButton" Content="Swing" Grid.Column="8" Grid.Row="10" Margin="1 1 1 1"/>
-            <Button x:Name="stealButton" Content="Steal" Background="LightSteelBlue" Grid.Column="8" Grid.Row="11" Margin="1 1 1 1"/>
-            <Button x:Name="sacrificeBuntButton" Content="Sac. Bunt" Background="LightSteelBlue" Grid.Column="8" Grid.Row="12" Margin="1 1 1 1"/>
-            <Button x:Name="intentionalWalkButton" Content="Int. BB" Background="LightSteelBlue" Grid.Column="9" Grid.Row="10" Margin="1 1 1 1"/>
-            <Button x:Name="hitRunButton" Content="Hit &amp; Run" Background="LightSteelBlue" Grid.Column="9" Grid.Row="11" Margin="1 1 1 1"/>
-            <Button x:Name="buntForHitButton" Content="Bunt For Hit" Background="LightSteelBlue" Grid.Column="9" Grid.Row="12" Margin="1 1 1 1"/>
+            <Image Source="/Images/fenway-top-view.jpg" Stretch="Fill" Grid.ColumnSpan="11" Grid.RowSpan="14"/>
+            <TextBlock x:Name="activePitcherTextBlock" Background="{Binding FielderColor}" Grid.Column="5" Grid.Row="8" Text="{Binding OnFieldPitcher}"/>
+            <TextBlock x:Name="activeCatcherTextBlock" Background="{Binding FielderColor}" Grid.Column="5" Grid.Row="12" Text="{Binding OnFieldCatcher}"/>
+            <TextBlock x:Name="activeFirstBasemanTextBlock" Background="{Binding FielderColor}" Grid.Column="8" Grid.Row="6" Text="{Binding OnFieldFirstBaseman}"/>
+            <TextBlock x:Name="activeSecondBasemanTextBlock" Background="{Binding FielderColor}" Grid.Column="7" Grid.Row="4" Text="{Binding OnFieldSecondBasemen}"/>
+            <TextBlock x:Name="activeThirdBasemanTextBlock" Background="{Binding FielderColor}" Grid.Column="2" Grid.Row="6" Text="{Binding OnThirdBaseman}"/>
+            <TextBlock x:Name="activeShortstopTextBlock" Background="{Binding FielderColor}" Grid.Column="3" Grid.Row="4" Text="{Binding OnFieldShortstop}"/>
+            <TextBlock x:Name="activeLeftFielderTextBlock" Background="{Binding FielderColor}" Grid.Column="1" Grid.Row="2" Text="{Binding OnFieldLeftFielder}"/>
+            <TextBlock x:Name="activeCenterFielderTextBlock" Background="{Binding FielderColor}" Grid.Column="5" Grid.Row="1" Text="{Binding OnFieldCenterFielder}"/>
+            <TextBlock x:Name="activeRightFielderTextBlock" Background="{Binding FielderColor}" Grid.Column="9" Grid.Row="2" Text="{Binding OnFieldRightFielder}"/>
+            <TextBlock x:Name="activeBatterTextBlock" Background="{Binding BatterColor}" Grid.Column="4" Grid.Row="11" Text="{Binding AtPlateBatter}"/>
+            <Grid Grid.Row="8" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="7*"/>
+                </Grid.RowDefinitions>
+                <Viewbox Grid.Row="0" Stretch="Fill">
+                    <Label Content="Play By Play:" Background="LightSteelBlue" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Viewbox>
+                <DataGrid Grid.Row="1" Background="LightSteelBlue" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding PlayByPlay}">
+                    
+                </DataGrid>
+            </Grid>
+            <Grid Grid.Row="8" Grid.Column="9" Grid.RowSpan="5" Grid.ColumnSpan="2" Background="LightSteelBlue">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Viewbox Grid.Column="0" Grid.Row="0" Stretch="Fill">
+                    <Label Content="Inning:" Background="LightSteelBlue" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Viewbox>
+                <Viewbox Grid.Column="1" Grid.Row="0" Stretch="Fill">
+                    <Label Content="{Binding Inning}" Background="LightSteelBlue" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Viewbox>
+                <Viewbox Grid.Column="0" Grid.Row="1" Stretch="Fill">
+                    <Label Content="Outs:" Background="LightSteelBlue" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Viewbox>
+                <Viewbox Grid.Column="1" Grid.Row="1" Stretch="Fill">
+                    <Label Content="{Binding Outs}" Background="LightSteelBlue" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Viewbox>
+                <Viewbox Grid.Column="0" Grid.Row="2" Stretch="Fill">
+                    <Label Content="Pitcher Status:" Background="LightSteelBlue" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Viewbox>
+                <Viewbox Grid.Column="1" Grid.Row="2" Stretch="Fill">
+                    <Label Content="{Binding CurrentPitcherStatus}" Background="LightSteelBlue" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Viewbox>
+                <Button x:Name="swingButton" Command="{Binding SwingCommand}" Content="Swing" Grid.Column="0" Grid.Row="3" Margin="1 1 1 1"/>
+                <Button x:Name="stealButton" Command="{Binding StealCommand}" Content="Steal" Grid.Column="0" Grid.Row="4" Margin="1 1 1 1"/>
+                <Button x:Name="sacrificeBuntButton" Content="Sac. Bunt" Grid.Column="0" Grid.Row="5" Margin="1 1 1 1"/>
+                <Button x:Name="intentionalWalkButton" Command="{Binding IntentionalWalkCommand}" Content="Int. BB" Grid.Column="1" Grid.Row="3" Margin="1 1 1 1"/>
+                <Button x:Name="hitRunButton" Content="Hit &amp; Run" Grid.Column="1" Grid.Row="4" Margin="1 1 1 1"/>
+                <Button x:Name="buntForHitButton" Content="Bunt For Hit" Grid.Column="1" Grid.Row="5" Margin="1 1 1 1"/>
+            </Grid>
         </Grid>
         <Grid Grid.Row="1" Background="MediumPurple">
             <Grid.RowDefinitions>
@@ -170,14 +213,14 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <DataGrid x:Name="awayTeamLineupDataGrid" CanUserAddRows="False" AutoGenerateColumns="False" Margin="3 3 3 3">
+            <DataGrid x:Name="awayTeamLineupDataGrid" CanUserAddRows="False" AutoGenerateColumns="False" Margin="3 3 3 3" ItemsSource="{Binding AwayTeam.Lineup}">
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
-                <DataGridTextColumn Header="R" Binding="{Binding Path='Runs'}"/>
-                <DataGridTextColumn Header="RBI" Binding="{Binding Path='RunsBattedIn'}"/>
-                <DataGridTextColumn Header="HR" Binding="{Binding Path='HomeRuns'}"/>
-                <DataGridTextColumn Header="AVG" Binding="{Binding Path='BattingAverage'}"/>
-                <DataGridTextColumn Header="OBP" Binding="{Binding Path='OnBasePercentage'}"/>
-                <DataGridTextColumn Header="SLG" Binding="{Binding Path='SluggingPercentage'}"/>
+                <DataGridTextColumn Header="AB" Binding="{Binding Path='CurrentGameRunsAtBats'}"/>
+                <DataGridTextColumn Header="H" Binding="{Binding Path='CurrentGameHits'}"/>
+                <DataGridTextColumn Header="BB" Binding="{Binding Path='CurrentGameWalks'}"/>
+                <DataGridTextColumn Header="HR" Binding="{Binding Path='CurrentGameHomeruns'}"/>
+                <DataGridTextColumn Header="R" Binding="{Binding Path='CurrentGameRuns'}"/>
+                <DataGridTextColumn Header="RBI" Binding="{Binding Path='CurrentGameRunsBattedIn'}"/>
             </DataGrid>
             <Button x:Name="awayTeamBenchButton" Content="Bench" Grid.Row="1" Margin="3 3 3 3"/>
             <Button x:Name="awayTeamBullpenButton" Content="Bullpen" Grid.Row="2" Margin="3 3 3 3"/>
@@ -188,14 +231,14 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <DataGrid x:Name="homeTeamLineupDataGrid" CanUserAddRows="False" AutoGenerateColumns="False" Margin="3 3 3 3">
+            <DataGrid x:Name="homeTeamLineupDataGrid" CanUserAddRows="False" AutoGenerateColumns="False" Margin="3 3 3 3"  ItemsSource="{Binding HomeTeam.Lineup}">
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
-                <DataGridTextColumn Header="R" Binding="{Binding Path='Runs'}"/>
-                <DataGridTextColumn Header="RBI" Binding="{Binding Path='RunsBattedIn'}"/>
-                <DataGridTextColumn Header="HR" Binding="{Binding Path='HomeRuns'}"/>
-                <DataGridTextColumn Header="AVG" Binding="{Binding Path='BattingAverage'}"/>
-                <DataGridTextColumn Header="OBP" Binding="{Binding Path='OnBasePercentage'}"/>
-                <DataGridTextColumn Header="SLG" Binding="{Binding Path='SluggingPercentage'}"/>
+                <DataGridTextColumn Header="AB" Binding="{Binding Path='CurrentGameRunsAtBats'}"/>
+                <DataGridTextColumn Header="H" Binding="{Binding Path='CurrentGameHits'}"/>
+                <DataGridTextColumn Header="BB" Binding="{Binding Path='CurrentGameWalks'}"/>
+                <DataGridTextColumn Header="HR" Binding="{Binding Path='CurrentGameHomeruns'}"/>
+                <DataGridTextColumn Header="R" Binding="{Binding Path='CurrentGameRuns'}"/>
+                <DataGridTextColumn Header="RBI" Binding="{Binding Path='CurrentGameRunsBattedIn'}"/>
             </DataGrid>
             <Button x:Name="homeTeamBenchButton" Content="Bench" Grid.Row="1" Margin="3 3 3 3"/>
             <Button x:Name="homeTeamBullpenButton" Content="Bullpen" Grid.Row="2" Margin="3 3 3 3"/>

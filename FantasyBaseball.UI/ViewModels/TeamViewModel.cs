@@ -34,7 +34,7 @@ namespace FantasyBaseball.UI.ViewModels
 
         public BatterViewModel BenchPlayer4 { get; set; }
 
-        public PitcherViewModel StartingPitcher1 { get; set; }
+        public PitcherViewModel CurrentPitcher { get; set; }
 
         public PitcherViewModel StartingPitcher2 { get; set; }
 
@@ -63,5 +63,7 @@ namespace FantasyBaseball.UI.ViewModels
         public IEnumerable<BatterViewModel> Lineup { get; set; }
 
         public IEnumerable<BatterViewModel> Bench { get; set; }
+
+        public IEnumerable<IPlayerViewModel> UnavailablePlayers { get; set; }
     }
 }

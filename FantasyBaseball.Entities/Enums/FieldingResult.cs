@@ -1,6 +1,6 @@
 ﻿namespace FantasyBaseball.Entities.Enums
 {
-    public enum InfieldFieldingResult
+    public enum FieldingResult
     {
         Single,
         Double,
@@ -11,19 +11,8 @@
         ThreeBaseError,
         Groundout,
         Popout,
-        Lineout
-    }
-
-    public enum OutfieldFieldingResult
-    {
-        Single,
-        Double,
-        Triple,
-        Homerun,
-        OneBaseError,
-        TwoBaseError,
-        ThreeBaseError,
+        Lineout,
         Flyout,
-        Lineout
+        Foulout
     }
 }

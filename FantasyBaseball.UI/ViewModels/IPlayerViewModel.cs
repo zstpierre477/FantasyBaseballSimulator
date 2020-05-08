@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FantasyBaseball.Entities.Models;
 
 namespace FantasyBaseball.UI.ViewModels
 {
-    public interface IPlayerViewModel : IViewModel
+    public interface IPlayerViewModel
     {
         public int StintId { get; set; }
         
@@ -15,5 +13,7 @@ namespace FantasyBaseball.UI.ViewModels
         public short Year { get; set; }
         
         public string TeamShortName { get; set; }
+
+        public PlayerStint PlayerStint { get; set; }
     }
 }

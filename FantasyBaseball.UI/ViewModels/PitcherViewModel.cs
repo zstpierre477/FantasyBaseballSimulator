@@ -55,6 +55,8 @@ namespace FantasyBaseball.UI.ViewModels
 
         public double IP => Math.Round((double)InningsPitchedOuts / 3, 1);
 
+        public double AverageIP => IP / Games;
+
         public double WHIP => IP > 0 ? Math.Round(((Walks + Hits + HitBatters) / IP), 2) : 0;
 
         public PlayerStint PlayerStint { get; set; }
@@ -63,5 +65,19 @@ namespace FantasyBaseball.UI.ViewModels
         {
             throw new NotImplementedException();
         }
+
+        public int CurrentGameStrikeouts { get; set; }
+
+        public int CurrentGameWalks { get; set; }
+
+        public int CurrentGameHits { get; set; }
+
+        public int CurrentGameRuns { get; set; }
+
+        public int CurrentGameEarnedRuns { get; set; }
+
+        public double CurrentGameInningsPitched { get; set; }
+
+        public bool CurrentGameIsTired => CurrentGameInningsPitched > Math.Round(AverageIP, 0, MidpointRounding.ToPositiveInfinity);
     }
 }
