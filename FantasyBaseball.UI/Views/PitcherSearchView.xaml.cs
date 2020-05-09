@@ -3,14 +3,16 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace FantasyBaseball.UI.Windows
+namespace FantasyBaseball.UI.Views
 {
     /// <summary>
     /// Interaction logic for PitcherSearch.xaml
     /// </summary>
-    public partial class PitcherSearch : Window
+    public partial class PitcherSearchView : Window
     {
-        public PitcherSearch(IViewModelFactory viewModelFactory)
+        public PitcherViewModel SelectedPitcher { get; set; }
+
+        public PitcherSearchView(IViewModelFactory viewModelFactory)
         {
             InitializeComponent();
             DataContext = viewModelFactory.GetViewModel(GetType().ToString());
@@ -43,8 +45,7 @@ namespace FantasyBaseball.UI.Windows
             }
             var row = (DataGridRow)parent;
 
-            var viewModel = (PitcherSearchViewModel)DataContext;
-            viewModel.SelectedPitcher = row.Item as PitcherViewModel;
+            SelectedPitcher = row.Item as PitcherViewModel;
 
             DialogResult = true;
             Close();

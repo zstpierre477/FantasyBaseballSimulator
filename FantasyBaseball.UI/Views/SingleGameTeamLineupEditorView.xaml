@@ -1,0 +1,68 @@
+﻿<Window x:Class="FantasyBaseball.UI.Views.SingleGameTeamLineupEditorView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FantasyBaseball.UI.Views"
+        mc:Ignorable="d"
+        Title="Lineup" Height="450" Width="800">
+    <Grid Background="LightSteelBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Label Content="{Binding TeamName}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Content="Lineup" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <DataGrid x:Name="lineupDataGrid" Grid.Row="2" Grid.Column="0" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Team.Lineup}" SelectedIndex="{Binding SelectedLineupBatter}" SelectedItem="{Binding SelectedLineupBatterIndex}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="First Name" Binding="{Binding Path='FirstName'}"/>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
+                <DataGridTextColumn Header="Year" Binding="{Binding Path='Year'}"/>
+                <DataGridTextColumn Header="Team" Binding="{Binding Path='TeamShortName'}"/>
+                <DataGridTextColumn Header="G" Binding="{Binding Path='Games'}"/>
+                <DataGridTextColumn Header="AB" Binding="{Binding Path='AtBats'}"/>
+                <DataGridTextColumn Header="H" Binding="{Binding Path='Hits'}"/>
+                <DataGridTextColumn Header="R" Binding="{Binding Path='Runs'}"/>
+                <DataGridTextColumn Header="RBI" Binding="{Binding Path='RunsBattedIn'}"/>
+                <DataGridTextColumn Header="HR" Binding="{Binding Path='HomeRuns'}"/>
+                <DataGridTextColumn Header="AVG" Binding="{Binding Path='BattingAverage'}"/>
+                <DataGridTextColumn Header="OBP" Binding="{Binding Path='OnBasePercentage'}"/>
+                <DataGridTextColumn Header="SLG" Binding="{Binding Path='SluggingPercentage'}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Bench" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <DataGrid x:Name="benchDataGrid" Grid.Row="4" Grid.Column="0" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Team.Bench}"  SelectedIndex="{Binding SelectedBenchBatter}" SelectedItem="{Binding SelectedBenchBatterIndex}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="First Name" Binding="{Binding Path='FirstName'}"/>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
+                <DataGridTextColumn Header="Year" Binding="{Binding Path='Year'}"/>
+                <DataGridTextColumn Header="Team" Binding="{Binding Path='TeamShortName'}"/>
+                <DataGridTextColumn Header="G" Binding="{Binding Path='Games'}"/>
+                <DataGridTextColumn Header="AB" Binding="{Binding Path='AtBats'}"/>
+                <DataGridTextColumn Header="H" Binding="{Binding Path='Hits'}"/>
+                <DataGridTextColumn Header="R" Binding="{Binding Path='Runs'}"/>
+                <DataGridTextColumn Header="RBI" Binding="{Binding Path='RunsBattedIn'}"/>
+                <DataGridTextColumn Header="HR" Binding="{Binding Path='HomeRuns'}"/>
+                <DataGridTextColumn Header="AVG" Binding="{Binding Path='BattingAverage'}"/>
+                <DataGridTextColumn Header="OBP" Binding="{Binding Path='OnBasePercentage'}"/>
+                <DataGridTextColumn Header="SLG" Binding="{Binding Path='SluggingPercentage'}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button x:Name="moveUpButton" Command="{Binding MoveUpCommand}" Grid.Column="0" Grid.Row="0" Content="Move Up" Margin="5 5 5 5"/>
+            <Button x:Name="moveDownButton" Command="{Binding MoveDownCommand}" Grid.Column="0" Grid.Row="1" Content="Move Down" Margin="5 5 5 5"/>
+        </Grid>
+        <Button x:Name="switchInLineupButton" Command="{Binding SwitchInLineupCommand}" Grid.Column="1" Grid.Row="4" Content="Switch In Lineup" Margin="5 5 5 5"/>
+    </Grid>
+</Window>

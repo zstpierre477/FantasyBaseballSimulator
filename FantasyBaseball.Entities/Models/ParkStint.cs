@@ -1,4 +1,6 @@
-﻿namespace FantasyBaseball.Entities.Models
+﻿using System;
+
+namespace FantasyBaseball.Entities.Models
 {
     public partial class ParkStint
     {

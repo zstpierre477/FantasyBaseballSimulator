@@ -12,7 +12,7 @@
         Triple,
         HomeRun,
         FieldedByPitcher,
-        FielderByCatcher,
+        FieldedByCatcher,
         FieldedByFirstBaseman,
         FieldedBySecondBaseman,
         FieldedByThirdBaseman,

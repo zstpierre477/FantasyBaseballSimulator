@@ -16,8 +16,6 @@ namespace FantasyBaseball.UI.ViewModels
 
         public IEnumerable<int> Years { get; set; }
 
-        public PitcherViewModel SelectedPitcher { get; set; }
-
         public IPlayerSearchService PlayerSearchService { get; set; }
 
         public PitcherSearchViewModel(IPlayerSearchServiceFactory playerSearchServiceFactory)

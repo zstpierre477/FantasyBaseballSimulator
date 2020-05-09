@@ -5,8 +5,6 @@ namespace FantasyBaseball.UI.ViewModels
 {
     public class PitcherViewModel : IPlayerViewModel
     {
-        public int StintId { get; set; }
-
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -41,18 +39,8 @@ namespace FantasyBaseball.UI.ViewModels
         
         public double EarnedRunAverage { get; set; }
                 
-        public short WildPitches { get; set; }
-        
         public short HitBatters { get; set; }
-        
-        public short Balks { get; set; }
-        
-        public short BattersFaced { get; set; }
-                                
-        public short SacrificeFlies { get; set; }
-        
-        public short InducedDoublePlays { get; set; }
-
+                
         public double IP => Math.Round((double)InningsPitchedOuts / 3, 1);
 
         public double AverageIP => IP / Games;
@@ -63,7 +51,25 @@ namespace FantasyBaseball.UI.ViewModels
 
         public PitcherViewModel(PlayerStint playerStint)
         {
-            throw new NotImplementedException();
+            PlayerStint = playerStint;
+            FirstName = playerStint.Person.FirstName;
+            LastName = playerStint.Person.LastName;
+            Year = playerStint.PitchingStint.Year;
+            TeamShortName = playerStint.Team.TeamIdBr;
+            Wins = playerStint.PitchingStint.Wins ?? 0;
+            Losses = playerStint.PitchingStint.Losses ?? 0;
+            Games = playerStint.PitchingStint.Games ?? 0;
+            GamesStarted = playerStint.PitchingStint.GamesStarted ?? 0;
+            Saves = playerStint.PitchingStint.Saves ?? 0;
+            InningsPitchedOuts = playerStint.PitchingStint.InningsPitchedOuts ?? 0;
+            Hits = playerStint.PitchingStint.Hits ?? 0;
+            EarnedRuns = playerStint.PitchingStint.EarnedRuns ?? 0;
+            HomeRuns = playerStint.PitchingStint.HomeRuns ?? 0;
+            Walks = playerStint.PitchingStint.Walks ?? 0;
+            Strikeouts = playerStint.PitchingStint.Strikeouts ?? 0;
+            OpponentBattingAverage = playerStint.PitchingStint.OpponentBattingAverage ?? .000;
+            EarnedRunAverage = playerStint.PitchingStint.EarnedRunAverage ?? .000;
+            HitBatters = playerStint.PitchingStint.HitBatters ?? 0;
         }
 
         public int CurrentGameStrikeouts { get; set; }

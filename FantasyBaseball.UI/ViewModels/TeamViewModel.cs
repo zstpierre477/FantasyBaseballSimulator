@@ -1,6 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace FantasyBaseball.UI.ViewModels
 {
@@ -36,6 +38,8 @@ namespace FantasyBaseball.UI.ViewModels
 
         public PitcherViewModel CurrentPitcher { get; set; }
 
+        public PitcherViewModel StartingPitcher1 { get; set; }
+
         public PitcherViewModel StartingPitcher2 { get; set; }
 
         public PitcherViewModel StartingPitcher3 { get; set; }
@@ -58,12 +62,20 @@ namespace FantasyBaseball.UI.ViewModels
 
         public PitcherViewModel ReliefPitcher7 { get; set; }
 
-        public IEnumerable<PitcherViewModel> Bullpen { get; set; }
+        public ObservableCollection<PitcherViewModel> Bullpen { get; set; }
 
-        public IEnumerable<BatterViewModel> Lineup { get; set; }
+        public ObservableCollection<BatterViewModel> Lineup { get; set; }
 
-        public IEnumerable<BatterViewModel> Bench { get; set; }
+        public ObservableCollection<BatterViewModel> Bench { get; set; }
 
-        public IEnumerable<IPlayerViewModel> UnavailablePlayers { get; set; }
+        public ObservableCollection<IPlayerViewModel> UnavailablePlayers { get; set; }
+
+        public TeamViewModel()
+        {
+            UnavailablePlayers = new ObservableCollection<IPlayerViewModel>();
+            Bullpen = new ObservableCollection<PitcherViewModel>();
+            Bench = new ObservableCollection<BatterViewModel>();
+            Lineup = new ObservableCollection<BatterViewModel>();
+        }
     }
 }

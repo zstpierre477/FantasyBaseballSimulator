@@ -1,0 +1,308 @@
+﻿<Window x:Class="FantasyBaseball.UI.Views.SingleGameTeamSelectorView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FantasyBaseball.UI.Views"
+        mc:Ignorable="d"
+        Title="Select Players" Height="450" Width="800">
+    <Grid Background="LightSkyBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Button x:Name="startGameButton" Click="startGameButton_Click" Grid.Column="3" Grid.Row="0" Margin="1 1 1 1">
+            <TextBlock Text="Start Game" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Away Team Name:"/>
+        <TextBox x:Name="awayTeamNameTextBox" Grid.Row="0" Grid.Column="1" Text="{Binding AwayTeam.TeamName}"/>
+        <Button x:Name="awayTeamCatcherButton" Click="awayTeamCatcherButton_Click" Grid.Column="2" Grid.Row="1" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamFirstBasemanButton" Click="awayTeamFirstBasemanButton_Click" Grid.Column="2" Grid.Row="2" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamSecondBasemanButton" Click="awayTeamSecondBasemanButton_Click" Grid.Column="2" Grid.Row="3" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamThirdBasemanButton" Click="awayTeamThirdBasemanButton_Click" Grid.Column="2" Grid.Row="4" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamShortstopButton" Click="awayTeamShortstopButton_Click" Grid.Column="2" Grid.Row="5" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamLeftFielderButton" Click="awayTeamLeftFielderButton_Click" Grid.Column="2" Grid.Row="6" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamCenterFielderButton" Click="awayTeamCenterFielderButton_Click" Grid.Column="2" Grid.Row="7" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamRightFielderButton" Click="awayTeamRightFielderButton_Click" Grid.Column="2" Grid.Row="8" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamDesignatedHitterButton" Click="awayTeamDesignatedHitterButton_Click" Grid.Column="2" Grid.Row="9" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamBench1Button" Click="awayTeamBenchPlayer1Button_Click" Grid.Column="2" Grid.Row="10" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamBench2Button" Click="awayTeamBenchPlayer2Button_Click" Grid.Column="2" Grid.Row="11" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamBench3Button" Click="awayTeamBenchPlayer3Button_Click" Grid.Column="2" Grid.Row="12" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamBench4Button" Click="awayTeamBenchPlayer4Button_Click" Grid.Column="2" Grid.Row="13" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamStartingPitcher1Button" Click="homeTeamStartingPitcher1Button_Click" Grid.Column="2" Grid.Row="14" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamStartingPitcher2Button" Click="homeTeamStartingPitcher2Button_Click" Grid.Column="2" Grid.Row="15" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamStartingPitcher3Button" Click="homeTeamStartingPitcher3Button_Click" Grid.Column="2" Grid.Row="16" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamStartingPitcher4Button" Click="homeTeamStartingPitcher4Button_Click" Grid.Column="2" Grid.Row="17" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamStartingPitcher5Button" Click="awayTeamStartingPitcher5Button_Click" Grid.Column="2" Grid.Row="18" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamReliefPitcher1Button" Click="awayTeamReliefPitcher1Button_Click" Grid.Column="2" Grid.Row="19" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamReliefPitcher2Button" Click="awayTeamReliefPitcher2Button_Click" Grid.Column="2" Grid.Row="20" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamReliefPitcher3Button" Click="awayTeamReliefPitcher3Button_Click" Grid.Column="2" Grid.Row="21" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamReliefPitcher4Button" Click="awayTeamReliefPitcher4Button_Click" Grid.Column="2" Grid.Row="22" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamReliefPitcher5Button" Click="awayTeamReliefPitcher5Button_Click" Grid.Column="2" Grid.Row="23" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamReliefPitcher6Button" Click="awayTeamReliefPitcher6Button_Click" Grid.Column="2" Grid.Row="24" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="awayTeamReliefPitcher7Button" Click="awayTeamReliefPitcher7Button_Click" Grid.Column="2" Grid.Row="25" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Label Grid.Row="1" Grid.Column="1" x:Name="awayTeamCatcherLabel" Content="{Binding AwayTeam.Catcher}"/>
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Catcher:"/>
+        <Label Grid.Row="2" Grid.Column="1" x:Name="awayTeamFirstBasemanLabel" Content="{Binding AwayTeam.FirstBaseman}"/>
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="First Baseman:"/>
+        <Label Grid.Row="3" Grid.Column="1" x:Name="awayTeamSecondBasemanLabel" Content="{Binding AwayTeam.SecondBaseman}"/>
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Second Baseman:"/>
+        <Label Grid.Row="4" Grid.Column="1" x:Name="awayTeamThirdBasemanLabel" Content="{Binding AwayTeam.ThirdBaseman}"/>
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Third Baseman:"/>
+        <Label Grid.Row="5" Grid.Column="1" x:Name="awayTeamShortstopLabel" Content="{Binding AwayTeam.Shortstop}"/>
+        <TextBlock Grid.Column="0" Grid.Row="5" Text="Shortstop:"/>
+        <Label Grid.Row="6" Grid.Column="1" x:Name="awayTeamLeftFielderLabel" Content="{Binding AwayTeam.LeftFielder}"/>
+        <TextBlock Grid.Column="0" Grid.Row="6" Text="Left Fielder:"/>
+        <Label Grid.Row="7" Grid.Column="1" x:Name="awayTeamCenterFielderLabel" Content="{Binding AwayTeam.CenterFielder}"/>
+        <TextBlock Grid.Column="0" Grid.Row="7" Text="Center Fielder:"/>
+        <Label Grid.Row="8" Grid.Column="1" x:Name="awayTeamRightFielderLabel" Content="{Binding AwayTeam.RightFielder}"/>
+        <TextBlock Grid.Column="0" Grid.Row="8" Text="Right Fielder:"/>
+        <Label Grid.Row="9" Grid.Column="1" x:Name="awayTeamDesignatedHitterLabel" Content="{Binding AwayTeam.DesignatedHitter}"/>
+        <TextBlock Grid.Column="0" Grid.Row="9" Text="Designated Hitter:"/>
+        <Label Grid.Row="10" Grid.Column="1" x:Name="awayTeamBench1Label" Content="{Binding AwayTeam.BenchPlayer1}"/>
+        <TextBlock Grid.Column="0" Grid.Row="10" Text="Bench Player 1:"/>
+        <Label Grid.Row="11" Grid.Column="1" x:Name="awayTeamBench2Label" Content="{Binding AwayTeam.BenchPlayer2}"/>
+        <TextBlock Grid.Column="0" Grid.Row="11" Text="Bench Player 2:"/>
+        <Label Grid.Row="12" Grid.Column="1" x:Name="awayTeamBench3Label" Content="{Binding AwayTeam.BenchPlayer3}"/>
+        <TextBlock Grid.Column="0" Grid.Row="12" Text="Bench Player 3:"/>
+        <Label Grid.Row="13" Grid.Column="1" x:Name="awayTeamBench4Label" Content="{Binding AwayTeam.BenchPlayer4}"/>
+        <TextBlock Grid.Column="0" Grid.Row="13" Text="Bench Player 4:"/>
+        <Label Grid.Row="14" Grid.Column="1" x:Name="awayTeamStartingPitcher1Label" Content="{Binding AwayTeam.StartingPitcher1}"/>
+        <TextBlock Grid.Column="0" Grid.Row="14" Text="Starting Pitcher 1:"/>
+        <Label Grid.Row="15" Grid.Column="1" x:Name="awayTeamStartingPitcher2Label" Content="{Binding AwayTeam.StartingPitcher2}"/>
+        <TextBlock Grid.Column="0" Grid.Row="15" Text="Starting Pitcher 2:"/>
+        <Label Grid.Row="16" Grid.Column="1" x:Name="awayTeamStartingPitcher3Label" Content="{Binding AwayTeam.StartingPitcher3}"/>
+        <TextBlock Grid.Column="0" Grid.Row="16" Text="Starting Pitcher 3:"/>
+        <Label Grid.Row="17" Grid.Column="1" x:Name="awayTeamStartingPitcher4Label" Content="{Binding AwayTeam.StartingPitcher4}"/>
+        <TextBlock Grid.Column="0" Grid.Row="17" Text="Starting Pitcher 4:"/>
+        <Label Grid.Row="18" Grid.Column="1" x:Name="awayTeamStartingPitcher5Label" Content="{Binding AwayTeam.StartingPitcher5}"/>
+        <TextBlock Grid.Column="0" Grid.Row="18" Text="Starting Pitcher 5:"/>
+        <Label Grid.Row="19" Grid.Column="1" x:Name="awayTeamReliefPitcher1Label" Content="{Binding AwayTeam.ReliefPitcher1}"/>
+        <TextBlock Grid.Column="0" Grid.Row="19" Text="Relief Pitcher 1:"/>
+        <Label Grid.Row="20" Grid.Column="1" x:Name="awayTeamReliefPitcher2Label" Content="{Binding AwayTeam.ReliefPitcher2}"/>
+        <TextBlock Grid.Column="0" Grid.Row="20" Text="Relief Pitcher 2:"/>
+        <Label Grid.Row="21" Grid.Column="1" x:Name="awayTeamReliefPitcher3Label" Content="{Binding AwayTeam.ReliefPitcher3}"/>
+        <TextBlock Grid.Column="0" Grid.Row="21" Text="Relief Pitcher 3:"/>
+        <Label Grid.Row="22" Grid.Column="1" x:Name="awayTeamReliefPitcher4Label" Content="{Binding AwayTeam.ReliefPitcher4}"/>
+        <TextBlock Grid.Column="0" Grid.Row="22" Text="Relief Pitcher 4:"/>
+        <Label Grid.Row="23" Grid.Column="1" x:Name="awayTeamReliefPitcher5Label" Content="{Binding AwayTeam.ReliefPitcher5}"/>
+        <TextBlock Grid.Column="0" Grid.Row="23" Text="Relief Pitcher 5:"/>
+        <Label Grid.Row="24" Grid.Column="1" x:Name="awayTeamReliefPitcher6Label" Content="{Binding AwayTeam.ReliefPitcher6}"/>
+        <TextBlock Grid.Column="0" Grid.Row="24" Text="Relief Pitcher 6:"/>
+        <Label Grid.Row="25" Grid.Column="1" x:Name="awayTeamReliefPitcher7Label" Content="{Binding AwayTeam.ReliefPitcher7}"/>
+        <TextBlock Grid.Column="0" Grid.Row="25" Text="Relief Pitcher 7:"/>
+
+        <TextBlock Grid.Column="5" Grid.Row="0" Text="Home Team Name:"/>
+        <TextBox x:Name="homeTeamNameTextBox" Grid.Row="0" Grid.Column="6" Text="{Binding HomeTeam.TeamName}"/>
+        <Button x:Name="homeTeamCatcherButton" Click="homeTeamCatcherButton_Click" Grid.Column="6" Grid.Row="1" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamFirstBasemanButton" Click="homeTeamFirstBasemanButton_Click" Grid.Column="6" Grid.Row="2" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamSecondBasemanButton" Click="homeTeamSecondBasemanButton_Click" Grid.Column="6" Grid.Row="3" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamThirdBasemanButton" Click="homeTeamThirdBasemanButton_Click" Grid.Column="6" Grid.Row="4" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamShortstopButton" Click="homeTeamShortstopButton_Click" Grid.Column="6" Grid.Row="5" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamLeftFielderButton" Click="homeTeamLeftFielderButton_Click" Grid.Column="6" Grid.Row="6" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamCenterFielderButton" Click="homeTeamCenterFielderButton_Click" Grid.Column="6" Grid.Row="7" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamRightFielderButton" Click="homeTeamRightFielderButton_Click" Grid.Column="6" Grid.Row="8" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamDesignatedHitterButton" Click="homeTeamDesignatedHitterButton_Click" Grid.Column="6" Grid.Row="9" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamBench1Button" Click="homeTeamBenchPlayer1Button_Click" Grid.Column="6" Grid.Row="10" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamBench2Button" Click="homeTeamBenchPlayer2Button_Click" Grid.Column="6" Grid.Row="11" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamBench3Button" Click="homeTeamBenchPlayer3Button_Click" Grid.Column="6" Grid.Row="12" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamBench4Button" Click="homeTeamBenchPlayer4Button_Click" Grid.Column="6" Grid.Row="13" Margin="1 1 1 1">
+            <TextBlock Text="Select Batter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamStartingPitcher1Button" Click="homeTeamStartingPitcher1Button_Click" Grid.Column="6" Grid.Row="14" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamStartingPitcher2Button" Click="homeTeamStartingPitcher2Button_Click" Grid.Column="6" Grid.Row="15" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamStartingPitcher3Button" Click="homeTeamStartingPitcher3Button_Click" Grid.Column="6" Grid.Row="16" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamStartingPitcher4Button" Click="homeTeamStartingPitcher4Button_Click" Grid.Column="6" Grid.Row="17" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamStartingPitcher5Button" Click="homeTeamStartingPitcher5Button_Click" Grid.Column="6" Grid.Row="18" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamReliefPitcher1Button" Click="homeTeamReliefPitcher1Button_Click" Grid.Column="6" Grid.Row="19" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamReliefPitcher2Button" Click="homeTeamReliefPitcher2Button_Click" Grid.Column="6" Grid.Row="20" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamReliefPitcher3Button" Click="homeTeamReliefPitcher3Button_Click" Grid.Column="6" Grid.Row="21" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamReliefPitcher4Button" Click="homeTeamReliefPitcher4Button_Click" Grid.Column="6" Grid.Row="22" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamReliefPitcher5Button" Click="homeTeamReliefPitcher5Button_Click" Grid.Column="6" Grid.Row="23" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamReliefPitcher6Button" Click="homeTeamReliefPitcher6Button_Click" Grid.Column="6" Grid.Row="24" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="homeTeamReliefPitcher7Button" Click="homeTeamReliefPitcher7Button_Click" Grid.Column="6" Grid.Row="25" Margin="1 1 1 1">
+            <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Label Grid.Row="1" Grid.Column="5" x:Name="homeTeamCatcherLabel" Content="{Binding HomeTeam.Catcher}"/>
+        <TextBlock Grid.Column="4" Grid.Row="1" Text="Catcher:"/>
+        <Label Grid.Row="2" Grid.Column="5" x:Name="homeTeamFirstBasemanLabel" Content="{Binding HomeTeam.FirstBaseman}"/>
+        <TextBlock Grid.Column="4" Grid.Row="2" Text="First Baseman:"/>
+        <Label Grid.Row="3" Grid.Column="5" x:Name="homeTeamSecondBasemanLabel" Content="{Binding HomeTeam.SecondBaseman}"/>
+        <TextBlock Grid.Column="4" Grid.Row="3" Text="Second Baseman:"/>
+        <Label Grid.Row="4" Grid.Column="5" x:Name="homeTeamThirdBasemanLabel" Content="{Binding HomeTeam.ThirdBaseman}"/>
+        <TextBlock Grid.Column="4" Grid.Row="4" Text="Third Baseman:"/>
+        <Label Grid.Row="5" Grid.Column="5" x:Name="homeTeamShortstopLabel" Content="{Binding HomeTeam.Shortstop}"/>
+        <TextBlock Grid.Column="4" Grid.Row="5" Text="Shortstop:"/>
+        <Label Grid.Row="6" Grid.Column="5" x:Name="homeTeamLeftFielderLabel" Content="{Binding HomeTeam.LeftFielder}"/>
+        <TextBlock Grid.Column="4" Grid.Row="6" Text="Left Fielder:"/>
+        <Label Grid.Row="7" Grid.Column="5" x:Name="homeTeamCenterFielderLabel" Content="{Binding HomeTeam.CenterFielder}"/>
+        <TextBlock Grid.Column="4" Grid.Row="7" Text="Center Fielder:"/>
+        <Label Grid.Row="8" Grid.Column="5" x:Name="homeTeamRightFielderLabel" Content="{Binding HomeTeam.RightFielder}"/>
+        <TextBlock Grid.Column="4" Grid.Row="8" Text="Right Fielder:"/>
+        <Label Grid.Row="9" Grid.Column="5" x:Name="homeTeamDesignatedHitterLabel" Content="{Binding HomeTeam.DesignatedHitter}"/>
+        <TextBlock Grid.Column="4" Grid.Row="9" Text="Designated Hitter:"/>
+        <Label Grid.Row="10" Grid.Column="5" x:Name="homeTeamBench1Label" Content="{Binding HomeTeam.BenchPlayer1}"/>
+        <TextBlock Grid.Column="4" Grid.Row="10" Text="Bench Player 1:"/>
+        <Label Grid.Row="11" Grid.Column="5" x:Name="homeTeamBench2Label" Content="{Binding HomeTeam.BenchPlayer2}"/>
+        <TextBlock Grid.Column="4" Grid.Row="11" Text="Bench Player 2:"/>
+        <Label Grid.Row="12" Grid.Column="5" x:Name="homeTeamBench3Label" Content="{Binding HomeTeam.BenchPlayer3}"/>
+        <TextBlock Grid.Column="4" Grid.Row="12" Text="Bench Player 3:"/>
+        <Label Grid.Row="13" Grid.Column="5" x:Name="homeTeamBench4Label" Content="{Binding HomeTeam.BenchPlayer4}"/>
+        <TextBlock Grid.Column="4" Grid.Row="13" Text="Bench Player 4:"/>
+        <Label Grid.Row="14" Grid.Column="5" x:Name="homeTeamStartingPitcher1Label" Content="{Binding HomeTeam.StartingPitcher1}"/>
+        <TextBlock Grid.Column="4" Grid.Row="14" Text="Starting Pitcher 1:"/>
+        <Label Grid.Row="15" Grid.Column="5" x:Name="homeTeamStartingPitcher2Label" Content="{Binding HomeTeam.StartingPitcher2}"/>
+        <TextBlock Grid.Column="4" Grid.Row="15" Text="Starting Pitcher 2:"/>
+        <Label Grid.Row="16" Grid.Column="5" x:Name="homeTeamStartingPitcher3Label" Content="{Binding HomeTeam.StartingPitcher3}"/>
+        <TextBlock Grid.Column="4" Grid.Row="16" Text="Starting Pitcher 3:"/>
+        <Label Grid.Row="17" Grid.Column="5" x:Name="homeTeamStartingPitcher4Label" Content="{Binding HomeTeam.StartingPitcher4}"/>
+        <TextBlock Grid.Column="4" Grid.Row="17" Text="Starting Pitcher 4:"/>
+        <Label Grid.Row="18" Grid.Column="5" x:Name="homeTeamStartingPitcher5Label" Content="{Binding HomeTeam.StartingPitcher5}"/>
+        <TextBlock Grid.Column="4" Grid.Row="18" Text="Starting Pitcher 5:"/>
+        <Label Grid.Row="19" Grid.Column="5" x:Name="homeTeamReliefPitcher1Label" Content="{Binding HomeTeam.ReliefPitcher1}"/>
+        <TextBlock Grid.Column="4" Grid.Row="19" Text="Relief Pitcher 1:"/>
+        <Label Grid.Row="20" Grid.Column="5" x:Name="homeTeamReliefPitcher2Label" Content="{Binding HomeTeam.ReliefPitcher2}"/>
+        <TextBlock Grid.Column="4" Grid.Row="20" Text="Relief Pitcher 2:"/>
+        <Label Grid.Row="21" Grid.Column="5" x:Name="homeTeamReliefPitcher3Label" Content="{Binding HomeTeam.ReliefPitcher3}"/>
+        <TextBlock Grid.Column="4" Grid.Row="21" Text="Relief Pitcher 3:"/>
+        <Label Grid.Row="22" Grid.Column="5" x:Name="homeTeamReliefPitcher4Label" Content="{Binding HomeTeam.ReliefPitcher4}"/>
+        <TextBlock Grid.Column="4" Grid.Row="22" Text="Relief Pitcher 4:"/>
+        <Label Grid.Row="23" Grid.Column="5" x:Name="homeTeamReliefPitcher5Label" Content="{Binding HomeTeam.ReliefPitcher5}"/>
+        <TextBlock Grid.Column="4" Grid.Row="23" Text="Relief Pitcher 5:"/>
+        <Label Grid.Row="24" Grid.Column="5" x:Name="homeTeamReliefPitcher6Label" Content="{Binding HomeTeam.ReliefPitcher6}"/>
+        <TextBlock Grid.Column="4" Grid.Row="24" Text="Relief Pitcher 6:"/>
+        <Label Grid.Row="25" Grid.Column="5" x:Name="homeTeamReliefPitcher7Label" Content="{Binding HomeTeam.ReliefPitcher7}"/>
+        <TextBlock Grid.Column="4" Grid.Row="25" Text="Relief Pitcher 7:"/>
+    </Grid>
+</Window>

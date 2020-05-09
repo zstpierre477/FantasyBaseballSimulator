@@ -1,16 +1,16 @@
 ﻿using FantasyBaseball.UI.ViewModels;
 using System.Windows;
 
-namespace FantasyBaseball.UI.Windows
+namespace FantasyBaseball.UI.Views
 {
     /// <summary>
     /// Interaction logic for SingleGameSetup.xaml
     /// </summary>
-    public partial class SingleGameSetup : Window
+    public partial class SingleGameSetupView : Window
     {
         public IViewModelFactory ViewModelFactory { get; set; }
 
-        public SingleGameSetup(IViewModelFactory viewModelFactory)
+        public SingleGameSetupView(IViewModelFactory viewModelFactory)
         {
             InitializeComponent();
             ViewModelFactory = viewModelFactory;
@@ -18,10 +18,10 @@ namespace FantasyBaseball.UI.Windows
 
         private void CreateTeamsButton_Click(object sender, RoutedEventArgs e)
         {
-            var singleTeamSearch = new SingleGameTeamSelector(ViewModelFactory);
-            this.Visibility = Visibility.Hidden;
+            var singleTeamSearch = new SingleGameTeamSelectorView(ViewModelFactory);
+            Visibility = Visibility.Hidden;
             singleTeamSearch.ShowDialog();
-            this.Close();
+            Close();
         }
     }
 }

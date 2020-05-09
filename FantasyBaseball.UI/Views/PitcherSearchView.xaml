@@ -1,11 +1,11 @@
-﻿<Window x:Class="FantasyBaseball.UI.Windows.BatterSearch"
+﻿<Window x:Class="FantasyBaseball.UI.Views.PitcherSearchView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FantasyBaseball.UI.Windows"
+        xmlns:local="clr-namespace:FantasyBaseball.UI.Views"
         mc:Ignorable="d"
-        Title="Batter Search" Height="450" Width="800">
+        Title="Search For Pitcher" Height="450" Width="800">
     <Grid Background="Coral">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -25,12 +25,12 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="1" Grid.Column="0" Content="Batter Last Name:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
-        <TextBox x:Name="batterLastNameTextBox" Grid.Row="1" Grid.Column="1" Margin="1 1 1 1" Text="{Binding LastName}"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Pitcher Last Name:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+        <TextBox x:Name="pitcherLastNameTextBox" Grid.Row="1" Grid.Column="1" Margin="1 1 1 1" Text="{Binding LastName}"/>
         <Label Grid.Row="1" Grid.Column="2" Content="Year:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
         <ComboBox x:Name="yearTextBox" Grid.Row="1" Grid.Column="3" Margin="1 1 1 1" Text="{Binding Year}" ItemsSource="{Binding Years}"/>
-        <Button x:Name="batterSearchButton" Click="batterSearchButton_Click" Grid.Column="4" Grid.Row="1" Content="Search"/>
-        <DataGrid x:Name="dataGrid" Grid.Row="3" Grid.ColumnSpan="5" Grid.Column="0" Grid.RowSpan="5" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Batters}">
+        <Button x:Name="pitcherSearchButton" Click="pitcherSearchButton_Click" Grid.Column="4" Grid.Row="1" Content="Search"/>
+        <DataGrid x:Name="dataGrid" Grid.Row="3" Grid.ColumnSpan="5" Grid.Column="0" Grid.RowSpan="5" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Pitchers}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
@@ -44,14 +44,17 @@
                 <DataGridTextColumn Header="Year" Binding="{Binding Path='Year'}"/>
                 <DataGridTextColumn Header="Team" Binding="{Binding Path='TeamShortName'}"/>
                 <DataGridTextColumn Header="G" Binding="{Binding Path='Games'}"/>
-                <DataGridTextColumn Header="AB" Binding="{Binding Path='AtBats'}"/>
+                <DataGridTextColumn Header="GS" Binding="{Binding Path='GamesStarted'}"/>
+                <DataGridTextColumn Header="IP" Binding="{Binding Path='IP'}"/>
+                <DataGridTextColumn Header="W" Binding="{Binding Path='Wins'}"/>
+                <DataGridTextColumn Header="L" Binding="{Binding Path='Losses'}"/>
+                <DataGridTextColumn Header="SV" Binding="{Binding Path='Saves'}"/>
+                <DataGridTextColumn Header="K" Binding="{Binding Path='Strikeouts'}"/>
+                <DataGridTextColumn Header="BB" Binding="{Binding Path='Walks'}"/>
                 <DataGridTextColumn Header="H" Binding="{Binding Path='Hits'}"/>
-                <DataGridTextColumn Header="R" Binding="{Binding Path='Runs'}"/>
-                <DataGridTextColumn Header="RBI" Binding="{Binding Path='RunsBattedIn'}"/>
                 <DataGridTextColumn Header="HR" Binding="{Binding Path='HomeRuns'}"/>
-                <DataGridTextColumn Header="AVG" Binding="{Binding Path='BattingAverage'}"/>
-                <DataGridTextColumn Header="OBP" Binding="{Binding Path='OnBasePercentage'}"/>
-                <DataGridTextColumn Header="SLG" Binding="{Binding Path='SluggingPercentage'}"/>
+                <DataGridTextColumn Header="ERA" Binding="{Binding Path='EarnedRunAverage'}"/>
+                <DataGridTextColumn Header="WHIP" Binding="{Binding Path='WHIP'}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

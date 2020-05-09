@@ -2,6 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.ComponentModel;
 using FantasyBaseball.Business.Services;
+using GalaSoft.MvvmLight;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FantasyBaseball.UI.ViewModels
 {
@@ -15,18 +18,22 @@ namespace FantasyBaseball.UI.ViewModels
             ServiceProvider = serviceProvider;
         }
 
-        public INotifyPropertyChanged GetViewModel(string viewType)
+        public INotifyPropertyChanged GetViewModel(string viewType, IEnumerable<ViewModelBase> viewModels = null)
         {
             switch (viewType)
             {
-                case "BatterSearch":
+                case "FantasyBaseball.UI.Views.BatterSearchView":
                     return new BatterSearchViewModel(ServiceProvider.GetService<IPlayerSearchServiceFactory>());
-                case "PitcherSearch":
+                case "FantasyBaseball.UI.Views.PitcherSearchView":
                     return new PitcherSearchViewModel(ServiceProvider.GetService<IPlayerSearchServiceFactory>());
-                case "SingleGameViewModel":
-
-                case "SingleGameTeamSelector":
-                    return new SingleGameTeamsModel();
+                case "FantasyBaseball.UI.Views.SingleGameView":
+                    return new SingleGameViewModel(ServiceProvider.GetService<ISingleGameService>(), viewModels);
+                case "FantasyBaseball.UI.Views.SingleGameTeamSelectorView":
+                    return new SingleGameTeamSelectorViewModel();
+                case "FantasyBaseball.UI.Views.SingleGameTeamLineupEditorView":
+                    return new SingleGameTeamLineupEditorViewModel((TeamViewModel)viewModels.First());
+                case "FantasyBaseball.UI.Views.SingleGameTeamBullpenEditorView":
+                    return new SingleGameTeamBullpenEditorViewModel((TeamViewModel)viewModels.First());
                 default:
                     throw new ArgumentOutOfRangeException($"View {viewType} does not have a corresponding View Model");
             }

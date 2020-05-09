@@ -3,9 +3,7 @@
 namespace FantasyBaseball.UI.ViewModels
 {
     public interface IPlayerViewModel
-    {
-        public int StintId { get; set; }
-        
+    {      
         public string FirstName { get; set; }
         
         public string LastName { get; set; }

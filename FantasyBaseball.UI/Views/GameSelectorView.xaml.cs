@@ -1,16 +1,16 @@
 ﻿using FantasyBaseball.UI.ViewModels;
 using System.Windows;
 
-namespace FantasyBaseball.UI.Windows
+namespace FantasyBaseball.UI.Views
 {
     /// <summary>
     /// Interaction logic for GameSelector.xaml
     /// </summary>
-    public partial class GameSelectorWindow : Window
+    public partial class GameSelectorView : Window
     {
         private IViewModelFactory ViewModelFactory { get; set; }
 
-        public GameSelectorWindow(IViewModelFactory viewModelFactory) 
+        public GameSelectorView(IViewModelFactory viewModelFactory) 
         {
             InitializeComponent();
             ViewModelFactory = viewModelFactory;
@@ -18,7 +18,7 @@ namespace FantasyBaseball.UI.Windows
 
         private void SingleGameButton_Click(object sender, RoutedEventArgs e)
         {
-            var singleGame = new SingleGameSetup(ViewModelFactory);
+            var singleGame = new SingleGameSetupView(ViewModelFactory);
             singleGame.Show();
             this.Close();
         }

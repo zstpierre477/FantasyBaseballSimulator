@@ -1,19 +1,17 @@
-﻿using FantasyBaseball.UI.Windows;
-using System;
-using System.Windows;
+﻿using System.Windows;
 using FantasyBaseball.UI.ViewModels;
 
-namespace FantasyBaseball.UI
+namespace FantasyBaseball.UI.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainView : Window
     {
 
         private IViewModelFactory ViewModelFactory { get; set; }
 
-        public MainWindow(IViewModelFactory viewModelFactory)
+        public MainView(IViewModelFactory viewModelFactory)
         {
             InitializeComponent();
             ViewModelFactory = viewModelFactory;
@@ -21,7 +19,7 @@ namespace FantasyBaseball.UI
 
         private void PlayBallButton_Click(object sender, RoutedEventArgs e)
         {
-            var gameSelectorWindow = new GameSelectorWindow(ViewModelFactory);
+            var gameSelectorWindow = new GameSelectorView(ViewModelFactory);
             gameSelectorWindow.ShowDialog();
             Close();
         }

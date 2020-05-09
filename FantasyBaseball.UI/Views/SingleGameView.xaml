@@ -1,11 +1,11 @@
-﻿<Window x:Class="FantasyBaseball.UI.Windows.SingleGame"
+﻿<Window x:Class="FantasyBaseball.UI.Views.SingleGameView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FantasyBaseball.UI.Windows"
+        xmlns:local="clr-namespace:FantasyBaseball.UI.Views"
         mc:Ignorable="d"
-        Title="Single Game" Height="450" Width="800">
+        Title="Playing Ball!" Height="450" Width="800">
     <Grid Background="LightSteelBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -222,8 +222,8 @@
                 <DataGridTextColumn Header="R" Binding="{Binding Path='CurrentGameRuns'}"/>
                 <DataGridTextColumn Header="RBI" Binding="{Binding Path='CurrentGameRunsBattedIn'}"/>
             </DataGrid>
-            <Button x:Name="awayTeamBenchButton" Content="Bench" Grid.Row="1" Margin="3 3 3 3"/>
-            <Button x:Name="awayTeamBullpenButton" Content="Bullpen" Grid.Row="2" Margin="3 3 3 3"/>
+            <Button x:Name="awayTeamBenchButton" Content="Bench" Grid.Row="1" Margin="3 3 3 3" Click="awayTeamBenchButton_Click"/>
+            <Button x:Name="awayTeamBullpenButton" Content="Bullpen" Grid.Row="2" Margin="3 3 3 3" Click="awayTeamBullpenButton_Click"/>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="2" Background="LightSalmon">
             <Grid.RowDefinitions>
@@ -240,8 +240,8 @@
                 <DataGridTextColumn Header="R" Binding="{Binding Path='CurrentGameRuns'}"/>
                 <DataGridTextColumn Header="RBI" Binding="{Binding Path='CurrentGameRunsBattedIn'}"/>
             </DataGrid>
-            <Button x:Name="homeTeamBenchButton" Content="Bench" Grid.Row="1" Margin="3 3 3 3"/>
-            <Button x:Name="homeTeamBullpenButton" Content="Bullpen" Grid.Row="2" Margin="3 3 3 3"/>
+            <Button x:Name="homeTeamBenchButton" Content="Bench" Grid.Row="1" Margin="3 3 3 3" Click="homeTeamBenchButton_Click"/>
+            <Button x:Name="homeTeamBullpenButton" Content="Bullpen" Grid.Row="2" Margin="3 3 3 3" Click="homeTeamBullpenButton_Click"/>
         </Grid>
     </Grid>
 </Window>

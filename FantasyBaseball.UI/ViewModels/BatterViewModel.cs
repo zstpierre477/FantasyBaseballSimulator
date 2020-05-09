@@ -6,8 +6,6 @@ namespace FantasyBaseball.UI.ViewModels
 {
     public class BatterViewModel : ViewModelBase, IPlayerViewModel
     {
-        public int StintId { get; set; }
-
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -50,7 +48,22 @@ namespace FantasyBaseball.UI.ViewModels
 
         public BatterViewModel(PlayerStint playerStint)
         {
-            throw new NotImplementedException();
+            FirstName = playerStint.Person.FirstName;
+            LastName = playerStint.Person.LastName;
+            Year = playerStint.BattingStint.Year;
+            TeamShortName = playerStint.Team.TeamIdBr;
+            Games = playerStint.BattingStint.Games ?? 0;
+            AtBats = playerStint.BattingStint.AtBats ?? 0;
+            Runs = playerStint.BattingStint.Runs ?? 0;
+            Hits = playerStint.BattingStint.Hits ?? 0;
+            Doubles = playerStint.BattingStint.Doubles ?? 0;
+            Triples = playerStint.BattingStint.Triples ?? 0;
+            HomeRuns = playerStint.BattingStint.HomeRuns ?? 0;
+            RunsBattedIn = playerStint.BattingStint.RunsBattedIn ?? 0;
+            StolenBases = playerStint.BattingStint.StolenBases ?? 0;
+            CaughtStealing = playerStint.BattingStint.CaughtStealing ?? 0;
+            Walks = playerStint.BattingStint.Walks ?? 0;
+            HitByPitch = playerStint.BattingStint.HitByPitch ?? 0;
         }
 
         public int CurrentGameAtBats { get; set; }

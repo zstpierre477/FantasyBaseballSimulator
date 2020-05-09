@@ -7,7 +7,7 @@ namespace FantasyBaseball.Business.Services
     {
         bool GetStealResult(BattingStint runner, FieldingStint catcher);
         BattingResult GetBattingResult(BattingStint batter, PitchingStint pitcher);
-        public FieldingResult GetFieldingResult(FieldingStint fielder);
+        public FieldingResult GetFieldingResult(FieldingStint fielder, PositionType positionType);
         public bool GetIsPassedBallResult(FieldingStint fielder);
     }
 }
