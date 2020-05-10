@@ -1,4 +1,6 @@
 ﻿using FantasyBaseball.Entities.Enums;
+using FantasyBaseball.Entities.Helpers;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FantasyBaseball.Entities.Models
 {
@@ -18,7 +20,7 @@ namespace FantasyBaseball.Entities.Models
             set
             {
                 _position = value;
-                PositionType = PositionTypeHelpers.ToPositionType(_position);
+                PositionType = PositionTypeHelperFunctions.PositionAbbreviationStringToPositionType(_position);
             }
         }
         public short? Games { get; set; }
@@ -38,6 +40,7 @@ namespace FantasyBaseball.Entities.Models
         public virtual Person Person { get; set; }
         public virtual Team Team { get; set; }
 
+        [NotMapped]
         public PositionType PositionType { get; set; }
     }
 }

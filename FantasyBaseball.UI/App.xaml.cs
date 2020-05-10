@@ -29,6 +29,7 @@ namespace FantasyBaseball.UI
             services.AddSingleton<IPitchingStintRepository, PitchingStintRepository>();
             services.AddSingleton<ISingleGameService, SingleGameService>();
             services.AddSingleton<IViewModelFactory, ViewModelFactory>();
+            services.AddSingleton<IRandomPlayerSelectorService, RandomPlayerSelectorService>();
             services.AddSingleton<MainView>();
         }
 

@@ -29,7 +29,7 @@ namespace FantasyBaseball.UI.ViewModels
                 case "FantasyBaseball.UI.Views.SingleGameView":
                     return new SingleGameViewModel(ServiceProvider.GetService<ISingleGameService>(), viewModels);
                 case "FantasyBaseball.UI.Views.SingleGameTeamSelectorView":
-                    return new SingleGameTeamSelectorViewModel();
+                    return new SingleGameTeamSelectorViewModel(ServiceProvider.GetService<IRandomPlayerSelectorService>());
                 case "FantasyBaseball.UI.Views.SingleGameTeamLineupEditorView":
                     return new SingleGameTeamLineupEditorViewModel((TeamViewModel)viewModels.First());
                 case "FantasyBaseball.UI.Views.SingleGameTeamBullpenEditorView":

@@ -23,5 +23,13 @@ namespace FantasyBaseball.UI.Views
             singleTeamSearch.ShowDialog();
             Close();
         }
+
+        private void GenerateRandomTeamsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var singleTeamSearch = new SingleGameTeamSelectorView(ViewModelFactory, true);
+            Visibility = Visibility.Hidden;
+            singleTeamSearch.ShowDialog();
+            Close();
+        }
     }
 }

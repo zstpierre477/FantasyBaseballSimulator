@@ -1,17 +1,38 @@
 ﻿using FantasyBaseball.Entities.Models;
+using GalaSoft.MvvmLight;
 using System;
 
 namespace FantasyBaseball.UI.ViewModels
 {
-    public class PitcherViewModel : IPlayerViewModel
+    public class PitcherViewModel : ViewModelBase, IPlayerViewModel
     {
-        public string FirstName { get; set; }
+        private string _firstName { get; set; }
+        public string FirstName
+        {
+            get { return _firstName; }
+            set { _firstName = value; RaisePropertyChanged("PlayerInfoString"); RaisePropertyChanged("FirstName"); }
+        }
 
-        public string LastName { get; set; }
+        private string _lastName { get; set; }
+        public string LastName
+        {
+            get { return _lastName; }
+            set { _lastName = value; RaisePropertyChanged("PlayerInfoString"); RaisePropertyChanged("LastName"); }
+        }
 
-        public short Year { get; set; }
+        private short _year { get; set; }
+        public short Year
+        {
+            get { return _year; }
+            set { _year = value; RaisePropertyChanged("PlayerInfoString"); RaisePropertyChanged("Year"); }
+        }
 
-        public string TeamShortName { get; set; }
+        private string _teamShortName { get; set; }
+        public string TeamShortName
+        {
+            get { return _teamShortName; }
+            set { _teamShortName = value; RaisePropertyChanged("PlayerInfoString"); RaisePropertyChanged("TeamShortName"); }
+        }
 
         public short Wins { get; set; }
         
@@ -85,5 +106,11 @@ namespace FantasyBaseball.UI.ViewModels
         public double CurrentGameInningsPitched { get; set; }
 
         public bool CurrentGameIsTired => CurrentGameInningsPitched > Math.Round(AverageIP, 0, MidpointRounding.ToPositiveInfinity);
+
+        public string _playerInfoString => $"{FirstName} {LastName} {Year} {TeamShortName}";
+        public string PlayerInfoString
+        {
+            get { return _playerInfoString; }
+        }
     }
 }

@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="..\FantasyBaseball.Entities\FantasyBaseball.Entities.csproj" />
     <ProjectReference Include="..\FantasyBaseball.Repository\FantasyBaseball.Repository.csproj" />
-    <ProjectReference Include="..\FantasyBaseball.UI\test.csproj" />
   </ItemGroup>
 
 </Project>

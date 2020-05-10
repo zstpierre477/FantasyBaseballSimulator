@@ -6,13 +6,33 @@ namespace FantasyBaseball.UI.ViewModels
 {
     public class BatterViewModel : ViewModelBase, IPlayerViewModel
     {
-        public string FirstName { get; set; }
+        private string _firstName { get; set; }
+        public string FirstName 
+        { 
+            get { return _firstName; } 
+            set { _firstName = value; RaisePropertyChanged("PlayerInfoString"); RaisePropertyChanged("FirstName"); } 
+        }
 
-        public string LastName { get; set; }
+        private string _lastName { get; set; }
+        public string LastName
+        {
+            get { return _lastName; }
+            set { _lastName = value; RaisePropertyChanged("PlayerInfoString"); RaisePropertyChanged("LastName"); }
+        }
 
-        public short Year { get; set; }
+        private short _year { get; set; }
+        public short Year
+        {
+            get { return _year; }
+            set { _year = value; RaisePropertyChanged("PlayerInfoString"); RaisePropertyChanged("Year"); }
+        }
 
-        public string TeamShortName { get; set; }
+        private string _teamShortName { get; set; }
+        public string TeamShortName
+        {
+            get { return _teamShortName; }
+            set { _teamShortName = value; RaisePropertyChanged("PlayerInfoString"); RaisePropertyChanged("TeamShortName"); }
+        }
 
         public short Games { get; set; }
 
@@ -48,6 +68,7 @@ namespace FantasyBaseball.UI.ViewModels
 
         public BatterViewModel(PlayerStint playerStint)
         {
+            PlayerStint = playerStint;
             FirstName = playerStint.Person.FirstName;
             LastName = playerStint.Person.LastName;
             Year = playerStint.BattingStint.Year;
@@ -64,6 +85,7 @@ namespace FantasyBaseball.UI.ViewModels
             CaughtStealing = playerStint.BattingStint.CaughtStealing ?? 0;
             Walks = playerStint.BattingStint.Walks ?? 0;
             HitByPitch = playerStint.BattingStint.HitByPitch ?? 0;
+            RaisePropertyChanged("PlayerInfoString");
         }
 
         public int CurrentGameAtBats { get; set; }
@@ -77,5 +99,11 @@ namespace FantasyBaseball.UI.ViewModels
         public int CurrentGameHomeRuns { get; set; }
 
         public int CurrentGameWalks { get; set; }
+
+        public string _playerInfoString => $"{FirstName} {LastName} {Year} {TeamShortName}";
+        public string PlayerInfoString
+        {
+            get { return _playerInfoString; }
+        }
     }
 }

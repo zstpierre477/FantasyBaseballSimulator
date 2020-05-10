@@ -2,31 +2,38 @@
 using FantasyBaseball.Entities.Enums;
 using GalaSoft.MvvmLight;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace FantasyBaseball.UI.ViewModels
 {
     public class PitcherSearchViewModel : ViewModelBase
     {
-        public IEnumerable<PitcherViewModel> Pitchers { get; set; }
+        private ObservableCollection<PitcherViewModel> _pitchers { get; set; }
+        public ObservableCollection<PitcherViewModel> Pitchers
+        {
+            get { return _pitchers; }
+            set { _pitchers = value; RaisePropertyChanged("Pitchers"); }
+        }
 
         public string LastName { get; set; } 
 
         public int Year { get; set; }
 
-        public IEnumerable<int> Years { get; set; }
+        public ObservableCollection<int> Years { get; set; }
 
         public IPlayerSearchService PlayerSearchService { get; set; }
 
         public PitcherSearchViewModel(IPlayerSearchServiceFactory playerSearchServiceFactory)
         {
             PlayerSearchService = playerSearchServiceFactory.GetPlayerSearchService(PlayerType.Pitcher);
-            Years = Enumerable.Range(1871, 2019);
+            Years = new ObservableCollection<int>(Enumerable.Range(1871, 2019));
+            Year = 2019;
         }
 
         public void SearchPitcherByLastNameAndYear()
         {
-            Pitchers = PlayerSearchService.SearchByLastNameAndYear(LastName, Year).Select(p => new PitcherViewModel(p));
+            Pitchers = new ObservableCollection<PitcherViewModel>(PlayerSearchService.SearchByLastNameAndYear(LastName, Year).Select(p => new PitcherViewModel(p)));
         }
     }
 }

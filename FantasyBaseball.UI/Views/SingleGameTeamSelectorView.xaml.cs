@@ -10,11 +10,16 @@ namespace FantasyBaseball.UI.Views
     {
         private IViewModelFactory ViewModelFactory { get; set; }
 
-        public SingleGameTeamSelectorView(IViewModelFactory viewModelFactory)
+        public SingleGameTeamSelectorView(IViewModelFactory viewModelFactory, bool generateRandomTeams = false)
         {
             InitializeComponent();
             ViewModelFactory = viewModelFactory;
-            DataContext = viewModelFactory.GetViewModel(GetType().ToString());
+            var vm = (SingleGameTeamSelectorViewModel)viewModelFactory.GetViewModel(GetType().ToString());
+            if (generateRandomTeams)
+            {
+                vm.GenerateRandomTeams();
+            }
+            DataContext = vm;
         }
 
         private void startGameButton_Click(object sender, RoutedEventArgs e)
@@ -28,7 +33,7 @@ namespace FantasyBaseball.UI.Views
             }
             else
             {
-                MessageBox.Show("To play a game, you must select a Catcher, First Baseman, Second Baseman, Third Baseman, Shortstop, Left Fielder, " +
+                MessageBox.Show("To play a game, you must select a Team Name, Catcher, First Baseman, Second Baseman, Third Baseman, Shortstop, Left Fielder, " +
                     "Center Fielder, Right Fielder, Designated Hitter, and Starting Pitcher 1 for each team.");
             }
         }

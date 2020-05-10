@@ -28,7 +28,7 @@
         <Label Grid.Row="1" Grid.Column="0" Content="Batter Last Name:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
         <TextBox x:Name="batterLastNameTextBox" Grid.Row="1" Grid.Column="1" Margin="1 1 1 1" Text="{Binding LastName}"/>
         <Label Grid.Row="1" Grid.Column="2" Content="Year:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
-        <ComboBox x:Name="yearTextBox" Grid.Row="1" Grid.Column="3" Margin="1 1 1 1" Text="{Binding Year}" ItemsSource="{Binding Years}"/>
+        <ComboBox x:Name="yearTextBox" Grid.Row="1" Grid.Column="3" Margin="1 1 1 1" ItemsSource="{Binding Years}" SelectedItem="{Binding Year}"/>
         <Button x:Name="batterSearchButton" Click="batterSearchButton_Click" Grid.Column="4" Grid.Row="1" Content="Search"/>
         <DataGrid x:Name="dataGrid" Grid.Row="3" Grid.ColumnSpan="5" Grid.Column="0" Grid.RowSpan="5" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Batters}">
             <DataGrid.Columns>

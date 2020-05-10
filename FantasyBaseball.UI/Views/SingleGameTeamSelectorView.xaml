@@ -126,55 +126,55 @@
         <Button x:Name="awayTeamReliefPitcher7Button" Click="awayTeamReliefPitcher7Button_Click" Grid.Column="2" Grid.Row="25" Margin="1 1 1 1">
             <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Button>
-        <Label Grid.Row="1" Grid.Column="1" x:Name="awayTeamCatcherLabel" Content="{Binding AwayTeam.Catcher}"/>
+        <Label Grid.Row="1" Grid.Column="1" x:Name="awayTeamCatcherLabel" Content="{Binding AwayTeam.Catcher.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="1" Text="Catcher:"/>
-        <Label Grid.Row="2" Grid.Column="1" x:Name="awayTeamFirstBasemanLabel" Content="{Binding AwayTeam.FirstBaseman}"/>
+        <Label Grid.Row="2" Grid.Column="1" x:Name="awayTeamFirstBasemanLabel" Content="{Binding AwayTeam.FirstBaseman.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="2" Text="First Baseman:"/>
-        <Label Grid.Row="3" Grid.Column="1" x:Name="awayTeamSecondBasemanLabel" Content="{Binding AwayTeam.SecondBaseman}"/>
+        <Label Grid.Row="3" Grid.Column="1" x:Name="awayTeamSecondBasemanLabel" Content="{Binding AwayTeam.SecondBaseman.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="3" Text="Second Baseman:"/>
-        <Label Grid.Row="4" Grid.Column="1" x:Name="awayTeamThirdBasemanLabel" Content="{Binding AwayTeam.ThirdBaseman}"/>
+        <Label Grid.Row="4" Grid.Column="1" x:Name="awayTeamThirdBasemanLabel" Content="{Binding AwayTeam.ThirdBaseman.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="4" Text="Third Baseman:"/>
-        <Label Grid.Row="5" Grid.Column="1" x:Name="awayTeamShortstopLabel" Content="{Binding AwayTeam.Shortstop}"/>
+        <Label Grid.Row="5" Grid.Column="1" x:Name="awayTeamShortstopLabel" Content="{Binding AwayTeam.Shortstop.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="5" Text="Shortstop:"/>
-        <Label Grid.Row="6" Grid.Column="1" x:Name="awayTeamLeftFielderLabel" Content="{Binding AwayTeam.LeftFielder}"/>
+        <Label Grid.Row="6" Grid.Column="1" x:Name="awayTeamLeftFielderLabel" Content="{Binding AwayTeam.LeftFielder.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="6" Text="Left Fielder:"/>
-        <Label Grid.Row="7" Grid.Column="1" x:Name="awayTeamCenterFielderLabel" Content="{Binding AwayTeam.CenterFielder}"/>
+        <Label Grid.Row="7" Grid.Column="1" x:Name="awayTeamCenterFielderLabel" Content="{Binding AwayTeam.CenterFielder.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="7" Text="Center Fielder:"/>
-        <Label Grid.Row="8" Grid.Column="1" x:Name="awayTeamRightFielderLabel" Content="{Binding AwayTeam.RightFielder}"/>
+        <Label Grid.Row="8" Grid.Column="1" x:Name="awayTeamRightFielderLabel" Content="{Binding AwayTeam.RightFielder.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="8" Text="Right Fielder:"/>
-        <Label Grid.Row="9" Grid.Column="1" x:Name="awayTeamDesignatedHitterLabel" Content="{Binding AwayTeam.DesignatedHitter}"/>
+        <Label Grid.Row="9" Grid.Column="1" x:Name="awayTeamDesignatedHitterLabel" Content="{Binding AwayTeam.DesignatedHitter.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="9" Text="Designated Hitter:"/>
-        <Label Grid.Row="10" Grid.Column="1" x:Name="awayTeamBench1Label" Content="{Binding AwayTeam.BenchPlayer1}"/>
+        <Label Grid.Row="10" Grid.Column="1" x:Name="awayTeamBench1Label" Content="{Binding AwayTeam.BenchPlayer1.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="10" Text="Bench Player 1:"/>
-        <Label Grid.Row="11" Grid.Column="1" x:Name="awayTeamBench2Label" Content="{Binding AwayTeam.BenchPlayer2}"/>
+        <Label Grid.Row="11" Grid.Column="1" x:Name="awayTeamBench2Label" Content="{Binding AwayTeam.BenchPlayer2.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="11" Text="Bench Player 2:"/>
-        <Label Grid.Row="12" Grid.Column="1" x:Name="awayTeamBench3Label" Content="{Binding AwayTeam.BenchPlayer3}"/>
+        <Label Grid.Row="12" Grid.Column="1" x:Name="awayTeamBench3Label" Content="{Binding AwayTeam.BenchPlayer3.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="12" Text="Bench Player 3:"/>
-        <Label Grid.Row="13" Grid.Column="1" x:Name="awayTeamBench4Label" Content="{Binding AwayTeam.BenchPlayer4}"/>
+        <Label Grid.Row="13" Grid.Column="1" x:Name="awayTeamBench4Label" Content="{Binding AwayTeam.BenchPlayer4.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="13" Text="Bench Player 4:"/>
-        <Label Grid.Row="14" Grid.Column="1" x:Name="awayTeamStartingPitcher1Label" Content="{Binding AwayTeam.StartingPitcher1}"/>
+        <Label Grid.Row="14" Grid.Column="1" x:Name="awayTeamStartingPitcher1Label" Content="{Binding AwayTeam.StartingPitcher1.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="14" Text="Starting Pitcher 1:"/>
-        <Label Grid.Row="15" Grid.Column="1" x:Name="awayTeamStartingPitcher2Label" Content="{Binding AwayTeam.StartingPitcher2}"/>
+        <Label Grid.Row="15" Grid.Column="1" x:Name="awayTeamStartingPitcher2Label" Content="{Binding AwayTeam.StartingPitcher2.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="15" Text="Starting Pitcher 2:"/>
-        <Label Grid.Row="16" Grid.Column="1" x:Name="awayTeamStartingPitcher3Label" Content="{Binding AwayTeam.StartingPitcher3}"/>
+        <Label Grid.Row="16" Grid.Column="1" x:Name="awayTeamStartingPitcher3Label" Content="{Binding AwayTeam.StartingPitcher3.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="16" Text="Starting Pitcher 3:"/>
-        <Label Grid.Row="17" Grid.Column="1" x:Name="awayTeamStartingPitcher4Label" Content="{Binding AwayTeam.StartingPitcher4}"/>
+        <Label Grid.Row="17" Grid.Column="1" x:Name="awayTeamStartingPitcher4Label" Content="{Binding AwayTeam.StartingPitcher4.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="17" Text="Starting Pitcher 4:"/>
-        <Label Grid.Row="18" Grid.Column="1" x:Name="awayTeamStartingPitcher5Label" Content="{Binding AwayTeam.StartingPitcher5}"/>
+        <Label Grid.Row="18" Grid.Column="1" x:Name="awayTeamStartingPitcher5Label" Content="{Binding AwayTeam.StartingPitcher5.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="18" Text="Starting Pitcher 5:"/>
-        <Label Grid.Row="19" Grid.Column="1" x:Name="awayTeamReliefPitcher1Label" Content="{Binding AwayTeam.ReliefPitcher1}"/>
+        <Label Grid.Row="19" Grid.Column="1" x:Name="awayTeamReliefPitcher1Label" Content="{Binding AwayTeam.ReliefPitcher1.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="19" Text="Relief Pitcher 1:"/>
-        <Label Grid.Row="20" Grid.Column="1" x:Name="awayTeamReliefPitcher2Label" Content="{Binding AwayTeam.ReliefPitcher2}"/>
+        <Label Grid.Row="20" Grid.Column="1" x:Name="awayTeamReliefPitcher2Label" Content="{Binding AwayTeam.ReliefPitcher2.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="20" Text="Relief Pitcher 2:"/>
-        <Label Grid.Row="21" Grid.Column="1" x:Name="awayTeamReliefPitcher3Label" Content="{Binding AwayTeam.ReliefPitcher3}"/>
+        <Label Grid.Row="21" Grid.Column="1" x:Name="awayTeamReliefPitcher3Label" Content="{Binding AwayTeam.ReliefPitcher3.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="21" Text="Relief Pitcher 3:"/>
-        <Label Grid.Row="22" Grid.Column="1" x:Name="awayTeamReliefPitcher4Label" Content="{Binding AwayTeam.ReliefPitcher4}"/>
+        <Label Grid.Row="22" Grid.Column="1" x:Name="awayTeamReliefPitcher4Label" Content="{Binding AwayTeam.ReliefPitcher4.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="22" Text="Relief Pitcher 4:"/>
-        <Label Grid.Row="23" Grid.Column="1" x:Name="awayTeamReliefPitcher5Label" Content="{Binding AwayTeam.ReliefPitcher5}"/>
+        <Label Grid.Row="23" Grid.Column="1" x:Name="awayTeamReliefPitcher5Label" Content="{Binding AwayTeam.ReliefPitcher5.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="23" Text="Relief Pitcher 5:"/>
-        <Label Grid.Row="24" Grid.Column="1" x:Name="awayTeamReliefPitcher6Label" Content="{Binding AwayTeam.ReliefPitcher6}"/>
+        <Label Grid.Row="24" Grid.Column="1" x:Name="awayTeamReliefPitcher6Label" Content="{Binding AwayTeam.ReliefPitcher6.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="24" Text="Relief Pitcher 6:"/>
-        <Label Grid.Row="25" Grid.Column="1" x:Name="awayTeamReliefPitcher7Label" Content="{Binding AwayTeam.ReliefPitcher7}"/>
+        <Label Grid.Row="25" Grid.Column="1" x:Name="awayTeamReliefPitcher7Label" Content="{Binding AwayTeam.ReliefPitcher7.PlayerInfoString}"/>
         <TextBlock Grid.Column="0" Grid.Row="25" Text="Relief Pitcher 7:"/>
 
         <TextBlock Grid.Column="5" Grid.Row="0" Text="Home Team Name:"/>
@@ -254,55 +254,55 @@
         <Button x:Name="homeTeamReliefPitcher7Button" Click="homeTeamReliefPitcher7Button_Click" Grid.Column="6" Grid.Row="25" Margin="1 1 1 1">
             <TextBlock Text="Select Pitcher" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Button>
-        <Label Grid.Row="1" Grid.Column="5" x:Name="homeTeamCatcherLabel" Content="{Binding HomeTeam.Catcher}"/>
+        <Label Grid.Row="1" Grid.Column="5" x:Name="homeTeamCatcherLabel" Content="{Binding HomeTeam.Catcher.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="1" Text="Catcher:"/>
-        <Label Grid.Row="2" Grid.Column="5" x:Name="homeTeamFirstBasemanLabel" Content="{Binding HomeTeam.FirstBaseman}"/>
+        <Label Grid.Row="2" Grid.Column="5" x:Name="homeTeamFirstBasemanLabel" Content="{Binding HomeTeam.FirstBaseman.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="2" Text="First Baseman:"/>
-        <Label Grid.Row="3" Grid.Column="5" x:Name="homeTeamSecondBasemanLabel" Content="{Binding HomeTeam.SecondBaseman}"/>
+        <Label Grid.Row="3" Grid.Column="5" x:Name="homeTeamSecondBasemanLabel" Content="{Binding HomeTeam.SecondBaseman.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="3" Text="Second Baseman:"/>
-        <Label Grid.Row="4" Grid.Column="5" x:Name="homeTeamThirdBasemanLabel" Content="{Binding HomeTeam.ThirdBaseman}"/>
+        <Label Grid.Row="4" Grid.Column="5" x:Name="homeTeamThirdBasemanLabel" Content="{Binding HomeTeam.ThirdBaseman.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="4" Text="Third Baseman:"/>
-        <Label Grid.Row="5" Grid.Column="5" x:Name="homeTeamShortstopLabel" Content="{Binding HomeTeam.Shortstop}"/>
+        <Label Grid.Row="5" Grid.Column="5" x:Name="homeTeamShortstopLabel" Content="{Binding HomeTeam.Shortstop.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="5" Text="Shortstop:"/>
-        <Label Grid.Row="6" Grid.Column="5" x:Name="homeTeamLeftFielderLabel" Content="{Binding HomeTeam.LeftFielder}"/>
+        <Label Grid.Row="6" Grid.Column="5" x:Name="homeTeamLeftFielderLabel" Content="{Binding HomeTeam.LeftFielder.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="6" Text="Left Fielder:"/>
-        <Label Grid.Row="7" Grid.Column="5" x:Name="homeTeamCenterFielderLabel" Content="{Binding HomeTeam.CenterFielder}"/>
+        <Label Grid.Row="7" Grid.Column="5" x:Name="homeTeamCenterFielderLabel" Content="{Binding HomeTeam.CenterFielder.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="7" Text="Center Fielder:"/>
-        <Label Grid.Row="8" Grid.Column="5" x:Name="homeTeamRightFielderLabel" Content="{Binding HomeTeam.RightFielder}"/>
+        <Label Grid.Row="8" Grid.Column="5" x:Name="homeTeamRightFielderLabel" Content="{Binding HomeTeam.RightFielder.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="8" Text="Right Fielder:"/>
-        <Label Grid.Row="9" Grid.Column="5" x:Name="homeTeamDesignatedHitterLabel" Content="{Binding HomeTeam.DesignatedHitter}"/>
+        <Label Grid.Row="9" Grid.Column="5" x:Name="homeTeamDesignatedHitterLabel" Content="{Binding HomeTeam.DesignatedHitter.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="9" Text="Designated Hitter:"/>
-        <Label Grid.Row="10" Grid.Column="5" x:Name="homeTeamBench1Label" Content="{Binding HomeTeam.BenchPlayer1}"/>
+        <Label Grid.Row="10" Grid.Column="5" x:Name="homeTeamBench1Label" Content="{Binding HomeTeam.BenchPlayer1.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="10" Text="Bench Player 1:"/>
-        <Label Grid.Row="11" Grid.Column="5" x:Name="homeTeamBench2Label" Content="{Binding HomeTeam.BenchPlayer2}"/>
+        <Label Grid.Row="11" Grid.Column="5" x:Name="homeTeamBench2Label" Content="{Binding HomeTeam.BenchPlayer2.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="11" Text="Bench Player 2:"/>
-        <Label Grid.Row="12" Grid.Column="5" x:Name="homeTeamBench3Label" Content="{Binding HomeTeam.BenchPlayer3}"/>
+        <Label Grid.Row="12" Grid.Column="5" x:Name="homeTeamBench3Label" Content="{Binding HomeTeam.BenchPlayer3.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="12" Text="Bench Player 3:"/>
-        <Label Grid.Row="13" Grid.Column="5" x:Name="homeTeamBench4Label" Content="{Binding HomeTeam.BenchPlayer4}"/>
+        <Label Grid.Row="13" Grid.Column="5" x:Name="homeTeamBench4Label" Content="{Binding HomeTeam.BenchPlayer4.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="13" Text="Bench Player 4:"/>
-        <Label Grid.Row="14" Grid.Column="5" x:Name="homeTeamStartingPitcher1Label" Content="{Binding HomeTeam.StartingPitcher1}"/>
+        <Label Grid.Row="14" Grid.Column="5" x:Name="homeTeamStartingPitcher1Label" Content="{Binding HomeTeam.StartingPitcher1.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="14" Text="Starting Pitcher 1:"/>
-        <Label Grid.Row="15" Grid.Column="5" x:Name="homeTeamStartingPitcher2Label" Content="{Binding HomeTeam.StartingPitcher2}"/>
+        <Label Grid.Row="15" Grid.Column="5" x:Name="homeTeamStartingPitcher2Label" Content="{Binding HomeTeam.StartingPitcher2.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="15" Text="Starting Pitcher 2:"/>
-        <Label Grid.Row="16" Grid.Column="5" x:Name="homeTeamStartingPitcher3Label" Content="{Binding HomeTeam.StartingPitcher3}"/>
+        <Label Grid.Row="16" Grid.Column="5" x:Name="homeTeamStartingPitcher3Label" Content="{Binding HomeTeam.StartingPitcher3.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="16" Text="Starting Pitcher 3:"/>
-        <Label Grid.Row="17" Grid.Column="5" x:Name="homeTeamStartingPitcher4Label" Content="{Binding HomeTeam.StartingPitcher4}"/>
+        <Label Grid.Row="17" Grid.Column="5" x:Name="homeTeamStartingPitcher4Label" Content="{Binding HomeTeam.StartingPitcher4.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="17" Text="Starting Pitcher 4:"/>
-        <Label Grid.Row="18" Grid.Column="5" x:Name="homeTeamStartingPitcher5Label" Content="{Binding HomeTeam.StartingPitcher5}"/>
+        <Label Grid.Row="18" Grid.Column="5" x:Name="homeTeamStartingPitcher5Label" Content="{Binding HomeTeam.StartingPitcher5.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="18" Text="Starting Pitcher 5:"/>
-        <Label Grid.Row="19" Grid.Column="5" x:Name="homeTeamReliefPitcher1Label" Content="{Binding HomeTeam.ReliefPitcher1}"/>
+        <Label Grid.Row="19" Grid.Column="5" x:Name="homeTeamReliefPitcher1Label" Content="{Binding HomeTeam.ReliefPitcher1.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="19" Text="Relief Pitcher 1:"/>
-        <Label Grid.Row="20" Grid.Column="5" x:Name="homeTeamReliefPitcher2Label" Content="{Binding HomeTeam.ReliefPitcher2}"/>
+        <Label Grid.Row="20" Grid.Column="5" x:Name="homeTeamReliefPitcher2Label" Content="{Binding HomeTeam.ReliefPitcher2.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="20" Text="Relief Pitcher 2:"/>
-        <Label Grid.Row="21" Grid.Column="5" x:Name="homeTeamReliefPitcher3Label" Content="{Binding HomeTeam.ReliefPitcher3}"/>
+        <Label Grid.Row="21" Grid.Column="5" x:Name="homeTeamReliefPitcher3Label" Content="{Binding HomeTeam.ReliefPitcher3.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="21" Text="Relief Pitcher 3:"/>
-        <Label Grid.Row="22" Grid.Column="5" x:Name="homeTeamReliefPitcher4Label" Content="{Binding HomeTeam.ReliefPitcher4}"/>
+        <Label Grid.Row="22" Grid.Column="5" x:Name="homeTeamReliefPitcher4Label" Content="{Binding HomeTeam.ReliefPitcher4.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="22" Text="Relief Pitcher 4:"/>
-        <Label Grid.Row="23" Grid.Column="5" x:Name="homeTeamReliefPitcher5Label" Content="{Binding HomeTeam.ReliefPitcher5}"/>
+        <Label Grid.Row="23" Grid.Column="5" x:Name="homeTeamReliefPitcher5Label" Content="{Binding HomeTeam.ReliefPitcher5.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="23" Text="Relief Pitcher 5:"/>
-        <Label Grid.Row="24" Grid.Column="5" x:Name="homeTeamReliefPitcher6Label" Content="{Binding HomeTeam.ReliefPitcher6}"/>
+        <Label Grid.Row="24" Grid.Column="5" x:Name="homeTeamReliefPitcher6Label" Content="{Binding HomeTeam.ReliefPitcher6.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="24" Text="Relief Pitcher 6:"/>
-        <Label Grid.Row="25" Grid.Column="5" x:Name="homeTeamReliefPitcher7Label" Content="{Binding HomeTeam.ReliefPitcher7}"/>
+        <Label Grid.Row="25" Grid.Column="5" x:Name="homeTeamReliefPitcher7Label" Content="{Binding HomeTeam.ReliefPitcher7.PlayerInfoString}"/>
         <TextBlock Grid.Column="4" Grid.Row="25" Text="Relief Pitcher 7:"/>
     </Grid>
 </Window>
