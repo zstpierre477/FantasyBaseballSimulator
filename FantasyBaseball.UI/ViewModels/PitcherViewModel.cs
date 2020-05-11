@@ -130,6 +130,13 @@ namespace FantasyBaseball.UI.ViewModels
             set { _currentGameEarnedRuns = value; RaisePropertyChanged("CurrentGameEarnedRuns"); }
         }
 
+        private int _currentGameErrors { get; set; }
+        public int CurrentGameErrors
+        {
+            get { return _currentGameErrors; }
+            set { _currentGameErrors = value; RaisePropertyChanged("CurrentGameErrors"); }
+        }
+
         private int _currentGameInningsPitchedOuts { get; set; }
         public int CurrentGameInningsPitchedOuts
         {

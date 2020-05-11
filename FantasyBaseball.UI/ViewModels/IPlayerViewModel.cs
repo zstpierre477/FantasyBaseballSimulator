@@ -13,5 +13,7 @@ namespace FantasyBaseball.UI.ViewModels
         public string TeamShortName { get; set; }
 
         public PlayerStint PlayerStint { get; set; }
+
+        public int CurrentGameErrors { get; set; }
     }
 }

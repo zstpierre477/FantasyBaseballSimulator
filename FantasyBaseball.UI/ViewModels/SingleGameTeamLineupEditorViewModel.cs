@@ -68,7 +68,6 @@ namespace FantasyBaseball.UI.ViewModels
             SelectedLineupBatter.CurrentGameLineupIndex = SelectedBenchBatter.CurrentGameLineupIndex;
             SelectedBenchBatter.CurrentGameBenchIndex = SelectedLineupBatter.CurrentGameBenchIndex;
             SelectedLineupBatter.CurrentGameBenchIndex = null;
-            SelectedBenchBatter.CurrentGameLineupIndex = null;
             SelectedLineupBatter.CurrentGamePosition = SelectedBenchBatter.CurrentGamePosition;
             SelectedBenchBatter.CurrentGamePosition = null;
         }

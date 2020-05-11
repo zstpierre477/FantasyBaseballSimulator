@@ -135,6 +135,18 @@ namespace FantasyBaseball.UI.ViewModels
             get { return _runnerOnThirdVisibility; }
         }
 
+        private ObservableCollection<PitcherViewModel> _homeTeamCurrentPitcher => new ObservableCollection<PitcherViewModel> { HomeTeam.CurrentPitcher };
+        public ObservableCollection<PitcherViewModel> HomeTeamCurrentPitcher
+        {
+            get { return _homeTeamCurrentPitcher; }
+        }
+
+        private ObservableCollection<PitcherViewModel> _awayTeamCurrentPitcher => new ObservableCollection<PitcherViewModel> { AwayTeam.CurrentPitcher };
+        public ObservableCollection<PitcherViewModel> AwayTeamCurrentPitcher
+        {
+            get { return _awayTeamCurrentPitcher; }
+        }
+
         private int _outs { get; set; }
         public int Outs
         {
@@ -417,11 +429,11 @@ namespace FantasyBaseball.UI.ViewModels
 
         public void ProcessSwingResult()
         {
-            var isPassedBall = SingleGameService.GetIsPassedBallResult(OnFieldCatcher.PlayerStint.FieldingStints.SingleOrDefault(f => f.PositionType == PositionType.Catcher));
+            var isPassedBall = SingleGameService.GetIsPassedBallResult(OnFieldCatcher.PlayerStint.FieldingStints.SingleOrDefault(f => f.Position == "C"));
 
             if (isPassedBall)
             {
-                PlayByPlay.Add(new PlayByPlayViewModel($"{OnFieldCatcher.LastName} allowed a passed ball", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                PlayByPlay.Insert(0, new PlayByPlayViewModel($"{OnFieldCatcher.LastName} allowed a passed ball", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                 AdvanceRunnersOneBase(false);
                 return;
             }
@@ -431,11 +443,11 @@ namespace FantasyBaseball.UI.ViewModels
             switch (result)
             {
                 case BattingResult.WildPitch:
-                    PlayByPlay.Add(new PlayByPlayViewModel($"{OnFieldPitcher.LastName} threw a wild pitch", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                    PlayByPlay.Insert(0, new PlayByPlayViewModel($"{OnFieldPitcher.LastName} threw a wild pitch", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     AdvanceRunnersOneBase();
                     return;
                 case BattingResult.Balk:
-                    PlayByPlay.Add(new PlayByPlayViewModel($"{OnFieldPitcher.LastName} balked", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                    PlayByPlay.Insert(0, new PlayByPlayViewModel($"{OnFieldPitcher.LastName} balked", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     AdvanceRunnersOneBase();
                     return;
                 case BattingResult.FieldedByPitcher:
@@ -466,18 +478,17 @@ namespace FantasyBaseball.UI.ViewModels
                     ProcessFieldingResult(OnFieldRightFielder, PositionType.RightFielder);
                     break;
                 case BattingResult.Strikeout:
-                    PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} struckout", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                    PlayByPlay.Insert(0, new PlayByPlayViewModel($"{AtPlateBatter.LastName} struckout", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     OnFieldPitcher.CurrentGameStrikeouts++;
-                    AtPlateBatter.CurrentGameAtBats++;
                     ProcessOut();
                     break;
                 case BattingResult.HitByPitch:
-                    PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} was hit by a pitch", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                    PlayByPlay.Insert(0, new PlayByPlayViewModel($"{AtPlateBatter.LastName} was hit by a pitch", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     AdvanceForcedRunnersOneBase();
                     RunnerOnFirst = AtPlateBatter;
                     break;
                 case BattingResult.Walk:
-                    PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} walked", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                    PlayByPlay.Insert(0, new PlayByPlayViewModel($"{AtPlateBatter.LastName} walked", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     AtPlateBatter.CurrentGameWalks++;
                     OnFieldPitcher.CurrentGameWalks++;
                     AdvanceForcedRunnersOneBase();
@@ -518,7 +529,7 @@ namespace FantasyBaseball.UI.ViewModels
 
         private void ProcessSingle()
         {
-            PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} singled", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+            PlayByPlay.Insert(0, new PlayByPlayViewModel($"{AtPlateBatter.LastName} singled", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
             IncrementHits();
             AdvanceRunnersOneBase();
             RunnerOnFirst = AtPlateBatter;
@@ -526,7 +537,7 @@ namespace FantasyBaseball.UI.ViewModels
 
         private void ProcessDouble()
         {
-            PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} doubled", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+            PlayByPlay.Insert(0, new PlayByPlayViewModel($"{AtPlateBatter.LastName} doubled", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
             IncrementHits();
             AdvanceRunnersTwoBases();
             RunnerOnSecond = AtPlateBatter;
@@ -534,7 +545,7 @@ namespace FantasyBaseball.UI.ViewModels
 
         private void ProcessTriple()
         {
-            PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} tripled", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+            PlayByPlay.Insert(0, new PlayByPlayViewModel($"{AtPlateBatter.LastName} tripled", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
             IncrementHits();
             AdvanceRunnersThreeBases();
             RunnerOnThird = AtPlateBatter;
@@ -542,15 +553,17 @@ namespace FantasyBaseball.UI.ViewModels
 
         private void ProcessHomerun()
         {
-            PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} homered", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+            PlayByPlay.Insert(0, new PlayByPlayViewModel($"{AtPlateBatter.LastName} homered", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
             IncrementHits();
             AtPlateBatter.CurrentGameHomeRuns++;
             AdvanceRunnersThreeBases();
             ScoreRun(AtPlateBatter);
         }
 
-        private void IncrementErrors()
+        private void IncrementErrors(IPlayerViewModel player)
         {
+            player.CurrentGameErrors++;
+            AtPlateBatter.CurrentGameAtBats++;
             if (IsTopOfInning)
             {
                 HomeTeamTotalErrors++;
@@ -576,33 +589,33 @@ namespace FantasyBaseball.UI.ViewModels
         private void ProcessFieldingResult(IPlayerViewModel fielder, PositionType positionType)
         { 
             var fieldingStint = fielder.PlayerStint.FieldingStints.SingleOrDefault(f => f.Position == PositionTypeHelperFunctions.PositionTypeToPositionAbbreviationString(positionType));
-            if (fieldingStint == null && positionType == PositionType.CenterFielder || positionType == PositionType.LeftFielder || positionType == PositionType.RightFielder)
+            if (fieldingStint == null && (positionType == PositionType.CenterFielder || positionType == PositionType.LeftFielder || positionType == PositionType.RightFielder))
             {
                 fieldingStint = fielder.PlayerStint.FieldingStints.SingleOrDefault(f => f.Position == "OF");
             }
 
-            var result = SingleGameService.GetFieldingResult(fieldingStint), positionType);
+            var result = SingleGameService.GetFieldingResult(fieldingStint, positionType);
 
             switch (result)
             {
                 case FieldingResult.Flyout:
-                    PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} flew out to the {positionType}", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                    PlayByPlay.Insert(0, new PlayByPlayViewModel($"{AtPlateBatter.LastName} flew out to the {positionType}", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     ProcessOut();
                     break;
                 case FieldingResult.Foulout:
-                    PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} fouled out to the {positionType}", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                    PlayByPlay.Insert(0, new PlayByPlayViewModel($"{AtPlateBatter.LastName} fouled out to the {positionType}", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     ProcessOut();
                     break;
                 case FieldingResult.Groundout:
-                    PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} grounded out to the {positionType}", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                    PlayByPlay.Insert(0, new PlayByPlayViewModel($"{AtPlateBatter.LastName} grounded out to the {positionType}", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     ProcessOut();
                     break;
                 case FieldingResult.Lineout:
-                    PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} lined out to the {positionType}", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                    PlayByPlay.Insert(0, new PlayByPlayViewModel($"{AtPlateBatter.LastName} lined out to the {positionType}", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     ProcessOut();
                     break;
                 case FieldingResult.Popout:
-                    PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} popped out to the {positionType}", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                    PlayByPlay.Insert(0, new PlayByPlayViewModel($"{AtPlateBatter.LastName} popped out to the {positionType}", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     ProcessOut();
                     break;
                 case FieldingResult.Single:
@@ -619,20 +632,20 @@ namespace FantasyBaseball.UI.ViewModels
                     break;
                 case FieldingResult.OneBaseError:
                     // handle incrementing fielder errors and unearned runs
-                    PlayByPlay.Add(new PlayByPlayViewModel($"{fielder.LastName} made a one base error", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
-                    IncrementErrors();
+                    PlayByPlay.Insert(0, new PlayByPlayViewModel($"{fielder.LastName} made a one base error", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                    IncrementErrors(fielder);
                     AdvanceRunnersOneBase(false);
                     RunnerOnFirst = AtPlateBatter;
                     break;
                 case FieldingResult.TwoBaseError:
-                    PlayByPlay.Add(new PlayByPlayViewModel($"{fielder.LastName} made a two base error", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
-                    IncrementErrors();
+                    PlayByPlay.Insert(0, new PlayByPlayViewModel($"{fielder.LastName} made a two base error", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                    IncrementErrors(fielder);
                     AdvanceRunnersTwoBases(false);
                     RunnerOnSecond = AtPlateBatter;
                     break;
                 case FieldingResult.ThreeBaseError:
-                    PlayByPlay.Add(new PlayByPlayViewModel($"{fielder.LastName} made a three base error", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
-                    IncrementErrors();
+                    PlayByPlay.Insert(0, new PlayByPlayViewModel($"{fielder.LastName} made a three base error", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                    IncrementErrors(fielder);
                     AdvanceRunnersThreeBases(false);
                     RunnerOnThird = AtPlateBatter;
                     break;
@@ -644,7 +657,7 @@ namespace FantasyBaseball.UI.ViewModels
 
         private void ProcessIntentionalWalk()
         {
-            PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} was intentionally walked", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+            PlayByPlay.Insert(0, new PlayByPlayViewModel($"{AtPlateBatter.LastName} was intentionally walked", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
             AtPlateBatter.CurrentGameWalks++;
             AdvanceRunnersOneBase();
             RunnerOnFirst = AtPlateBatter;
@@ -654,6 +667,7 @@ namespace FantasyBaseball.UI.ViewModels
         {
             var fieldingTeam = HomeTeam;
             var battingTeam = AwayTeam;
+            var index = AwayTeamLineupIndex;
             if (IsTopOfInning)
             {
                 FielderColor = "LightSalmon";
@@ -663,6 +677,7 @@ namespace FantasyBaseball.UI.ViewModels
             {
                 fieldingTeam = AwayTeam;
                 battingTeam = HomeTeam;
+                index = HomeTeamLineupIndex;
                 FielderColor = "MediumPurple";
                 BatterColor = "LightSalmon";
             }
@@ -675,11 +690,12 @@ namespace FantasyBaseball.UI.ViewModels
             OnFieldLeftFielder = fieldingTeam.Lineup.Single(l => l.CurrentGamePositionType == PositionType.LeftFielder);
             OnFieldCenterFielder = fieldingTeam.Lineup.Single(l => l.CurrentGamePositionType == PositionType.CenterFielder);
             OnFieldRightFielder = fieldingTeam.Lineup.Single(l => l.CurrentGamePositionType == PositionType.RightFielder);
-            AtPlateBatter = battingTeam.Lineup.ElementAt(0);
+            AtPlateBatter = battingTeam.Lineup.ElementAt(index);
         }
 
         private void ProcessOut()
         {
+            AtPlateBatter.CurrentGameAtBats++;
             OnFieldPitcher.CurrentGameInningsPitchedOuts++;
             if (Outs == 2)
             {
@@ -781,7 +797,7 @@ namespace FantasyBaseball.UI.ViewModels
             }
             OnFieldPitcher.CurrentGameRuns++;
             runner.CurrentGameRuns++;
-            PlayByPlay.Add(new PlayByPlayViewModel($"{runner.LastName} scored", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+            PlayByPlay.Insert(0, new PlayByPlayViewModel($"{runner.LastName} scored", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
             if (IsTopOfInning)
             {
                 IncrementAwayTeamRuns();
@@ -919,13 +935,13 @@ namespace FantasyBaseball.UI.ViewModels
             
             if (result)
             {
-                PlayByPlay.Add(new PlayByPlayViewModel($"{leadRunner.LastName} stole a base", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                PlayByPlay.Insert(0, new PlayByPlayViewModel($"{leadRunner.LastName} stole a base", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                 AdvanceRunnersOneBase(false);
                 return;
             }
             else
             {
-                PlayByPlay.Add(new PlayByPlayViewModel($"{leadRunner.LastName} was caught stealing", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                PlayByPlay.Insert(0, new PlayByPlayViewModel($"{leadRunner.LastName} was caught stealing", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                 RemoveLeadRunner();
                 ProcessOut();
                 AdvanceRunnersOneBase(false);               
@@ -937,11 +953,11 @@ namespace FantasyBaseball.UI.ViewModels
             GameOver = true;
             if (HomeTeamTotalRuns > AwayTeamTotalRuns)
             {
-                PlayByPlay.Add(new PlayByPlayViewModel($"{HomeTeam.TeamName} Win!", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                PlayByPlay.Insert(0, new PlayByPlayViewModel($"{HomeTeam.TeamName} Win!", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
             }
             else
             {
-                PlayByPlay.Add(new PlayByPlayViewModel($"{AwayTeam.TeamName} Win!", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+                PlayByPlay.Insert(0, new PlayByPlayViewModel($"{AwayTeam.TeamName} Win!", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
             }
 
             StealCommand.RaiseCanExecuteChanged();
@@ -959,28 +975,62 @@ namespace FantasyBaseball.UI.ViewModels
             return GameOver == false;
         }
 
+        private void SetRunners()
+        {
+            var team = IsTopOfInning ? AwayTeam : HomeTeam;
+
+            if (RunnerOnFirst != null)
+            {
+                RunnerOnFirst = team.Lineup.ElementAt(RunnerOnFirst.CurrentGameLineupIndex.Value);
+            }
+            if (RunnerOnSecond != null)
+            {
+                RunnerOnSecond = team.Lineup.ElementAt(RunnerOnSecond.CurrentGameLineupIndex.Value);
+            }
+            if (RunnerOnThird != null)
+            {
+                RunnerOnThird = team.Lineup.ElementAt(RunnerOnThird.CurrentGameLineupIndex.Value);
+            }
+        }
+
         public void UpdateAwayTeamLineup(TeamViewModel team)
         {
             AwayTeam.Lineup = team.Lineup;
             AwayTeam.Bench = team.Bench;
+            SetFieldingTeam();
+            SetRunners();
         }
 
         public void UpdateAwayTeamBullpen(TeamViewModel team)
         {
             AwayTeam.CurrentPitcher = team.CurrentPitcher;
             AwayTeam.Bullpen = team.Bullpen;
+            if (IsTopOfInning == false)
+            {
+                OnFieldPitcher = team.CurrentPitcher;
+            }
+            SetFieldingTeam();
+            RaisePropertyChanged("AwayTeamCurrentPitcher");
         }
 
         public void UpdateHomeTeamLineup(TeamViewModel team)
         {
             HomeTeam.Lineup = team.Lineup;
             HomeTeam.Bench = team.Bench;
+            SetFieldingTeam();
+            SetRunners();
         }
 
         public void UpdateHomeTeamBullpen(TeamViewModel team)
         {
             HomeTeam.CurrentPitcher = team.CurrentPitcher;
             HomeTeam.Bullpen = team.Bullpen;
+            if (IsTopOfInning)
+            {
+                OnFieldPitcher = team.CurrentPitcher;
+            }
+            SetFieldingTeam();
+            RaisePropertyChanged("HomeTeamCurrentPitcher");
         }
     }
 }

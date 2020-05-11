@@ -133,6 +133,13 @@ namespace FantasyBaseball.UI.ViewModels
             set { _currentGameWalks = value; RaisePropertyChanged("CurrentGameWalks"); }
         }
 
+        private int _currentGameErrors { get; set; }
+        public int CurrentGameErrors
+        {
+            get { return _currentGameErrors; }
+            set { _currentGameErrors = value; RaisePropertyChanged("CurrentGameErrors"); }
+        }
+
         public PositionType CurrentGamePositionType { get; private set; }
 
         private string _currentGamePosition { get; set; }

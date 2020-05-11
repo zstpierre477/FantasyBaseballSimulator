@@ -41,7 +41,7 @@ namespace FantasyBaseball.Repository
                     Person = x.First().Person,
                     PitchingStint = x.First().PitchingStint,
                     Team = x.First().Team,
-                    FieldingStints = x.Select(y => y.FieldingStint)
+                    FieldingStints = x.GroupBy(f => f.FieldingStint.FieldingStintId).Select(y => y.First().FieldingStint)
                 }).ToList();
             }
         }
@@ -79,7 +79,7 @@ namespace FantasyBaseball.Repository
                     Person = x.First().Person,
                     PitchingStint = x.First().PitchingStint,
                     Team = x.First().Team,
-                    FieldingStints = x.Select(y => y.FieldingStint)
+                    FieldingStints = x.GroupBy(f => f.FieldingStint.FieldingStintId).Select(y => y.First().FieldingStint)
                 }).ToList();
             }
         }
