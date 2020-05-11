@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using System.Collections.ObjectModel;
+using Microsoft.VisualStudio.PlatformUI;
+using System.Linq;
 using System.Windows.Input;
 
 namespace FantasyBaseball.UI.ViewModels
@@ -9,73 +9,82 @@ namespace FantasyBaseball.UI.ViewModels
     {
         public TeamViewModel Team { get; set; }
 
-        public ICommand SwitchInLineupCommand { get; set; }
+        private DelegateCommand _switchInLineupCommand { get; set; }
+        public DelegateCommand SwitchInLineupCommand
+        {
+            get { return _switchInLineupCommand; }
+            set { _switchInLineupCommand = value; }
+        }
 
-        public ICommand MoveUpCommand { get; set; }
+        private DelegateCommand _moveUpCommand { get; set; }
+        public DelegateCommand MoveUpCommand
+        {
+            get { return _moveUpCommand; }
+            set { _moveUpCommand = value; }
+        }
 
-        public ICommand MoveDownCommand { get; set; }
+        private DelegateCommand _moveDownCommand { get; set; }
+        public DelegateCommand MoveDownCommand
+        {
+            get { return _moveDownCommand; }
+            set { _moveDownCommand = value; }
+        }
 
-        public BatterViewModel SelectedLineupBatter { get; set; }
+        private BatterViewModel _selectedLineupBatter { get; set; }
+        public BatterViewModel SelectedLineupBatter
+        {
+            get { return _selectedLineupBatter; }
+            set { _selectedLineupBatter = value; RaisePropertyChanged("SelectedLineupBatter"); _moveDownCommand.RaiseCanExecuteChanged(); _moveUpCommand.RaiseCanExecuteChanged(); _switchInLineupCommand.RaiseCanExecuteChanged(); }
+        }
 
-        public int SelectedLineupBatterIndex { get; set; }
-
-        public BatterViewModel SelectedBenchBatter { get; set; }
-
-        public int SelectedBenchBatterIndex { get; set; }
+        private BatterViewModel _selectedBenchBatter { get; set; }
+        public BatterViewModel SelectedBenchBatter
+        {
+            get { return _selectedBenchBatter; }
+            set { _selectedBenchBatter = value; RaisePropertyChanged("SelectedBenchBatter"); }
+        }
 
         public SingleGameTeamLineupEditorViewModel(TeamViewModel teamViewModel)
         {
-            SwitchInLineupCommand = new RelayCommand(SwitchInLineup, CanSwitchInLineup);
-            MoveDownCommand = new RelayCommand(MoveDown, CanMoveDown);
-            MoveUpCommand = new RelayCommand(MoveUp, CanMoveUp);
-
-            if (teamViewModel.Lineup == null)
-            {
-                teamViewModel.Lineup = new ObservableCollection<BatterViewModel>
-                {
-                    teamViewModel.Catcher,
-                    teamViewModel.FirstBaseman,
-                    teamViewModel.SecondBaseman,
-                    teamViewModel.ThirdBaseman,
-                    teamViewModel.Shortstop,
-                    teamViewModel.LeftFielder,
-                    teamViewModel.CenterFielder,
-                    teamViewModel.RightFielder,
-                    teamViewModel.DesignatedHitter
-                };
-            }
-
-            if (teamViewModel.Bench == null)
-            {
-                teamViewModel.Bench = new ObservableCollection<BatterViewModel>
-                {
-                    teamViewModel.BenchPlayer1,
-                    teamViewModel.BenchPlayer2,
-                    teamViewModel.BenchPlayer3,
-                    teamViewModel.BenchPlayer4
-                };
-            }
-
+            SwitchInLineupCommand = new DelegateCommand(SwitchInLineup, CanSwitchInLineup);
+            MoveDownCommand = new DelegateCommand(MoveDown, CanMoveDown);
+            MoveUpCommand = new DelegateCommand(MoveUp, CanMoveUp);
             Team = teamViewModel;
+            SelectedLineupBatter = Team.Lineup.ElementAt(0);
+            if (Team.Bench.Count() > 0)
+            {
+                SelectedBenchBatter = Team.Bench.ElementAt(0);
+            }
         }
 
         private void SwitchInLineup()
         {
             var selectedLineupBatter = SelectedLineupBatter;
-            Team.Bench[SelectedBenchBatterIndex] = SelectedLineupBatter;
-            Team.Lineup[SelectedLineupBatterIndex] = SelectedBenchBatter;
-            SelectedLineupBatter = SelectedBenchBatter;
+            var selectedBenchBatter = SelectedBenchBatter;
+            Team.Lineup[SelectedLineupBatter.CurrentGameLineupIndex.Value] = selectedBenchBatter;
+            Team.Bench[SelectedBenchBatter.CurrentGameBenchIndex.Value] = selectedLineupBatter;
+            SelectedLineupBatter = selectedBenchBatter;
             SelectedBenchBatter = selectedLineupBatter;
+            SelectedLineupBatter.CurrentGameLineupIndex = SelectedBenchBatter.CurrentGameLineupIndex;
+            SelectedBenchBatter.CurrentGameBenchIndex = SelectedLineupBatter.CurrentGameBenchIndex;
+            SelectedLineupBatter.CurrentGameBenchIndex = null;
+            SelectedBenchBatter.CurrentGameLineupIndex = null;
+            SelectedLineupBatter.CurrentGamePosition = SelectedBenchBatter.CurrentGamePosition;
+            SelectedBenchBatter.CurrentGamePosition = null;
         }
 
         private void MoveDown()
         {
-            Team.Lineup.Move(SelectedLineupBatterIndex, SelectedLineupBatterIndex+1);
+            Team.Lineup.Move(SelectedLineupBatter.CurrentGameLineupIndex.Value, SelectedLineupBatter.CurrentGameLineupIndex.Value + 1);
+            Team.Lineup[SelectedLineupBatter.CurrentGameLineupIndex.Value].CurrentGameLineupIndex--;
+            Team.Lineup[SelectedLineupBatter.CurrentGameLineupIndex.Value + 1].CurrentGameLineupIndex++;
         }
 
         private void MoveUp()
         {
-            Team.Lineup.Move(SelectedLineupBatterIndex, SelectedLineupBatterIndex - 1);
+            Team.Lineup.Move(SelectedLineupBatter.CurrentGameLineupIndex.Value, SelectedLineupBatter.CurrentGameLineupIndex.Value - 1);
+            Team.Lineup[SelectedLineupBatter.CurrentGameLineupIndex.Value].CurrentGameLineupIndex++;
+            Team.Lineup[SelectedLineupBatter.CurrentGameLineupIndex.Value - 1].CurrentGameLineupIndex--;
         }
 
         private bool CanSwitchInLineup()
@@ -85,12 +94,12 @@ namespace FantasyBaseball.UI.ViewModels
 
         private bool CanMoveDown()
         {
-            return SelectedLineupBatterIndex < 8;
+            return SelectedLineupBatter != null && SelectedLineupBatter.CurrentGameLineupIndex < 8;
         }
 
         private bool CanMoveUp()
         {
-            return SelectedLineupBatterIndex > 0;
+            return SelectedLineupBatter != null && SelectedLineupBatter.CurrentGameLineupIndex > 0;
         }
     }
 }

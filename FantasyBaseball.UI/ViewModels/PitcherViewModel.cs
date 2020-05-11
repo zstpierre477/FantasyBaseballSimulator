@@ -77,35 +77,83 @@ namespace FantasyBaseball.UI.ViewModels
             LastName = playerStint.Person.LastName;
             Year = playerStint.PitchingStint.Year;
             TeamShortName = playerStint.Team.TeamIdBr;
-            Wins = playerStint.PitchingStint.Wins ?? 0;
-            Losses = playerStint.PitchingStint.Losses ?? 0;
-            Games = playerStint.PitchingStint.Games ?? 0;
-            GamesStarted = playerStint.PitchingStint.GamesStarted ?? 0;
-            Saves = playerStint.PitchingStint.Saves ?? 0;
-            InningsPitchedOuts = playerStint.PitchingStint.InningsPitchedOuts ?? 0;
-            Hits = playerStint.PitchingStint.Hits ?? 0;
-            EarnedRuns = playerStint.PitchingStint.EarnedRuns ?? 0;
-            HomeRuns = playerStint.PitchingStint.HomeRuns ?? 0;
-            Walks = playerStint.PitchingStint.Walks ?? 0;
-            Strikeouts = playerStint.PitchingStint.Strikeouts ?? 0;
+            Wins = playerStint.PitchingStint.Wins;
+            Losses = playerStint.PitchingStint.Losses;
+            Games = playerStint.PitchingStint.Games;
+            GamesStarted = playerStint.PitchingStint.GamesStarted;
+            Saves = playerStint.PitchingStint.Saves;
+            InningsPitchedOuts = playerStint.PitchingStint.InningsPitchedOuts;
+            Hits = playerStint.PitchingStint.Hits;
+            EarnedRuns = playerStint.PitchingStint.EarnedRuns;
+            HomeRuns = playerStint.PitchingStint.HomeRuns;
+            Walks = playerStint.PitchingStint.Walks;
+            Strikeouts = playerStint.PitchingStint.Strikeouts;
             OpponentBattingAverage = playerStint.PitchingStint.OpponentBattingAverage ?? .000;
             EarnedRunAverage = playerStint.PitchingStint.EarnedRunAverage ?? .000;
-            HitBatters = playerStint.PitchingStint.HitBatters ?? 0;
+            HitBatters = playerStint.PitchingStint.HitBatters;
+            RaisePropertyChanged("PlayerInfoString");
+            RemovedFromGame = false;
         }
 
-        public int CurrentGameStrikeouts { get; set; }
+        private int _currentGameStrikeouts { get; set; }
+        public int CurrentGameStrikeouts
+        {
+            get { return _currentGameStrikeouts; }
+            set { _currentGameStrikeouts = value; RaisePropertyChanged("CurrentGameStrikeouts"); }
+        }
 
-        public int CurrentGameWalks { get; set; }
+        private int _currentGameWalks { get; set; }
+        public int CurrentGameWalks
+        {
+            get { return _currentGameWalks; }
+            set { _currentGameWalks = value; RaisePropertyChanged("CurrentGameWalks"); }
+        }
 
-        public int CurrentGameHits { get; set; }
+        private int _currentGameHits { get; set; }
+        public int CurrentGameHits
+        {
+            get { return _currentGameHits; }
+            set { _currentGameHits = value; RaisePropertyChanged("CurrentGameHits"); }
+        }
 
-        public int CurrentGameRuns { get; set; }
+        private int _currentGameRuns { get; set; }
+        public int CurrentGameRuns
+        {
+            get { return _currentGameRuns; }
+            set { _currentGameRuns = value; RaisePropertyChanged("CurrentGameRuns"); }
+        }
 
-        public int CurrentGameEarnedRuns { get; set; }
+        private int _currentGameEarnedRuns { get; set; }
+        public int CurrentGameEarnedRuns
+        {
+            get { return _currentGameEarnedRuns; }
+            set { _currentGameEarnedRuns = value; RaisePropertyChanged("CurrentGameEarnedRuns"); }
+        }
 
-        public double CurrentGameInningsPitched { get; set; }
+        private int _currentGameInningsPitchedOuts { get; set; }
+        public int CurrentGameInningsPitchedOuts
+        {
+            get { return _currentGameInningsPitchedOuts; }
+            set { _currentGameInningsPitchedOuts = value; RaisePropertyChanged("CurrentGameInningsPitched"); RaisePropertyChanged("CurrentGameStatus"); }
+        }
+
+        private double _currentGameInningsPitched => Math.Round((double)CurrentGameInningsPitchedOuts / 3, 1);
+        public double CurrentGameInningsPitched
+        {
+            get { return _currentGameInningsPitched; }
+        }
 
         public bool CurrentGameIsTired => CurrentGameInningsPitched > Math.Round(AverageIP, 0, MidpointRounding.ToPositiveInfinity);
+
+        private string _currentGameStatus => CurrentGameIsTired ? "Not Tired" : "Tired";
+        public string CurrentGameStatus
+        {
+            get { return _currentGameStatus; }
+        }
+
+        public int? BullpenIndex { get; set; }
+
+        public bool RemovedFromGame { get; set; }
 
         public string _playerInfoString => $"{FirstName} {LastName} {Year} {TeamShortName}";
         public string PlayerInfoString

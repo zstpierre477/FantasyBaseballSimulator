@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FantasyBaseball.UI"
         mc:Ignorable="d"
-        Title="Fantasy Baseball Simulator" Height="450" Width="800">
+        d:DesignHeight="500" d:DesignWidth="850"
+        Title="Fantasy Baseball Simulator">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

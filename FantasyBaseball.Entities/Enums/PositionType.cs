@@ -2,6 +2,7 @@
 {
     public enum PositionType
     {
+        None,
         Pitcher,
         Catcher,
         FirstBaseman,

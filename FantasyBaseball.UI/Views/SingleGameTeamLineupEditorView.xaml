@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FantasyBaseball.UI.Views"
         mc:Ignorable="d"
-        Title="Lineup" Height="450" Width="800">
+        d:DesignHeight="500" d:DesignWidth="850"
+        Title="Lineup">
     <Grid Background="LightSteelBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
@@ -18,9 +19,21 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <Label Content="{Binding TeamName}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Content="{Binding Team.TeamName}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Label Content="Lineup" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <DataGrid x:Name="lineupDataGrid" Grid.Row="2" Grid.Column="0" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Team.Lineup}" SelectedIndex="{Binding SelectedLineupBatter}" SelectedItem="{Binding SelectedLineupBatterIndex}">
+        <DataGrid x:Name="lineupDataGrid" Grid.Row="2" Grid.Column="0" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False"
+                  ItemsSource="{Binding Team.Lineup, Mode=OneWay}" SelectedItem="{Binding SelectedLineupBatter, Mode=TwoWay}" IsReadOnly="True"
+                  CanUserSortColumns="False" SelectionMode="Single">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="Background" Value="Blue" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="First Name" Binding="{Binding Path='FirstName'}"/>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
@@ -35,10 +48,23 @@
                 <DataGridTextColumn Header="AVG" Binding="{Binding Path='BattingAverage'}"/>
                 <DataGridTextColumn Header="OBP" Binding="{Binding Path='OnBasePercentage'}"/>
                 <DataGridTextColumn Header="SLG" Binding="{Binding Path='SluggingPercentage'}"/>
+                <DataGridTextColumn Header="POS" Binding="{Binding Path='CurrentGamePosition'}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Bench" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <DataGrid x:Name="benchDataGrid" Grid.Row="4" Grid.Column="0" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Team.Bench}"  SelectedIndex="{Binding SelectedBenchBatter}" SelectedItem="{Binding SelectedBenchBatterIndex}">
+        <DataGrid x:Name="benchDataGrid" Grid.Row="4" Grid.Column="0" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Team.Bench, Mode=OneWay}" SelectedItem="{Binding SelectedBenchBatter, Mode=TwoWay}" IsReadOnly="True"
+                  CanUserSortColumns="False" SelectionMode="Single">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="Background" Value="Blue" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="First Name" Binding="{Binding Path='FirstName'}"/>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
@@ -52,7 +78,7 @@
                 <DataGridTextColumn Header="HR" Binding="{Binding Path='HomeRuns'}"/>
                 <DataGridTextColumn Header="AVG" Binding="{Binding Path='BattingAverage'}"/>
                 <DataGridTextColumn Header="OBP" Binding="{Binding Path='OnBasePercentage'}"/>
-                <DataGridTextColumn Header="SLG" Binding="{Binding Path='SluggingPercentage'}"/>
+                <DataGridTextColumn Header="POS" Binding="{Binding Path='AllPositionsString'}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="2" Grid.Column="1">
@@ -63,6 +89,7 @@
             <Button x:Name="moveUpButton" Command="{Binding MoveUpCommand}" Grid.Column="0" Grid.Row="0" Content="Move Up" Margin="5 5 5 5"/>
             <Button x:Name="moveDownButton" Command="{Binding MoveDownCommand}" Grid.Column="0" Grid.Row="1" Content="Move Down" Margin="5 5 5 5"/>
         </Grid>
+        <Button x:Name="closeButton" Grid.Column="1" Grid.Row="1" Content="Ready" Margin="5 5 5 5" Click="closeButton_Click"/>
         <Button x:Name="switchInLineupButton" Command="{Binding SwitchInLineupCommand}" Grid.Column="1" Grid.Row="4" Content="Switch In Lineup" Margin="5 5 5 5"/>
     </Grid>
 </Window>

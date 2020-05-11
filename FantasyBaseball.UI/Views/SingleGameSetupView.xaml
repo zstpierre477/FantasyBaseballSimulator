@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FantasyBaseball.UI.Views"
         mc:Ignorable="d"
-        Title="Setup Single Game Teams" Height="450" Width="800">
+        d:DesignHeight="500" d:DesignWidth="850"
+        Title="Setup Single Game Teams">
     <Grid Background="BlanchedAlmond">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -26,7 +27,7 @@
             <TextBlock Text="Select Historical Teams (Not Implemented)" FontSize="24" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Button>
         <Button x:Name="GenerateRandomTeamsButton" Grid.Column="1" Grid.Row="4" Margin="5 5 5 5" Background="LightGray" Click="GenerateRandomTeamsButton_Click">
-            <TextBlock Text="Generate Random Teams (Not Implemented)" FontSize="22" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text="Generate Random Teams" FontSize="22" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Button>
     </Grid>
 </Window>

@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace FantasyBaseball.UI.ViewModels
@@ -11,46 +12,38 @@ namespace FantasyBaseball.UI.ViewModels
 
         public ICommand SwitchPitcherCommand { get; set; }
 
-        public PitcherViewModel SelectedBullpenPitcher { get; set; }
+        private PitcherViewModel _selectedBullpenPitcher { get; set; }
+        public PitcherViewModel SelectedBullpenPitcher 
+        { 
+            get { return _selectedBullpenPitcher; }
+            set { _selectedBullpenPitcher = value; RaisePropertyChanged("SelectedBullpenPitcher"); }
+        }
 
-        public int SelectedBullpenPitcherIndex { get; set; }
+        private ObservableCollection<PitcherViewModel> _currentPitcher => new ObservableCollection<PitcherViewModel> { Team.CurrentPitcher };
+        public ObservableCollection<PitcherViewModel> CurrentPitcher
+        {
+            get { return _currentPitcher; }
+        }
 
         public SingleGameTeamBullpenEditorViewModel(TeamViewModel teamViewModel)
         {
             SwitchPitcherCommand = new RelayCommand(SwitchPitcher, CanSwitchPitcher);
-
-            if (teamViewModel.Bullpen == null)
-            {
-                teamViewModel.Bullpen = new ObservableCollection<PitcherViewModel>
-                {
-                    teamViewModel.StartingPitcher2,
-                    teamViewModel.StartingPitcher3,
-                    teamViewModel.StartingPitcher4,
-                    teamViewModel.StartingPitcher5,
-                    teamViewModel.ReliefPitcher1,
-                    teamViewModel.ReliefPitcher2,
-                    teamViewModel.ReliefPitcher3,
-                    teamViewModel.ReliefPitcher4,
-                    teamViewModel.ReliefPitcher5,
-                    teamViewModel.ReliefPitcher6,
-                    teamViewModel.ReliefPitcher7
-                };
-            }
-
-            if (teamViewModel.CurrentPitcher == null)
-            {
-                teamViewModel.CurrentPitcher = teamViewModel.StartingPitcher1;
-            }
-
             Team = teamViewModel;
+            if (Team.Bullpen.Count() > 0)
+            {
+                SelectedBullpenPitcher = Team.Bullpen.ElementAt(0);
+            }
         }
 
         private void SwitchPitcher()
         {
             var currentPitcher = Team.CurrentPitcher;
-            Team.CurrentPitcher = Team.Bullpen[SelectedBullpenPitcherIndex];
-            Team.Bullpen[SelectedBullpenPitcherIndex] = currentPitcher;
+            Team.CurrentPitcher = Team.Bullpen[SelectedBullpenPitcher.BullpenIndex.Value];
+            Team.Bullpen[SelectedBullpenPitcher.BullpenIndex.Value] = currentPitcher;
             SelectedBullpenPitcher = currentPitcher;
+            SelectedBullpenPitcher.BullpenIndex = Team.CurrentPitcher.BullpenIndex;
+            Team.CurrentPitcher.BullpenIndex = null;
+            RaisePropertyChanged("CurrentPitcher");
         }
 
         private bool CanSwitchPitcher()

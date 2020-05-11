@@ -1,7 +1,6 @@
 ﻿using FantasyBaseball.Business.Services;
 using FantasyBaseball.Entities.Enums;
 using GalaSoft.MvvmLight;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 

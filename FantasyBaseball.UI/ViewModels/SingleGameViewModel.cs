@@ -1,52 +1,152 @@
 ﻿using FantasyBaseball.Business.Services;
 using FantasyBaseball.Entities.Enums;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using Microsoft.VisualStudio.PlatformUI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
 
 namespace FantasyBaseball.UI.ViewModels
 {
     public class SingleGameViewModel : ViewModelBase
     {
-        public TeamViewModel HomeTeam { get; set; }
+        private TeamViewModel _homeTeam { get; set; }
+        public TeamViewModel HomeTeam
+        {
+            get { return _homeTeam; }
+            set { _homeTeam = value; RaisePropertyChanged("HomeTeam"); }
+        }
 
-        public TeamViewModel AwayTeam { get; set; }
+        private TeamViewModel _awayTeam { get; set; }
+        public TeamViewModel AwayTeam
+        {
+            get { return _awayTeam; }
+            set { _awayTeam = value; RaisePropertyChanged("AwayTeam"); }
+        }
 
-        public BatterViewModel OnFieldCatcher { get; set; }
+        private BatterViewModel _onFieldCatcher { get; set; }
+        public BatterViewModel OnFieldCatcher
+        {
+            get { return _onFieldCatcher; }
+            set { _onFieldCatcher = value; RaisePropertyChanged("OnFieldCatcher"); }
+        }
 
-        public BatterViewModel OnFieldFirstBaseman { get; set; }
+        private BatterViewModel _onFieldFirstBaseman { get; set; }
+        public BatterViewModel OnFieldFirstBaseman
+        {
+            get { return _onFieldFirstBaseman; }
+            set { _onFieldFirstBaseman = value; RaisePropertyChanged("OnFieldFirstBaseman"); }
+        }
 
-        public BatterViewModel OnFieldSecondBaseman { get; set; }
+        private BatterViewModel _onFieldSecondBaseman { get; set; }
+        public BatterViewModel OnFieldSecondBaseman
+        {
+            get { return _onFieldSecondBaseman; }
+            set { _onFieldSecondBaseman = value; RaisePropertyChanged("OnFieldSecondBaseman"); }
+        }
 
-        public BatterViewModel OnFieldThirdBaseman { get; set; }
+        private BatterViewModel _onFieldThirdBaseman { get; set; }
+        public BatterViewModel OnFieldThirdBaseman
+        {
+            get { return _onFieldThirdBaseman; }
+            set { _onFieldThirdBaseman = value; RaisePropertyChanged("OnFieldThirdBaseman"); }
+        }
 
-        public BatterViewModel OnFieldShortstop { get; set; }
+        private BatterViewModel _onFieldShortstop { get; set; }
+        public BatterViewModel OnFieldShortstop
+        {
+            get { return _onFieldShortstop; }
+            set { _onFieldShortstop = value; RaisePropertyChanged("OnFieldShortstop"); }
+        }
 
-        public BatterViewModel OnFieldLeftFielder { get; set; }
+        private BatterViewModel _onFieldLeftFielder { get; set; }
+        public BatterViewModel OnFieldLeftFielder
+        {
+            get { return _onFieldLeftFielder; }
+            set { _onFieldLeftFielder = value; RaisePropertyChanged("OnFieldLeftFielder"); }
+        }
 
-        public BatterViewModel OnFieldCenterFielder { get; set; }
+        private BatterViewModel _onFieldCenterFielder { get; set; }
+        public BatterViewModel OnFieldCenterFielder
+        {
+            get { return _onFieldCenterFielder; }
+            set { _onFieldCenterFielder = value; RaisePropertyChanged("OnFieldCenterFielder"); }
+        }
 
-        public BatterViewModel OnFieldRightFielder { get; set; }
+        private BatterViewModel _onFieldRightFielder { get; set; }
+        public BatterViewModel OnFieldRightFielder
+        {
+            get { return _onFieldRightFielder; }
+            set { _onFieldRightFielder = value; RaisePropertyChanged("OnFieldRightFielder"); }
+        }
 
-        public PitcherViewModel OnFieldPitcher { get; set; }
+        private PitcherViewModel _onFieldPitcher { get; set; }
+        public PitcherViewModel OnFieldPitcher
+        {
+            get { return _onFieldPitcher; }
+            set { _onFieldPitcher = value; RaisePropertyChanged("OnFieldPitcher"); }
+        }
 
-        public BatterViewModel AtPlateBatter { get; set; }
+        private BatterViewModel _atPlateBatter { get; set; }
+        public BatterViewModel AtPlateBatter
+        {
+            get { return _atPlateBatter; }
+            set { _atPlateBatter = value; RaisePropertyChanged("AtPlateBatter"); }
+        }
 
-        public BatterViewModel RunnerOnFirst { get; set; }
+        private BatterViewModel _runnerOnFirst { get; set; }
+        public BatterViewModel RunnerOnFirst
+        {
+            get { return _runnerOnFirst; }
+            set { _runnerOnFirst = value; RaisePropertyChanged("RunnerOnFirst"); RaisePropertyChanged("RunnerOnFirstVisibility"); }
+        }
 
-        public BatterViewModel RunnerOnSecond { get; set; }
+        private BatterViewModel _runnerOnSecond { get; set; }
+        public BatterViewModel RunnerOnSecond
+        {
+            get { return _runnerOnSecond; }
+            set { _runnerOnSecond = value; RaisePropertyChanged("RunnerOnSecond"); RaisePropertyChanged("RunnerOnSecondVisibility"); }
+        }
 
-        public BatterViewModel RunnerOnThird { get; set; }
+        private BatterViewModel _runnerOnThird { get; set; }
+        public BatterViewModel RunnerOnThird
+        {
+            get { return _runnerOnThird; }
+            set { _runnerOnThird = value; RaisePropertyChanged("RunnerOnThird"); RaisePropertyChanged("RunnerOnThirdVisibility"); }
+        }
 
-        public string CurrentPitcherStatus => OnFieldPitcher.CurrentGameIsTired ? "Tired" : "Healthy";
+        private string _runnerOnFirstVisibility => RunnerOnFirst != null ? "Visible" : "Hidden";
+        public string RunnerOnFirstVisibility
+        {
+            get { return _runnerOnFirstVisibility; }
+        }
 
-        public int Outs { get; set; }
+        private string _runnerOnSecondVisibility => RunnerOnSecond != null ? "Visible" : "Hidden";
+        public string RunnerOnSecondVisibility
+        {
+            get { return _runnerOnSecondVisibility; }
+        }
 
-        public int Inning { get; set; }
+        private string _runnerOnThirdVisibility => RunnerOnThird != null ? "Visible" : "Hidden";
+        public string RunnerOnThirdVisibility
+        {
+            get { return _runnerOnThirdVisibility; }
+        }
+
+        private int _outs { get; set; }
+        public int Outs
+        {
+            get { return _outs; }
+            set { _outs = value; RaisePropertyChanged("Outs"); }
+        }
+
+        private int _inning { get; set; }
+        public int Inning
+        {
+            get { return _inning; }
+            set { _inning = value; RaisePropertyChanged("Inning"); }
+        }
 
         public bool IsTopOfInning { get; set; }
 
@@ -69,97 +169,248 @@ namespace FantasyBaseball.UI.ViewModels
             } 
         }
 
-        public int AwayTeamInning1Runs { get; set; }
+        private int _awayTeamInning1Runs { get; set; }
+        public int AwayTeamInning1Runs
+        {
+            get { return _awayTeamInning1Runs; }
+            set { _awayTeamInning1Runs = value; RaisePropertyChanged("AwayTeamInning1Runs"); }
+        }
 
-        public int AwayTeamInning2Runs { get; set; }
+        private int _awayTeamInning2Runs { get; set; }
+        public int AwayTeamInning2Runs
+        {
+            get { return _awayTeamInning2Runs; }
+            set { _awayTeamInning2Runs = value; RaisePropertyChanged("AwayTeamInning2Runs"); }
+        }
 
-        public int AwayTeamInning3Runs { get; set; }
+        private int _awayTeamInning3Runs { get; set; }
+        public int AwayTeamInning3Runs
+        {
+            get { return _awayTeamInning3Runs; }
+            set { _awayTeamInning3Runs = value; RaisePropertyChanged("AwayTeamInning3Runs"); }
+        }
 
-        public int AwayTeamInning4Runs { get; set; }
+        private int _awayTeamInning4Runs { get; set; }
+        public int AwayTeamInning4Runs
+        {
+            get { return _awayTeamInning4Runs; }
+            set { _awayTeamInning4Runs = value; RaisePropertyChanged("AwayTeamInning4Runs"); }
+        }
 
-        public int AwayTeamInning5Runs { get; set; }
+        private int _awayTeamInning5Runs { get; set; }
+        public int AwayTeamInning5Runs
+        {
+            get { return _awayTeamInning5Runs; }
+            set { _awayTeamInning5Runs = value; RaisePropertyChanged("AwayTeamInning5Runs"); }
+        }
 
-        public int AwayTeamInning6Runs { get; set; }
+        private int _awayTeamInning6Runs { get; set; }
+        public int AwayTeamInning6Runs
+        {
+            get { return _awayTeamInning6Runs; }
+            set { _awayTeamInning6Runs = value; RaisePropertyChanged("AwayTeamInning6Runs"); }
+        }
 
-        public int AwayTeamInning7Runs { get; set; }
+        private int _awayTeamInning7Runs { get; set; }
+        public int AwayTeamInning7Runs
+        {
+            get { return _awayTeamInning7Runs; }
+            set { _awayTeamInning7Runs = value; RaisePropertyChanged("AwayTeamInning7Runs"); }
+        }
 
-        public int AwayTeamInning8Runs { get; set; }
+        private int _awayTeamInning8Runs { get; set; }
+        public int AwayTeamInning8Runs
+        {
+            get { return _awayTeamInning8Runs; }
+            set { _awayTeamInning8Runs = value; RaisePropertyChanged("AwayTeamInning8Runs"); }
+        }
 
-        public int AwayTeamInning9Runs { get; set; }
+        private int _awayTeamInning9Runs { get; set; }
+        public int AwayTeamInning9Runs
+        {
+            get { return _awayTeamInning9Runs; }
+            set { _awayTeamInning9Runs = value; RaisePropertyChanged("AwayTeamInning9Runs"); }
+        }
 
-        public int AwayTeamExtraInningsRuns { get; set; }
+        private int _awayTeamExtraInningsRuns { get; set; }
+        public int AwayTeamExtraInningsRuns
+        {
+            get { return _awayTeamExtraInningsRuns; }
+            set { _awayTeamExtraInningsRuns = value; RaisePropertyChanged("AwayTeamExtraInningsRuns"); }
+        }
 
-        public int AwayTeamTotalRuns { get; set; }
+        private int _awayTeamTotalRuns { get; set; }
+        public int AwayTeamTotalRuns
+        {
+            get { return _awayTeamTotalRuns; }
+            set { _awayTeamTotalRuns = value; RaisePropertyChanged("AwayTeamTotalRuns"); }
+        }
 
-        public int AwayTeamTotalHits { get; set; }
+        private int _awayTeamTotalHits { get; set; }
+        public int AwayTeamTotalHits
+        {
+            get { return _awayTeamTotalHits; }
+            set { _awayTeamTotalHits = value; RaisePropertyChanged("AwayTeamTotalHits"); }
+        }
 
-        public int AwayTeamTotalErrors { get; set; }
+        private int _awayTeamTotalErrors { get; set; }
+        public int AwayTeamTotalErrors
+        {
+            get { return _awayTeamTotalErrors; }
+            set { _awayTeamTotalErrors = value; RaisePropertyChanged("AwayTeamTotalErrors"); }
+        }
 
-        public int HomeTeamInning1Runs { get; set; }
+        private int _homeTeamInning1Runs { get; set; }
+        public int HomeTeamInning1Runs
+        {
+            get { return _homeTeamInning1Runs; }
+            set { _homeTeamInning1Runs = value; RaisePropertyChanged("HomeTeamInning1Runs"); }
+        }
 
-        public int HomeTeamInning2Runs { get; set; }
+        private int _homeTeamInning2Runs { get; set; }
+        public int HomeTeamInning2Runs
+        {
+            get { return _homeTeamInning2Runs; }
+            set { _homeTeamInning2Runs = value; RaisePropertyChanged("HomeTeamInning2Runs"); }
+        }
 
-        public int HomeTeamInning3Runs { get; set; }
+        private int _homeTeamInning3Runs { get; set; }
+        public int HomeTeamInning3Runs
+        {
+            get { return _homeTeamInning3Runs; }
+            set { _homeTeamInning3Runs = value; RaisePropertyChanged("HomeTeamInning3Runs"); }
+        }
 
-        public int HomeTeamInning4Runs { get; set; }
+        private int _homeTeamInning4Runs { get; set; }
+        public int HomeTeamInning4Runs
+        {
+            get { return _homeTeamInning4Runs; }
+            set { _homeTeamInning4Runs = value; RaisePropertyChanged("HomeTeamInning4Runs"); }
+        }
 
-        public int HomeTeamInning5Runs { get; set; }
+        private int _homeTeamInning5Runs { get; set; }
+        public int HomeTeamInning5Runs
+        {
+            get { return _homeTeamInning5Runs; }
+            set { _homeTeamInning5Runs = value; RaisePropertyChanged("HomeTeamInning5Runs"); }
+        }
 
-        public int HomeTeamInning6Runs { get; set; }
+        private int _homeTeamInning6Runs { get; set; }
+        public int HomeTeamInning6Runs
+        {
+            get { return _homeTeamInning6Runs; }
+            set { _homeTeamInning6Runs = value; RaisePropertyChanged("HomeTeamInning6Runs"); }
+        }
 
-        public int HomeTeamInning7Runs { get; set; }
+        private int _homeTeamInning7Runs { get; set; }
+        public int HomeTeamInning7Runs
+        {
+            get { return _homeTeamInning7Runs; }
+            set { _homeTeamInning7Runs = value; RaisePropertyChanged("HomeTeamInning7Runs"); }
+        }
 
-        public int HomeTeamInning8Runs { get; set; }
+        private int _homeTeamInning8Runs { get; set; }
+        public int HomeTeamInning8Runs
+        {
+            get { return _homeTeamInning8Runs; }
+            set { _homeTeamInning8Runs = value; RaisePropertyChanged("HomeTeamInning8Runs"); }
+        }
 
-        public int HomeTeamInning9Runs { get; set; }
+        private int _homeTeamInning9Runs { get; set; }
+        public int HomeTeamInning9Runs
+        {
+            get { return _homeTeamInning9Runs; }
+            set { _homeTeamInning9Runs = value; RaisePropertyChanged("HomeTeamInning9Runs"); }
+        }
 
-        public int HomeTeamExtraInningsRuns { get; set; }
+        private int _homeTeamExtraInningsRuns { get; set; }
+        public int HomeTeamExtraInningsRuns
+        {
+            get { return _homeTeamExtraInningsRuns; }
+            set { _homeTeamExtraInningsRuns = value; RaisePropertyChanged("HomeTeamExtraInningsRuns"); }
+        }
 
-        public int HomeTeamTotalRuns { get; set; }
+        private int _homeTeamTotalRuns { get; set; }
+        public int HomeTeamTotalRuns
+        {
+            get { return _homeTeamTotalRuns; }
+            set { _homeTeamTotalRuns = value; RaisePropertyChanged("HomeTeamTotalRuns"); }
+        }
 
-        public int HomeTeamTotalHits { get; set; }
+        private int _homeTeamTotalHits { get; set; }
+        public int HomeTeamTotalHits
+        {
+            get { return _homeTeamTotalHits; }
+            set { _homeTeamTotalHits = value; RaisePropertyChanged("HomeTeamTotalHits"); }
+        }
 
-        public int HomeTeamTotalErrors { get; set; }
+        private int _homeTeamTotalErrors { get; set; }
+        public int HomeTeamTotalErrors
+        {
+            get { return _homeTeamTotalErrors; }
+            set { _homeTeamTotalErrors = value; RaisePropertyChanged("HomeTeamTotalErrors"); }
+        }
 
         public bool GameOver { get; set; }
 
-        public string FielderColor { get; set; }
+        private string _fielderColor { get; set; }
+        public string FielderColor
+        {
+            get { return _fielderColor; }
+            set { _fielderColor = value; RaisePropertyChanged("FielderColor"); }
+        }
 
-        public string BatterColor { get; set; }
+        private string _batterColor { get; set; }
+        public string BatterColor
+        {
+            get { return _batterColor; }
+            set { _batterColor = value; RaisePropertyChanged("BatterColor"); }
+        }
 
-        public ICommand SwingCommand { get; set; }
+        private DelegateCommand _swingCommand { get; set; }
+        public DelegateCommand SwingCommand
+        {
+            get { return _swingCommand; }
+            set { _swingCommand = value; }
+        }
 
-        public ICommand StealCommand { get; set; }
+        private DelegateCommand _stealCommand { get; set; }
+        public DelegateCommand StealCommand
+        {
+            get { return _stealCommand; }
+            set { _stealCommand = value; }
+        }
 
-        public ICommand IntentionalWalkCommand { get; set; }
+        private DelegateCommand _intentionalWalkCommand { get; set; }
+        public DelegateCommand IntentionalWalkCommand
+        {
+            get { return _intentionalWalkCommand; }
+            set { _intentionalWalkCommand = value; }
+        }
 
         public ISingleGameService SingleGameService { get; set; }
 
-        public ObservableCollection<string> PlayByPlay { get; set; }
+        private ObservableCollection<PlayByPlayViewModel> _playByPlay { get; set; }
+        public ObservableCollection<PlayByPlayViewModel> PlayByPlay 
+        {
+            get { return _playByPlay; }
+            set { _playByPlay = value; RaisePropertyChanged("PlayByPlay"); }
+        }
 
         public SingleGameViewModel(ISingleGameService singleGameService, IEnumerable<ViewModelBase> viewModels)
         {
             SingleGameService = singleGameService;
             HomeTeam = (TeamViewModel)viewModels.First();
             AwayTeam = (TeamViewModel)viewModels.ElementAt(1);
-            SwingCommand = new RelayCommand(ProcessSwingResult, IsGameNotOver);
-            StealCommand = new RelayCommand(GetStealResult, CanSteal);
-            IntentionalWalkCommand = new RelayCommand(ProcessIntentionalWalk, IsGameNotOver);
-            PlayByPlay = new ObservableCollection<string>();
+            SwingCommand = new DelegateCommand(ProcessSwingResult, IsGameNotOver);
+            StealCommand = new DelegateCommand(GetStealResult, CanSteal);
+            IntentionalWalkCommand = new DelegateCommand(ProcessIntentionalWalk, IsGameNotOver);
+            PlayByPlay = new ObservableCollection<PlayByPlayViewModel>();
             FielderColor = "LightSalmon";
             BatterColor = "MediumPurple";
             GameOver = false;
             IsTopOfInning = true;
-            OnFieldPitcher = HomeTeam.CurrentPitcher;
-            OnFieldCatcher = HomeTeam.Catcher;
-            OnFieldFirstBaseman = HomeTeam.FirstBaseman;
-            OnFieldSecondBaseman = HomeTeam.SecondBaseman;
-            OnFieldThirdBaseman = HomeTeam.ThirdBaseman;
-            OnFieldShortstop = HomeTeam.Shortstop;
-            OnFieldLeftFielder = HomeTeam.LeftFielder;
-            OnFieldCenterFielder = HomeTeam.CenterFielder;
-            OnFieldRightFielder = HomeTeam.RightFielder;
-            AtPlateBatter = AwayTeam.Lineup.ElementAt(0);
+            SetFieldingTeam();
         }
 
         public void ProcessSwingResult()
@@ -168,7 +419,7 @@ namespace FantasyBaseball.UI.ViewModels
 
             if (isPassedBall)
             {
-                PlayByPlay.Add($"{OnFieldCatcher.LastName} allowed a passed ball");
+                PlayByPlay.Add(new PlayByPlayViewModel($"{OnFieldCatcher.LastName} allowed a passed ball", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                 AdvanceRunnersOneBase(false);
                 return;
             }
@@ -178,11 +429,11 @@ namespace FantasyBaseball.UI.ViewModels
             switch (result)
             {
                 case BattingResult.WildPitch:
-                    PlayByPlay.Add($"{OnFieldPitcher.LastName} threw a wild pitch");
+                    PlayByPlay.Add(new PlayByPlayViewModel($"{OnFieldPitcher.LastName} threw a wild pitch", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     AdvanceRunnersOneBase();
-                    break;
+                    return;
                 case BattingResult.Balk:
-                    PlayByPlay.Add($"{OnFieldPitcher.LastName} balked");
+                    PlayByPlay.Add(new PlayByPlayViewModel($"{OnFieldPitcher.LastName} balked", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     AdvanceRunnersOneBase();
                     return;
                 case BattingResult.FieldedByPitcher:
@@ -213,18 +464,18 @@ namespace FantasyBaseball.UI.ViewModels
                     ProcessFieldingResult(OnFieldRightFielder, PositionType.RightFielder);
                     break;
                 case BattingResult.Strikeout:
-                    PlayByPlay.Add($"{AtPlateBatter.LastName} struckout");
+                    PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} struckout", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     OnFieldPitcher.CurrentGameStrikeouts++;
                     AtPlateBatter.CurrentGameAtBats++;
                     ProcessOut();
                     break;
                 case BattingResult.HitByPitch:
-                    PlayByPlay.Add($"{AtPlateBatter.LastName} was hit by a pitch");
+                    PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} was hit by a pitch", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     AdvanceRunnersOneBase();
                     RunnerOnFirst = AtPlateBatter;
                     break;
                 case BattingResult.Walk:
-                    PlayByPlay.Add($"{AtPlateBatter.LastName} walked");
+                    PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} walked", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     AtPlateBatter.CurrentGameWalks++;
                     OnFieldPitcher.CurrentGameWalks++;
                     AdvanceRunnersOneBase();
@@ -246,6 +497,7 @@ namespace FantasyBaseball.UI.ViewModels
                     throw new ArgumentOutOfRangeException($"{result} is not a valid batting result.");
             }
 
+            StealCommand.RaiseCanExecuteChanged();
             SwitchBatter();
         }
 
@@ -264,7 +516,7 @@ namespace FantasyBaseball.UI.ViewModels
 
         private void ProcessSingle()
         {
-            PlayByPlay.Add($"{AtPlateBatter.LastName} singled");
+            PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} singled", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
             IncrementHits();
             AdvanceRunnersOneBase();
             RunnerOnFirst = AtPlateBatter;
@@ -272,7 +524,7 @@ namespace FantasyBaseball.UI.ViewModels
 
         private void ProcessDouble()
         {
-            PlayByPlay.Add($"{AtPlateBatter.LastName} doubled");
+            PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} doubled", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
             IncrementHits();
             AdvanceRunnersTwoBases();
             RunnerOnSecond = AtPlateBatter;
@@ -280,7 +532,7 @@ namespace FantasyBaseball.UI.ViewModels
 
         private void ProcessTriple()
         {
-            PlayByPlay.Add($"{AtPlateBatter.LastName} tripled");
+            PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} tripled", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
             IncrementHits();
             AdvanceRunnersThreeBase();
             RunnerOnThird = AtPlateBatter;
@@ -288,7 +540,7 @@ namespace FantasyBaseball.UI.ViewModels
 
         private void ProcessHomerun()
         {
-            PlayByPlay.Add($"{AtPlateBatter.LastName} homered");
+            PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} homered", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
             IncrementHits();
             AtPlateBatter.CurrentGameHomeRuns++;
             AdvanceRunnersThreeBase();
@@ -326,23 +578,23 @@ namespace FantasyBaseball.UI.ViewModels
             switch(result)
             {
                 case FieldingResult.Flyout:
-                    PlayByPlay.Add($"{AtPlateBatter.LastName} flew out to the {positionType}");
+                    PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} flew out to the {positionType}", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     ProcessOut();
                     break;
                 case FieldingResult.Foulout:
-                    PlayByPlay.Add($"{AtPlateBatter.LastName} fouled out to the {positionType}");
+                    PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} fouled out to the {positionType}", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     ProcessOut();
                     break;
                 case FieldingResult.Groundout:
-                    PlayByPlay.Add($"{AtPlateBatter.LastName} grounded out to the {positionType}");
+                    PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} grounded out to the {positionType}", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     ProcessOut();
                     break;
                 case FieldingResult.Lineout:
-                    PlayByPlay.Add($"{AtPlateBatter.LastName} lined out to the {positionType}");
+                    PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} lined out to the {positionType}", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     ProcessOut();
                     break;
                 case FieldingResult.Popout:
-                    PlayByPlay.Add($"{AtPlateBatter.LastName} popped out to the {positionType}");
+                    PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} popped out to the {positionType}", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     ProcessOut();
                     break;
                 case FieldingResult.Single:
@@ -359,105 +611,86 @@ namespace FantasyBaseball.UI.ViewModels
                     break;
                 case FieldingResult.OneBaseError:
                     // handle incrementing fielder errors and unearned runs
-                    PlayByPlay.Add($"{fielder.LastName} made a one base error");
+                    PlayByPlay.Add(new PlayByPlayViewModel($"{fielder.LastName} made a one base error", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     IncrementErrors();
                     AdvanceRunnersOneBase(false);
                     break;
                 case FieldingResult.TwoBaseError:
-                    PlayByPlay.Add($"{fielder.LastName} made a two base error");
+                    PlayByPlay.Add(new PlayByPlayViewModel($"{fielder.LastName} made a two base error", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     IncrementErrors();
                     AdvanceRunnersOneBase(false);
                     break;
                 case FieldingResult.ThreeBaseError:
-                    PlayByPlay.Add($"{fielder.LastName} made a three base error");
+                    PlayByPlay.Add(new PlayByPlayViewModel($"{fielder.LastName} made a three base error", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     IncrementErrors();
                     AdvanceRunnersOneBase(false);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException($"{result} is not a valid fielding result.");
             }
+            StealCommand.RaiseCanExecuteChanged();
         }
 
         private void ProcessIntentionalWalk()
         {
-            PlayByPlay.Add($"{AtPlateBatter.LastName} was intentionally walked");
+            PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} was intentionally walked", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
             AtPlateBatter.CurrentGameWalks++;
             AdvanceRunnersOneBase();
             RunnerOnFirst = AtPlateBatter;
         }
 
-        private void SwitchFieldingTeam()
+        private void SetFieldingTeam()
         {
+            var fieldingTeam = HomeTeam;
+            var battingTeam = AwayTeam;
             if (IsTopOfInning)
             {
-                SwitchToHomeTeamFielding();
-                return;
+                FielderColor = "LightSalmon";
+                BatterColor = "MediumPurple";
             }
-            SwitchToAwayTeamFielding();
-        }
-
-        private void SwitchToHomeTeamFielding()
-        {
-            FielderColor = "LightSalmon";
-            BatterColor = "MediumPurple";
-            OnFieldPitcher = HomeTeam.CurrentPitcher;
-            OnFieldCatcher = HomeTeam.Catcher;
-            OnFieldFirstBaseman = HomeTeam.FirstBaseman;
-            OnFieldSecondBaseman = HomeTeam.SecondBaseman;
-            OnFieldThirdBaseman = HomeTeam.ThirdBaseman;
-            OnFieldShortstop = HomeTeam.Shortstop;
-            OnFieldLeftFielder = HomeTeam.LeftFielder;
-            OnFieldCenterFielder = HomeTeam.CenterFielder;
-            OnFieldRightFielder = HomeTeam.RightFielder;
-        }
-
-        private void SwitchToAwayTeamFielding()
-        {
-            FielderColor = "MediumPurple";
-            BatterColor = "LightSalmon";
-            OnFieldPitcher = AwayTeam.CurrentPitcher;
-            OnFieldCatcher = AwayTeam.Catcher;
-            OnFieldFirstBaseman = AwayTeam.FirstBaseman;
-            OnFieldSecondBaseman = AwayTeam.SecondBaseman;
-            OnFieldThirdBaseman = AwayTeam.ThirdBaseman;
-            OnFieldShortstop = AwayTeam.Shortstop;
-            OnFieldLeftFielder = AwayTeam.LeftFielder;
-            OnFieldCenterFielder = AwayTeam.CenterFielder;
-            OnFieldRightFielder = AwayTeam.RightFielder;
+            else
+            {
+                fieldingTeam = AwayTeam;
+                battingTeam = HomeTeam;
+                FielderColor = "MediumPurple";
+                BatterColor = "LightSalmon";
+            }
+            OnFieldPitcher = fieldingTeam.CurrentPitcher;
+            OnFieldCatcher = fieldingTeam.Lineup.Single(l => l.CurrentGamePositionType == PositionType.Catcher);
+            OnFieldFirstBaseman = fieldingTeam.Lineup.Single(l => l.CurrentGamePositionType == PositionType.FirstBaseman);
+            OnFieldSecondBaseman = fieldingTeam.Lineup.Single(l => l.CurrentGamePositionType == PositionType.ThirdBaseman);
+            OnFieldThirdBaseman = fieldingTeam.Lineup.Single(l => l.CurrentGamePositionType == PositionType.SecondBaseman);
+            OnFieldShortstop = fieldingTeam.Lineup.Single(l => l.CurrentGamePositionType == PositionType.Shortstop);
+            OnFieldLeftFielder = fieldingTeam.Lineup.Single(l => l.CurrentGamePositionType == PositionType.LeftFielder);
+            OnFieldCenterFielder = fieldingTeam.Lineup.Single(l => l.CurrentGamePositionType == PositionType.CenterFielder);
+            OnFieldRightFielder = fieldingTeam.Lineup.Single(l => l.CurrentGamePositionType == PositionType.RightFielder);
+            AtPlateBatter = battingTeam.Lineup.ElementAt(0);
         }
 
         private void ProcessOut()
         {
-            var ip = (OnFieldPitcher.CurrentGameInningsPitched + (1.0 / 3.0))*3;
-            double i = Math.Round(ip, MidpointRounding.AwayFromZero);
-            OnFieldPitcher.CurrentGameInningsPitched = i/3;
+            OnFieldPitcher.CurrentGameInningsPitchedOuts++;
             if (Outs == 2)
             {
                 if (Inning >= 9)
                 {
-                    if (IsTopOfInning && HomeTeamTotalRuns > AwayTeamTotalRuns)
+                    if (IsTopOfInning && HomeTeamTotalRuns > AwayTeamTotalRuns || (IsTopOfInning == false && AwayTeamTotalRuns > HomeTeamTotalRuns))
                     {
-                        PlayByPlay.Add($"{HomeTeam.TeamName} Win {HomeTeamTotalRuns} to {AwayTeamTotalRuns}!");
-                        GameOver = true;
-                        return;
-                    }
-                    if (IsTopOfInning == false && AwayTeamTotalRuns > HomeTeamTotalRuns)
-                    {
-                        PlayByPlay.Add($"{AwayTeam.TeamName} Win {AwayTeamTotalRuns} to {HomeTeamTotalRuns}!");
-                        GameOver = true;
+                        EndGame();
                         return;
                     }
                 }
                 Outs = 0;
                 Inning++;
                 IsTopOfInning = !IsTopOfInning;
-                SwitchFieldingTeam();
+                SetFieldingTeam();
                 RunnerOnFirst = null;
                 RunnerOnSecond = null;
                 RunnerOnThird = null;
                 return;
             }
             Outs++;
+            StealCommand.RaiseCanExecuteChanged();
         }
 
         private void AdvanceRunnersOneBase(bool rbi = true)
@@ -469,6 +702,7 @@ namespace FantasyBaseball.UI.ViewModels
             RunnerOnThird = RunnerOnSecond;
             RunnerOnSecond = RunnerOnFirst;
             RunnerOnFirst = null;
+            StealCommand.RaiseCanExecuteChanged();
         }
 
         private void AdvanceRunnersTwoBases(bool rbi = true)
@@ -484,6 +718,7 @@ namespace FantasyBaseball.UI.ViewModels
             }
             RunnerOnThird = RunnerOnFirst;
             RunnerOnFirst = null;
+            StealCommand.RaiseCanExecuteChanged();
         }
 
         private void AdvanceRunnersThreeBase(bool rbi = true)
@@ -503,6 +738,7 @@ namespace FantasyBaseball.UI.ViewModels
                 ScoreRun(RunnerOnFirst, rbi);
                 RunnerOnFirst = null;
             }
+            StealCommand.RaiseCanExecuteChanged();
         }
 
         private void ScoreRun(BatterViewModel runner, bool rbi = true)
@@ -513,7 +749,7 @@ namespace FantasyBaseball.UI.ViewModels
             }
             OnFieldPitcher.CurrentGameRuns++;
             runner.CurrentGameRuns++;
-            PlayByPlay.Add($"{runner.LastName} scored");
+            PlayByPlay.Add(new PlayByPlayViewModel($"{runner.LastName} scored", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
             if (IsTopOfInning)
             {
                 IncrementAwayTeamRuns();
@@ -523,8 +759,7 @@ namespace FantasyBaseball.UI.ViewModels
                 IncrementHomeTeamRuns();
                 if (Inning >= 9 && HomeTeamTotalRuns > AwayTeamTotalRuns)
                 {
-                    PlayByPlay.Add($"{HomeTeam.TeamName} Win {HomeTeamTotalRuns} to {AwayTeamTotalRuns}!");
-                    GameOver = true;
+                    EndGame();
                 }
             }
         }
@@ -652,17 +887,34 @@ namespace FantasyBaseball.UI.ViewModels
             
             if (result)
             {
-                PlayByPlay.Add($"{leadRunner.LastName} stole a base");
+                PlayByPlay.Add(new PlayByPlayViewModel($"{leadRunner.LastName} stole a base", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                 AdvanceRunnersOneBase(false);
                 return;
             }
             else
             {
-                PlayByPlay.Add($"{leadRunner.LastName} was caught stealing");
+                PlayByPlay.Add(new PlayByPlayViewModel($"{leadRunner.LastName} was caught stealing", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                 RemoveLeadRunner();
                 ProcessOut();
                 AdvanceRunnersOneBase(false);               
             }
+        }
+
+        private void EndGame()
+        {
+            GameOver = true;
+            if (HomeTeamTotalRuns > AwayTeamTotalRuns)
+            {
+                PlayByPlay.Add(new PlayByPlayViewModel($"{HomeTeam.TeamName} Win!", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+            }
+            else
+            {
+                PlayByPlay.Add(new PlayByPlayViewModel($"{AwayTeam.TeamName} Win!", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
+            }
+
+            StealCommand.RaiseCanExecuteChanged();
+            IntentionalWalkCommand.RaiseCanExecuteChanged();
+            SwingCommand.RaiseCanExecuteChanged();
         }
 
         public bool CanSteal()

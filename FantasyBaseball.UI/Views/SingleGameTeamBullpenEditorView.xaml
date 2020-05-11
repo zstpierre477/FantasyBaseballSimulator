@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FantasyBaseball.UI.Views"
         mc:Ignorable="d"
-        Title="Bullpen" Height="450" Width="800">
+        d:DesignHeight="500" d:DesignWidth="850"
+        Title="Bullpen">
     <Grid Background="LightSteelBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
@@ -18,9 +19,9 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="12*"/>
         </Grid.RowDefinitions>
-        <Label Content="{Binding TeamName}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Content="{Binding Team.TeamName}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Label Content="Current Pitcher" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <DataGrid x:Name="currentPitcherDataGrid" Grid.Row="2" Grid.Column="0" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding CurrentPitcher}">
+        <DataGrid x:Name="currentPitcherDataGrid" Grid.Row="2" Grid.Column="0" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding CurrentPitcher, Mode=OneWay}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="First Name" Binding="{Binding Path='FirstName'}"/>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
@@ -41,7 +42,9 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Bullpen" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <DataGrid x:Name="bullpenDataGrid" Grid.Row="4" Grid.Column="0" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Team.Bullpen}"  SelectedIndex="{Binding SelectedBullpenPitcher}" SelectedItem="{Binding SelectedBullpenPitcherIndex}">
+        <DataGrid x:Name="bullpenDataGrid" Grid.Row="4" Grid.Column="0" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False"
+                  ItemsSource="{Binding Team.Bullpen, Mode=OneWay}" SelectedItem="{Binding SelectedBullpenPitcher, Mode=TwoWay}" IsReadOnly="True"
+                  CanUserSortColumns="False" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="First Name" Binding="{Binding Path='FirstName'}"/>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
@@ -61,6 +64,7 @@
                 <DataGridTextColumn Header="WHIP" Binding="{Binding Path='WHIP'}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="closeButton" Grid.Column="1" Grid.Row="1" Content="Ready" Margin="5 5 5 5" Click="closeButton_Click"/>
         <Button Command="{Binding SwitchPitcherCommand}" Grid.Column="1" Grid.Row="4" Content="Switch Pitcher" Margin="5 5 5 5"/>
     </Grid>
 </Window>

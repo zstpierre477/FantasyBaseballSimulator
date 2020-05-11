@@ -57,6 +57,11 @@ namespace FantasyBaseball.Business.Services
 
             var minimumGamesPlayed = starter ? 80 : 20;
             var batters = BattingStintRepository.GetBattingStintByPositionYearAndMinimumGamesPlayed(position, year, minimumGamesPlayed);
+            while (batters.Count() == 0)
+            {
+                year = random.Next(1873, 2020);
+                batters = BattingStintRepository.GetBattingStintByPositionYearAndMinimumGamesPlayed(position, year, minimumGamesPlayed);
+            }
             return batters.ElementAt(random.Next(0, batters.Count()));
         }
 

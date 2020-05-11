@@ -27,6 +27,7 @@ namespace FantasyBaseball.UI.Views
             var viewModel = (SingleGameTeamSelectorViewModel)DataContext;
             if (viewModel.CanPlaySingleGame())
             {
+                viewModel.SetPitcherLineupsBullpensAndBenches();
                 var singleGame = new SingleGameView(ViewModelFactory, viewModel);
                 singleGame.Show();
                 Close();

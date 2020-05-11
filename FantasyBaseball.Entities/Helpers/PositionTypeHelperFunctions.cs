@@ -7,7 +7,7 @@ namespace FantasyBaseball.Entities.Helpers
     {
         public static PositionType PositionAbbreviationStringToPositionType(string position)
         {
-            switch (position.Trim().ToUpper())
+            switch (position?.Trim()?.ToUpper())
             {
                 case "P":
                     return PositionType.Pitcher;
@@ -32,7 +32,7 @@ namespace FantasyBaseball.Entities.Helpers
                 case "DH":
                     return PositionType.DesignatedHitter;
                 default:
-                    throw new ArgumentOutOfRangeException($"{position} is not a valid position.");
+                    return PositionType.None;
             }
         }
 
@@ -59,7 +59,7 @@ namespace FantasyBaseball.Entities.Helpers
                 case 9:
                     return PositionType.RightFielder;
                 default:
-                    throw new ArgumentOutOfRangeException($"{position} is not a valid position number.");
+                    return PositionType.None;
             }
         }
 
@@ -90,7 +90,7 @@ namespace FantasyBaseball.Entities.Helpers
                 case PositionType.DesignatedHitter:
                     return "DH";
                 default:
-                    throw new ArgumentOutOfRangeException($"{positionType} is not a valid position type.");
+                    return "None";
             }
         }
 
@@ -117,7 +117,7 @@ namespace FantasyBaseball.Entities.Helpers
                 case 9:
                     return "RF";
                 default:
-                    throw new ArgumentOutOfRangeException($"{position} is not a valid position number.");
+                    return "None";
             }
         }
     }

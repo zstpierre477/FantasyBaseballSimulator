@@ -23,17 +23,17 @@ namespace FantasyBaseball.Entities.Models
                 PositionType = PositionTypeHelperFunctions.PositionAbbreviationStringToPositionType(_position);
             }
         }
-        public short? Games { get; set; }
-        public short? GamesStarted { get; set; }
-        public short? InningsPlayedOuts { get; set; }
-        public short? Putouts { get; set; }
-        public short? Assists { get; set; }
-        public short? Errors { get; set; }
-        public short? DoublePlays { get; set; }
-        public short? PassedBalls { get; set; }
-        public short? WildPitches { get; set; }
-        public short? StolenBases { get; set; }
-        public short? CaughtStealing { get; set; }
+        public short Games { get; set; }
+        public short GamesStarted { get; set; }
+        public short InningsPlayedOuts { get; set; }
+        public short Putouts { get; set; }
+        public short Assists { get; set; }
+        public short Errors { get; set; }
+        public short DoublePlays { get; set; }
+        public short PassedBalls { get; set; }
+        public short WildPitches { get; set; }
+        public short StolenBases { get; set; }
+        public short CaughtStealing { get; set; }
         public short? ZoneRating { get; set; }
 
         public virtual League League { get; set; }

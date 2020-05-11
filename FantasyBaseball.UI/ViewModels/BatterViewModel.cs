@@ -1,4 +1,6 @@
-﻿using FantasyBaseball.Entities.Models;
+﻿using FantasyBaseball.Entities.Enums;
+using FantasyBaseball.Entities.Helpers;
+using FantasyBaseball.Entities.Models;
 using GalaSoft.MvvmLight;
 using System;
 
@@ -7,10 +9,10 @@ namespace FantasyBaseball.UI.ViewModels
     public class BatterViewModel : ViewModelBase, IPlayerViewModel
     {
         private string _firstName { get; set; }
-        public string FirstName 
-        { 
-            get { return _firstName; } 
-            set { _firstName = value; RaisePropertyChanged("PlayerInfoString"); RaisePropertyChanged("FirstName"); } 
+        public string FirstName
+        {
+            get { return _firstName; }
+            set { _firstName = value; RaisePropertyChanged("PlayerInfoString"); RaisePropertyChanged("FirstName"); }
         }
 
         private string _lastName { get; set; }
@@ -62,7 +64,7 @@ namespace FantasyBaseball.UI.ViewModels
 
         public double OnBasePercentage => AtBats > 0 ? Math.Round((Hits + Walks + HitByPitch) / (double)AtBats, 3) : .000;
 
-        public double SluggingPercentage => AtBats > 0 ? Math.Round((Hits + Doubles + Triples*2 + HomeRuns*3) / (double)AtBats, 3) : .000;
+        public double SluggingPercentage => AtBats > 0 ? Math.Round((Hits + Doubles + Triples * 2 + HomeRuns * 3) / (double)AtBats, 3) : .000;
 
         public PlayerStint PlayerStint { get; set; }
 
@@ -73,32 +75,103 @@ namespace FantasyBaseball.UI.ViewModels
             LastName = playerStint.Person.LastName;
             Year = playerStint.BattingStint.Year;
             TeamShortName = playerStint.Team.TeamIdBr;
-            Games = playerStint.BattingStint.Games ?? 0;
-            AtBats = playerStint.BattingStint.AtBats ?? 0;
-            Runs = playerStint.BattingStint.Runs ?? 0;
-            Hits = playerStint.BattingStint.Hits ?? 0;
-            Doubles = playerStint.BattingStint.Doubles ?? 0;
-            Triples = playerStint.BattingStint.Triples ?? 0;
-            HomeRuns = playerStint.BattingStint.HomeRuns ?? 0;
-            RunsBattedIn = playerStint.BattingStint.RunsBattedIn ?? 0;
-            StolenBases = playerStint.BattingStint.StolenBases ?? 0;
-            CaughtStealing = playerStint.BattingStint.CaughtStealing ?? 0;
-            Walks = playerStint.BattingStint.Walks ?? 0;
-            HitByPitch = playerStint.BattingStint.HitByPitch ?? 0;
+            Games = playerStint.BattingStint.Games;
+            AtBats = playerStint.BattingStint.AtBats;
+            Runs = playerStint.BattingStint.Runs;
+            Hits = playerStint.BattingStint.Hits;
+            Doubles = playerStint.BattingStint.Doubles;
+            Triples = playerStint.BattingStint.Triples;
+            HomeRuns = playerStint.BattingStint.HomeRuns;
+            RunsBattedIn = playerStint.BattingStint.RunsBattedIn;
+            StolenBases = playerStint.BattingStint.StolenBases;
+            CaughtStealing = playerStint.BattingStint.CaughtStealing;
+            Walks = playerStint.BattingStint.Walks;
+            HitByPitch = playerStint.BattingStint.HitByPitch;
             RaisePropertyChanged("PlayerInfoString");
+            RemovedFromGame = false;
         }
 
-        public int CurrentGameAtBats { get; set; }
+        private int _currentGameAtBats { get; set; }
+        public int CurrentGameAtBats
+        {
+            get { return _currentGameAtBats; }
+            set { _currentGameAtBats = value; RaisePropertyChanged("CurrentGameAtBats"); }
+        }
 
-        public int CurrentGameHits { get; set; }
+        private int _currentGameHits { get; set; }
+        public int CurrentGameHits
+        {
+            get { return _currentGameHits; }
+            set { _currentGameHits = value; RaisePropertyChanged("CurrentGameHits"); }
+        }
 
-        public int CurrentGameRuns { get; set; }
+        private int _currentGameRuns { get; set; }
+        public int CurrentGameRuns
+        {
+            get { return _currentGameRuns; }
+            set { _currentGameRuns = value; RaisePropertyChanged("CurrentGameRuns"); }
+        }
 
-        public int CurrentGameRunsBattedIn { get; set; }
+        private int _currentGameRunsBattedIn { get; set; }
+        public int CurrentGameRunsBattedIn
+        {
+            get { return _currentGameRunsBattedIn; }
+            set { _currentGameRunsBattedIn = value; RaisePropertyChanged("CurrentGameRunsBattedIn"); }
+        }
 
-        public int CurrentGameHomeRuns { get; set; }
+        private int _currentGameHomeRuns { get; set; }
+        public int CurrentGameHomeRuns
+        {
+            get { return _currentGameHomeRuns; }
+            set { _currentGameHomeRuns = value; RaisePropertyChanged("CurrentGameHomeRuns"); }
+        }
 
-        public int CurrentGameWalks { get; set; }
+        private int _currentGameWalks { get; set; }
+        public int CurrentGameWalks
+        {
+            get { return _currentGameWalks; }
+            set { _currentGameWalks = value; RaisePropertyChanged("CurrentGameWalks"); }
+        }
+
+        public PositionType CurrentGamePositionType { get; private set; }
+
+        private string _currentGamePosition { get; set; }
+        public string CurrentGamePosition
+        {
+            get { return _currentGamePosition; }
+            set 
+            { 
+                _currentGamePosition = value; RaisePropertyChanged("CurrentGamePosition"); 
+                CurrentGamePositionType = PositionTypeHelperFunctions.PositionAbbreviationStringToPositionType(_currentGamePosition); 
+                RaisePropertyChanged("CurrentGamePositionType"); 
+            }
+    }
+
+        public int? CurrentGameLineupIndex { get; set; }
+
+        public int? CurrentGameBenchIndex { get; set; }
+
+        public bool RemovedFromGame { get; set; }
+
+        public string _allPositionsString => GetAllPositionsString();
+        public string AllPositionsString
+        {
+            get { return _allPositionsString; }
+        }
+
+        private string GetAllPositionsString()
+        {
+            var allPositions = "";
+            foreach(var f in PlayerStint.FieldingStints)
+            {
+                allPositions += f.Position + " ";
+            }
+            if (string.IsNullOrWhiteSpace(allPositions))
+            {
+                return "None";
+            }
+            return allPositions.Trim();
+        }
 
         public string _playerInfoString => $"{FirstName} {LastName} {Year} {TeamShortName}";
         public string PlayerInfoString

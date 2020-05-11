@@ -5,69 +5,74 @@ namespace FantasyBaseball.UI.ViewModels
 {
     public class TeamViewModel : ViewModelBase
     {
-        public string TeamName { get; set; }
+        private string _teamName { get; set; }
+        public string TeamName
+        {
+            get { return _teamName; }
+            set { _teamName = value; RaisePropertyChanged("TeamName"); }
+        }
 
         private BatterViewModel _catcher { get; set; }
         public BatterViewModel Catcher
         {
             get { return _catcher; }
-            set { _catcher = value; RaisePropertyChanged("Catcher"); }
+            set { _catcher = value; RaisePropertyChanged("Catcher"); _catcher.CurrentGamePosition = "C"; }
         }
 
         private BatterViewModel _firstBaseman { get; set; }
         public BatterViewModel FirstBaseman
         {
             get { return _firstBaseman; }
-            set { _firstBaseman = value; RaisePropertyChanged("FirstBaseman"); }
+            set { _firstBaseman = value; RaisePropertyChanged("FirstBaseman"); _firstBaseman.CurrentGamePosition = "1B"; }
         }
 
         private BatterViewModel _secondBaseman { get; set; }
         public BatterViewModel SecondBaseman
         {
             get { return _secondBaseman; }
-            set { _secondBaseman = value; RaisePropertyChanged("SecondBaseman"); }
+            set { _secondBaseman = value; RaisePropertyChanged("SecondBaseman"); _secondBaseman.CurrentGamePosition = "2B"; }
         }
 
         private BatterViewModel _thirdBaseman { get; set; }
         public BatterViewModel ThirdBaseman
         {
             get { return _thirdBaseman; }
-            set { _thirdBaseman = value; RaisePropertyChanged("ThirdBaseman"); }
+            set { _thirdBaseman = value; RaisePropertyChanged("ThirdBaseman"); _thirdBaseman.CurrentGamePosition = "3B"; }
         }
 
         private BatterViewModel _shortstop { get; set; }
         public BatterViewModel Shortstop
         {
             get { return _shortstop; }
-            set { _shortstop = value; RaisePropertyChanged("Shortstop"); }
+            set { _shortstop = value; RaisePropertyChanged("Shortstop"); _shortstop.CurrentGamePosition = "SS"; }
         }
 
         private BatterViewModel _leftFielder { get; set; }
         public BatterViewModel LeftFielder
         {
             get { return _leftFielder; }
-            set { _leftFielder = value; RaisePropertyChanged("LeftFielder"); }
+            set { _leftFielder = value; RaisePropertyChanged("LeftFielder"); _leftFielder.CurrentGamePosition = "LF"; }
         }
 
         private BatterViewModel _centerFielder { get; set; }
         public BatterViewModel CenterFielder
         {
             get { return _centerFielder; }
-            set { _centerFielder = value; RaisePropertyChanged("CenterFielder"); }
+            set { _centerFielder = value; RaisePropertyChanged("CenterFielder"); _centerFielder.CurrentGamePosition = "CF"; }
         }
 
         private BatterViewModel _rightFielder { get; set; }
         public BatterViewModel RightFielder
         {
             get { return _rightFielder; }
-            set { _rightFielder = value; RaisePropertyChanged("RightFielder"); }
+            set { _rightFielder = value; RaisePropertyChanged("RightFielder"); _rightFielder.CurrentGamePosition = "RF"; }
         }
 
         private BatterViewModel _designatedHitter { get; set; }
         public BatterViewModel DesignatedHitter
         {
             get { return _designatedHitter; }
-            set { _designatedHitter = value; RaisePropertyChanged("DesignatedHitter"); }
+            set { _designatedHitter = value; RaisePropertyChanged("DesignatedHitter"); _designatedHitter.CurrentGamePosition = "DH"; }
         }
 
         private BatterViewModel _benchPlayer1 { get; set; }

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FantasyBaseball.UI.Views"
         mc:Ignorable="d"
-        Title="Search For Batter" Height="450" Width="800">
+        d:DesignHeight="500" d:DesignWidth="850"
+        Title="Search For Batter">
     <Grid Background="Coral">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -30,7 +31,7 @@
         <Label Grid.Row="1" Grid.Column="2" Content="Year:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
         <ComboBox x:Name="yearTextBox" Grid.Row="1" Grid.Column="3" Margin="1 1 1 1" ItemsSource="{Binding Years}" SelectedItem="{Binding Year}"/>
         <Button x:Name="batterSearchButton" Click="batterSearchButton_Click" Grid.Column="4" Grid.Row="1" Content="Search"/>
-        <DataGrid x:Name="dataGrid" Grid.Row="3" Grid.ColumnSpan="5" Grid.Column="0" Grid.RowSpan="5" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Batters}">
+        <DataGrid x:Name="dataGrid" Grid.Row="3" Grid.ColumnSpan="5" Grid.Column="0" Grid.RowSpan="5" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Batters, Mode=OneWay}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>

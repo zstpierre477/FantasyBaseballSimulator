@@ -18,5 +18,10 @@ namespace FantasyBaseball.UI.Views
             ViewModelFactory = viewModelFactory;
             DataContext = viewModelFactory.GetViewModel(GetType().ToString(), new List<ViewModelBase> { teamViewModel });
         }
+
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

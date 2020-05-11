@@ -12,62 +12,68 @@ namespace FantasyBaseball.UI.Views
     {
         private IViewModelFactory ViewModelFactory { get; set; }
 
-        private Window AwayTeamLineupEditor { get; set; }
-
-        private Window HomeTeamLineupEditor { get; set; }
-
-        private Window AwayTeamBullpenEditor { get; set; }
-
-        private Window HomeTeamBullpenEditor { get; set; }
-
         public SingleGameView(IViewModelFactory viewModelFactory, SingleGameTeamSelectorViewModel singleGameTeamSelectorViewModel)
         {
             InitializeComponent();
             ViewModelFactory = viewModelFactory;
-            AwayTeamLineupEditor = new SingleGameTeamLineupEditorView(viewModelFactory, singleGameTeamSelectorViewModel.AwayTeam);
-            AwayTeamLineupEditor.ShowDialog();
-            var awayTeam = (TeamViewModel)AwayTeamLineupEditor.DataContext;
-            AwayTeamBullpenEditor = new SingleGameTeamBullpenEditorView(viewModelFactory, awayTeam);
-            AwayTeamBullpenEditor.ShowDialog();
-            awayTeam = (TeamViewModel)AwayTeamBullpenEditor.DataContext;
-            HomeTeamLineupEditor = new SingleGameTeamLineupEditorView(viewModelFactory, singleGameTeamSelectorViewModel.HomeTeam);
-            HomeTeamLineupEditor.ShowDialog();
-            var homeTeam = (TeamViewModel)HomeTeamLineupEditor.DataContext;
-            HomeTeamBullpenEditor = new SingleGameTeamBullpenEditorView(viewModelFactory, homeTeam);
-            HomeTeamBullpenEditor.ShowDialog();
-            homeTeam = (TeamViewModel)HomeTeamBullpenEditor.DataContext;
+            var awayTeam = singleGameTeamSelectorViewModel.AwayTeam;
+            var awayTeamLineupEditor = new SingleGameTeamLineupEditorView(viewModelFactory, awayTeam);
+            awayTeamLineupEditor.ShowDialog();
+            var awayTeamLineupEditorViewModel = (SingleGameTeamLineupEditorViewModel)awayTeamLineupEditor.DataContext;
+            awayTeam = awayTeamLineupEditorViewModel.Team;
+            var awayTeamBullpenEditor = new SingleGameTeamBullpenEditorView(viewModelFactory, awayTeam);
+            awayTeamBullpenEditor.ShowDialog();
+            var awayTeamBullpenEditorViewModel = (SingleGameTeamBullpenEditorViewModel)awayTeamBullpenEditor.DataContext;
+            awayTeam = awayTeamBullpenEditorViewModel.Team;
+            var homeTeam = singleGameTeamSelectorViewModel.HomeTeam;
+            var homeTeamLineupEditor = new SingleGameTeamLineupEditorView(viewModelFactory, homeTeam);
+            homeTeamLineupEditor.ShowDialog();
+            var homeTeamLineupEditorViewModel = (SingleGameTeamLineupEditorViewModel)homeTeamLineupEditor.DataContext;
+            homeTeam = homeTeamLineupEditorViewModel.Team;
+            var homeTeamBullpenEditor = new SingleGameTeamBullpenEditorView(viewModelFactory, homeTeam);
+            homeTeamBullpenEditor.ShowDialog();
+            var homeTeamBullpenEditorViewModel = (SingleGameTeamBullpenEditorViewModel)homeTeamBullpenEditor.DataContext;
+            homeTeam = homeTeamBullpenEditorViewModel.Team;
             DataContext = viewModelFactory.GetViewModel(GetType().ToString(), new List<ViewModelBase> { homeTeam, awayTeam });
         }
 
         private void homeTeamBenchButton_Click(object sender, RoutedEventArgs e)
         {
-            HomeTeamLineupEditor.ShowDialog();
-            var homeTeam = (TeamViewModel)HomeTeamLineupEditor.DataContext;
             var viewModel = (SingleGameViewModel)DataContext;
+            var homeTeamLineupEditor = new SingleGameTeamLineupEditorView(ViewModelFactory, viewModel.HomeTeam);
+            homeTeamLineupEditor.ShowDialog();
+            var homeTeamLineupEditorViewModel = (SingleGameTeamLineupEditorViewModel)homeTeamLineupEditor.DataContext;
+            var homeTeam = homeTeamLineupEditorViewModel.Team;
             viewModel.UpdateHomeTeamLineup(homeTeam);
         }
 
         private void homeTeamBullpenButton_Click(object sender, RoutedEventArgs e)
         {
-            HomeTeamBullpenEditor.ShowDialog();
-            var homeTeam = (TeamViewModel)HomeTeamBullpenEditor.DataContext;
             var viewModel = (SingleGameViewModel)DataContext;
+            var homeTeamBullpenEditor = new SingleGameTeamBullpenEditorView(ViewModelFactory, viewModel.HomeTeam);
+            homeTeamBullpenEditor.ShowDialog();
+            var homeTeamBullpenEditorViewModel = (SingleGameTeamBullpenEditorViewModel)homeTeamBullpenEditor.DataContext;
+            var homeTeam = homeTeamBullpenEditorViewModel.Team;
             viewModel.UpdateHomeTeamBullpen(homeTeam);
         }
 
         private void awayTeamBenchButton_Click(object sender, RoutedEventArgs e)
         {
-            AwayTeamLineupEditor.ShowDialog();
-            var awayTeam = (TeamViewModel)AwayTeamLineupEditor.DataContext;
             var viewModel = (SingleGameViewModel)DataContext;
+            var awayTeamLineupEditor = new SingleGameTeamLineupEditorView(ViewModelFactory, viewModel.AwayTeam);
+            awayTeamLineupEditor.ShowDialog();
+            var awayTeamLineupEditorViewModel = (SingleGameTeamLineupEditorViewModel)awayTeamLineupEditor.DataContext;
+            var awayTeam = awayTeamLineupEditorViewModel.Team;
             viewModel.UpdateAwayTeamLineup(awayTeam);
         }
 
         private void awayTeamBullpenButton_Click(object sender, RoutedEventArgs e)
         {
-            AwayTeamBullpenEditor.ShowDialog();
-            var awayTeam = (TeamViewModel)AwayTeamBullpenEditor.DataContext;
             var viewModel = (SingleGameViewModel)DataContext;
+            var awayTeamBullpenEditor = new SingleGameTeamBullpenEditorView(ViewModelFactory, viewModel.AwayTeam);
+            awayTeamBullpenEditor.ShowDialog();
+            var awayTeamBullpenEditorViewModel = (SingleGameTeamBullpenEditorViewModel)awayTeamBullpenEditor.DataContext;
+            var awayTeam = awayTeamBullpenEditorViewModel.Team;
             viewModel.UpdateAwayTeamBullpen(awayTeam);
         }
     }
