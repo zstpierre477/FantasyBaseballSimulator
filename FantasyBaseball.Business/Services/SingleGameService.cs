@@ -46,7 +46,7 @@ namespace FantasyBaseball.Business.Services
 
             if (fielder == null)
             {
-                fielder = FieldingStintHelperFunctions.CreateFieldingStintForPlayerOutOfPosition(PositionType.Catcher);
+                fielder = FieldingStintHelperFunctions.CreateFieldingStintForPlayerOutOfPosition(positionType);
             }
 
             var successThreshold = ((double)fielder.Errors/(fielder.Putouts+fielder.Errors+fielder.Assists))*1000;

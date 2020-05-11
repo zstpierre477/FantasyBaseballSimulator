@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FantasyBaseball.UI.Views"
         mc:Ignorable="d"
-        d:DesignHeight="500" d:DesignWidth="850"
+        d:DesignHeight="900" d:DesignWidth="1250"
         Title="Playing Ball!">
     <Grid Background="LightSteelBlue">
         <Grid.ColumnDefinitions>
@@ -150,8 +150,8 @@
             <TextBlock x:Name="activePitcherTextBlock" Background="{Binding FielderColor}" Grid.Column="5" Grid.Row="8" Text="{Binding OnFieldPitcher.LastName}"/>
             <TextBlock x:Name="activeCatcherTextBlock" Background="{Binding FielderColor}" Grid.Column="5" Grid.Row="12" Text="{Binding OnFieldCatcher.LastName}"/>
             <TextBlock x:Name="activeFirstBasemanTextBlock" Background="{Binding FielderColor}" Grid.Column="8" Grid.Row="6" Text="{Binding OnFieldFirstBaseman.LastName}"/>
-            <TextBlock x:Name="activeSecondBasemanTextBlock" Background="{Binding FielderColor}" Grid.Column="7" Grid.Row="4" Text="{Binding OnFieldSecondBasemen.LastName}"/>
-            <TextBlock x:Name="activeThirdBasemanTextBlock" Background="{Binding FielderColor}" Grid.Column="2" Grid.Row="6" Text="{Binding OnThirdBaseman.LastName}"/>
+            <TextBlock x:Name="activeSecondBasemanTextBlock" Background="{Binding FielderColor}" Grid.Column="7" Grid.Row="4" Text="{Binding OnFieldSecondBaseman.LastName}"/>
+            <TextBlock x:Name="activeThirdBasemanTextBlock" Background="{Binding FielderColor}" Grid.Column="2" Grid.Row="6" Text="{Binding OnFieldThirdBaseman.LastName}"/>
             <TextBlock x:Name="activeShortstopTextBlock" Background="{Binding FielderColor}" Grid.Column="3" Grid.Row="4" Text="{Binding OnFieldShortstop.LastName}"/>
             <TextBlock x:Name="activeLeftFielderTextBlock" Background="{Binding FielderColor}" Grid.Column="1" Grid.Row="2" Text="{Binding OnFieldLeftFielder.LastName}"/>
             <TextBlock x:Name="activeCenterFielderTextBlock" Background="{Binding FielderColor}" Grid.Column="5" Grid.Row="1" Text="{Binding OnFieldCenterFielder.LastName}"/>
@@ -225,6 +225,7 @@
             <DataGrid x:Name="awayTeamLineupDataGrid" CanUserAddRows="False" AutoGenerateColumns="False" Margin="3 3 3 3" ItemsSource="{Binding AwayTeam.Lineup, Mode=OneWay}" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
+                    <DataGridTextColumn Header="POS" Binding="{Binding Path='CurrentGamePosition'}"/>
                     <DataGridTextColumn Header="AB" Binding="{Binding Path='CurrentGameAtBats'}"/>
                     <DataGridTextColumn Header="H" Binding="{Binding Path='CurrentGameHits'}"/>
                     <DataGridTextColumn Header="BB" Binding="{Binding Path='CurrentGameWalks'}"/>
@@ -245,6 +246,7 @@
             <DataGrid x:Name="homeTeamLineupDataGrid" CanUserAddRows="False" AutoGenerateColumns="False" Margin="3 3 3 3"  ItemsSource="{Binding HomeTeam.Lineup, Mode=OneWay}" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
+                    <DataGridTextColumn Header="POS" Binding="{Binding Path='CurrentGamePosition'}"/>
                     <DataGridTextColumn Header="AB" Binding="{Binding Path='CurrentGameAtBats'}"/>
                     <DataGridTextColumn Header="H" Binding="{Binding Path='CurrentGameHits'}"/>
                     <DataGridTextColumn Header="BB" Binding="{Binding Path='CurrentGameWalks'}"/>

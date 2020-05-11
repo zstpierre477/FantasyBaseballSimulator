@@ -1,5 +1,6 @@
 ﻿using FantasyBaseball.Business.Services;
 using FantasyBaseball.Entities.Enums;
+using FantasyBaseball.Entities.Helpers;
 using GalaSoft.MvvmLight;
 using Microsoft.VisualStudio.PlatformUI;
 using System;
@@ -410,6 +411,7 @@ namespace FantasyBaseball.UI.ViewModels
             BatterColor = "MediumPurple";
             GameOver = false;
             IsTopOfInning = true;
+            Inning = 1;
             SetFieldingTeam();
         }
 
@@ -471,14 +473,14 @@ namespace FantasyBaseball.UI.ViewModels
                     break;
                 case BattingResult.HitByPitch:
                     PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} was hit by a pitch", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
-                    AdvanceRunnersOneBase();
+                    AdvanceForcedRunnersOneBase();
                     RunnerOnFirst = AtPlateBatter;
                     break;
                 case BattingResult.Walk:
                     PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} walked", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     AtPlateBatter.CurrentGameWalks++;
                     OnFieldPitcher.CurrentGameWalks++;
-                    AdvanceRunnersOneBase();
+                    AdvanceForcedRunnersOneBase();
                     RunnerOnFirst = AtPlateBatter;
                     break;
                 case BattingResult.Single:
@@ -534,7 +536,7 @@ namespace FantasyBaseball.UI.ViewModels
         {
             PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} tripled", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
             IncrementHits();
-            AdvanceRunnersThreeBase();
+            AdvanceRunnersThreeBases();
             RunnerOnThird = AtPlateBatter;
         }
 
@@ -543,7 +545,7 @@ namespace FantasyBaseball.UI.ViewModels
             PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} homered", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
             IncrementHits();
             AtPlateBatter.CurrentGameHomeRuns++;
-            AdvanceRunnersThreeBase();
+            AdvanceRunnersThreeBases();
             ScoreRun(AtPlateBatter);
         }
 
@@ -572,10 +574,16 @@ namespace FantasyBaseball.UI.ViewModels
         }
 
         private void ProcessFieldingResult(IPlayerViewModel fielder, PositionType positionType)
-        {
-            var result = SingleGameService.GetFieldingResult(fielder.PlayerStint.FieldingStints.SingleOrDefault(f => f.PositionType == positionType), positionType);
-            
-            switch(result)
+        { 
+            var fieldingStint = fielder.PlayerStint.FieldingStints.SingleOrDefault(f => f.Position == PositionTypeHelperFunctions.PositionTypeToPositionAbbreviationString(positionType));
+            if (fieldingStint == null && positionType == PositionType.CenterFielder || positionType == PositionType.LeftFielder || positionType == PositionType.RightFielder)
+            {
+                fieldingStint = fielder.PlayerStint.FieldingStints.SingleOrDefault(f => f.Position == "OF");
+            }
+
+            var result = SingleGameService.GetFieldingResult(fieldingStint), positionType);
+
+            switch (result)
             {
                 case FieldingResult.Flyout:
                     PlayByPlay.Add(new PlayByPlayViewModel($"{AtPlateBatter.LastName} flew out to the {positionType}", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
@@ -614,16 +622,19 @@ namespace FantasyBaseball.UI.ViewModels
                     PlayByPlay.Add(new PlayByPlayViewModel($"{fielder.LastName} made a one base error", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     IncrementErrors();
                     AdvanceRunnersOneBase(false);
+                    RunnerOnFirst = AtPlateBatter;
                     break;
                 case FieldingResult.TwoBaseError:
                     PlayByPlay.Add(new PlayByPlayViewModel($"{fielder.LastName} made a two base error", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     IncrementErrors();
-                    AdvanceRunnersOneBase(false);
+                    AdvanceRunnersTwoBases(false);
+                    RunnerOnSecond = AtPlateBatter;
                     break;
                 case FieldingResult.ThreeBaseError:
                     PlayByPlay.Add(new PlayByPlayViewModel($"{fielder.LastName} made a three base error", Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
                     IncrementErrors();
-                    AdvanceRunnersOneBase(false);
+                    AdvanceRunnersThreeBases(false);
+                    RunnerOnThird = AtPlateBatter;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException($"{result} is not a valid fielding result.");
@@ -681,7 +692,10 @@ namespace FantasyBaseball.UI.ViewModels
                     }
                 }
                 Outs = 0;
-                Inning++;
+                if (IsTopOfInning == false)
+                {
+                    Inning++;
+                }
                 IsTopOfInning = !IsTopOfInning;
                 SetFieldingTeam();
                 RunnerOnFirst = null;
@@ -690,6 +704,24 @@ namespace FantasyBaseball.UI.ViewModels
                 return;
             }
             Outs++;
+            StealCommand.RaiseCanExecuteChanged();
+        }
+
+        private void AdvanceForcedRunnersOneBase(bool rbi = true)
+        {
+            if (RunnerOnThird != null && RunnerOnSecond != null && RunnerOnFirst != null)
+            {
+                ScoreRun(RunnerOnThird, rbi);
+            }
+            if (RunnerOnSecond != null && RunnerOnFirst != null)
+            {
+                RunnerOnThird = RunnerOnSecond;
+            }
+            if (RunnerOnFirst != null)
+            {
+                RunnerOnSecond = RunnerOnFirst;
+                RunnerOnFirst = null;
+            }
             StealCommand.RaiseCanExecuteChanged();
         }
 
@@ -721,7 +753,7 @@ namespace FantasyBaseball.UI.ViewModels
             StealCommand.RaiseCanExecuteChanged();
         }
 
-        private void AdvanceRunnersThreeBase(bool rbi = true)
+        private void AdvanceRunnersThreeBases(bool rbi = true)
         {
             if (RunnerOnThird != null)
             {
