@@ -3,6 +3,7 @@ using FantasyBaseball.Entities.Helpers;
 using FantasyBaseball.Entities.Models;
 using GalaSoft.MvvmLight;
 using System;
+using System.Linq;
 
 namespace FantasyBaseball.UI.ViewModels
 {
@@ -60,11 +61,13 @@ namespace FantasyBaseball.UI.ViewModels
 
         public short HitByPitch { get; set; }
 
+        public short SacrificeFlies { get; set; }
+
         public double BattingAverage => AtBats > 0 ? Math.Round(Hits / (double)AtBats, 3) : .000;
 
-        public double OnBasePercentage => AtBats > 0 ? Math.Round((Hits + Walks + HitByPitch) / (double)AtBats, 3) : .000;
+        public double OnBasePercentage => AtBats > 0 ? Math.Round((Hits + Walks + HitByPitch) / (double)(AtBats + Walks + HitByPitch + SacrificeFlies), 3) : .000;
 
-        public double SluggingPercentage => AtBats > 0 ? Math.Round((Hits + Doubles + Triples * 2 + HomeRuns * 3) / (double)AtBats, 3) : .000;
+        public double SluggingPercentage => AtBats > 0 ? Math.Round((Hits + Doubles + (Triples * 2) + (HomeRuns * 3)) / (double)AtBats, 3) : .000;
 
         public PlayerStint PlayerStint { get; set; }
 
@@ -87,6 +90,7 @@ namespace FantasyBaseball.UI.ViewModels
             CaughtStealing = playerStint.BattingStint.CaughtStealing;
             Walks = playerStint.BattingStint.Walks;
             HitByPitch = playerStint.BattingStint.HitByPitch;
+            SacrificeFlies = playerStint.BattingStint.SacrificeFlies;
             RaisePropertyChanged("PlayerInfoString");
             RemovedFromGame = false;
         }
@@ -140,6 +144,13 @@ namespace FantasyBaseball.UI.ViewModels
             set { _currentGameErrors = value; RaisePropertyChanged("CurrentGameErrors"); }
         }
 
+        private int _currentGameStolenBases { get; set; }
+        public int CurrentGameStolenBases
+        {
+            get { return _currentGameStolenBases; }
+            set { _currentGameStolenBases = value; RaisePropertyChanged("CurrentGameStolenBases"); }
+        }
+
         public PositionType CurrentGamePositionType { get; private set; }
 
         private string _currentGamePosition { get; set; }
@@ -150,11 +161,27 @@ namespace FantasyBaseball.UI.ViewModels
             { 
                 _currentGamePosition = value; RaisePropertyChanged("CurrentGamePosition"); 
                 CurrentGamePositionType = PositionTypeHelperFunctions.PositionAbbreviationStringToPositionType(_currentGamePosition); 
-                RaisePropertyChanged("CurrentGamePositionType"); 
+                RaisePropertyChanged("CurrentGamePositionType"); RaisePropertyChanged("CurrentGamePositionFieldingPercentage");
             }
-    }
+        }
 
-        public int? CurrentGameLineupIndex { get; set; }
+        private double _currentGamePositionFieldingPercentage => PlayerStint.FieldingStints.SingleOrDefault(s => s.PositionType == CurrentGamePositionType)?.FieldingPercentage ?? .000;
+        public double CurrentGamePositionFieldingPercentage
+        {
+            get { return _currentGamePositionFieldingPercentage; }
+        }
+
+        private int? _currentGameLineupIndex { get; set; }
+        public int? CurrentGameLineupIndex
+        {
+            get { return _currentGameLineupIndex; }
+            set { _currentGameLineupIndex = value; RaisePropertyChanged("CurrentGameBattingOrder"); }
+        }
+
+        public int? CurrentGameBattingOrder
+        {
+            get { return _currentGameLineupIndex + 1; }
+        }
 
         public int? CurrentGameBenchIndex { get; set; }
 
@@ -172,6 +199,26 @@ namespace FantasyBaseball.UI.ViewModels
             foreach(var f in PlayerStint.FieldingStints)
             {
                 allPositions += f.Position + " ";
+            }
+            if (string.IsNullOrWhiteSpace(allPositions))
+            {
+                return "None";
+            }
+            return allPositions.Trim();
+        }
+
+        public string _allPositionsAndFieldingPercentageString => GetAllPositionsAndFieldingPercentageString();
+        public string AllPositionsAndFieldingPercentageString
+        {
+            get { return _allPositionsAndFieldingPercentageString; }
+        }
+
+        private string GetAllPositionsAndFieldingPercentageString()
+        {
+            var allPositions = "";
+            foreach (var f in PlayerStint.FieldingStints)
+            {
+                allPositions += f.Position + ": " + f.FieldingPercentage;
             }
             if (string.IsNullOrWhiteSpace(allPositions))
             {

@@ -152,7 +152,7 @@ namespace FantasyBaseball.UI.ViewModels
 
         public bool CurrentGameIsTired => CurrentGameInningsPitched > Math.Round(AverageIP, 0, MidpointRounding.ToPositiveInfinity);
 
-        private string _currentGameStatus => CurrentGameIsTired ? "Not Tired" : "Tired";
+        private string _currentGameStatus => CurrentGameIsTired ? "Tired" : "Not Tired";
         public string CurrentGameStatus
         {
             get { return _currentGameStatus; }

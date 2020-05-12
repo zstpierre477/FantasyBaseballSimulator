@@ -41,6 +41,9 @@ namespace FantasyBaseball.Entities.Models
         public virtual Team Team { get; set; }
 
         [NotMapped]
+        public double FieldingPercentage => ((double)Putouts + Assists) / (Putouts + Assists + Errors);
+
+        [NotMapped]
         public PositionType PositionType { get; set; }
     }
 }

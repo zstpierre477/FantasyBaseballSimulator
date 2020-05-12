@@ -74,6 +74,7 @@
                         <DataGridTextColumn Header="HR" Binding="{Binding Path='CurrentGameHomeRuns'}"/>
                         <DataGridTextColumn Header="R" Binding="{Binding Path='CurrentGameRuns'}"/>
                         <DataGridTextColumn Header="RBI" Binding="{Binding Path='CurrentGameRunsBattedIn'}"/>
+                        <DataGridTextColumn Header="SB" Binding="{Binding Path='CurrentGameStolenBases'}"/>
                         <DataGridTextColumn Header="E" Binding="{Binding Path='CurrentGameErrors'}"/>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -142,35 +143,35 @@
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Away" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Home" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <TextBlock Grid.Row="0" Grid.Column="1" Text="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="inning1AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning1Runs}"/>
-                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="inning1HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning1Runs}"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="inning1AwayTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning1RunsString}"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="inning1HomeTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning1RunsString}"/>
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Row="1" Grid.Column="2" x:Name="inning2AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning2Runs}"/>
-                <TextBlock Grid.Row="2" Grid.Column="2" x:Name="inning2HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning2Runs}"/>
+                <TextBlock Grid.Row="1" Grid.Column="2" x:Name="inning2AwayTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning2RunsString}"/>
+                <TextBlock Grid.Row="2" Grid.Column="2" x:Name="inning2HomeTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning2RunsString}"/>
                 <TextBlock Grid.Row="0" Grid.Column="3" Text="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Row="1" Grid.Column="3" x:Name="inning3AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning3Runs}"/>
-                <TextBlock Grid.Row="2" Grid.Column="3" x:Name="inning3HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning3Runs}"/>
+                <TextBlock Grid.Row="1" Grid.Column="3" x:Name="inning3AwayTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning3RunsString}"/>
+                <TextBlock Grid.Row="2" Grid.Column="3" x:Name="inning3HomeTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning3RunsString}"/>
                 <TextBlock Grid.Row="0" Grid.Column="4" Text="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Row="1" Grid.Column="4" x:Name="inning4AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning4Runs}"/>
-                <TextBlock Grid.Row="2" Grid.Column="4" x:Name="inning4HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning4Runs}"/>
+                <TextBlock Grid.Row="1" Grid.Column="4" x:Name="inning4AwayTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning4RunsString}"/>
+                <TextBlock Grid.Row="2" Grid.Column="4" x:Name="inning4HomeTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning4RunsString}"/>
                 <TextBlock Grid.Row="0" Grid.Column="5" Text="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Row="1" Grid.Column="5" x:Name="inning5AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning5Runs}"/>
-                <TextBlock Grid.Row="2" Grid.Column="5" x:Name="inning5HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning5Runs}"/>
+                <TextBlock Grid.Row="1" Grid.Column="5" x:Name="inning5AwayTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning5RunsString}"/>
+                <TextBlock Grid.Row="2" Grid.Column="5" x:Name="inning5HomeTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning5RunsString}"/>
                 <TextBlock Grid.Row="0" Grid.Column="6" Text="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Row="1" Grid.Column="6" x:Name="inning6AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning6Runs}"/>
-                <TextBlock Grid.Row="2" Grid.Column="6" x:Name="inning6HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning6Runs}"/>
+                <TextBlock Grid.Row="1" Grid.Column="6" x:Name="inning6AwayTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning6RunsString}"/>
+                <TextBlock Grid.Row="2" Grid.Column="6" x:Name="inning6HomeTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning6RunsString}"/>
                 <TextBlock Grid.Row="0" Grid.Column="7" Text="7" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Row="1" Grid.Column="7" x:Name="inning7AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning7Runs}"/>
-                <TextBlock Grid.Row="2" Grid.Column="7" x:Name="inning7HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning7Runs}"/>
+                <TextBlock Grid.Row="1" Grid.Column="7" x:Name="inning7AwayTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning7RunsString}"/>
+                <TextBlock Grid.Row="2" Grid.Column="7" x:Name="inning7HomeTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning7RunsString}"/>
                 <TextBlock Grid.Row="0" Grid.Column="8" Text="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Row="1" Grid.Column="8" x:Name="inning8AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning8Runs}"/>
-                <TextBlock Grid.Row="2" Grid.Column="8" x:Name="inning8HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning8Runs}"/>
+                <TextBlock Grid.Row="1" Grid.Column="8" x:Name="inning8AwayTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning8RunsString}"/>
+                <TextBlock Grid.Row="2" Grid.Column="8" x:Name="inning8HomeTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning8RunsString}"/>
                 <TextBlock Grid.Row="0" Grid.Column="9" Text="9" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Row="1" Grid.Column="9" x:Name="inning9AwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning9Runs}"/>
-                <TextBlock Grid.Row="2" Grid.Column="9" x:Name="inning9HomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning9Runs}"/>
+                <TextBlock Grid.Row="1" Grid.Column="9" x:Name="inning9AwayTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamInning9RunsString}"/>
+                <TextBlock Grid.Row="2" Grid.Column="9" x:Name="inning9HomeTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamInning9RunsString}"/>
                 <TextBlock Grid.Row="0" Grid.Column="10" Text="X" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Row="1" Grid.Column="10" x:Name="extraInningsAwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamExtraInningsRuns}"/>
-                <TextBlock Grid.Row="2" Grid.Column="10" x:Name="extraInningsHomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamExtraInningsRuns}"/>
+                <TextBlock Grid.Row="1" Grid.Column="10" x:Name="extraInningsAwayTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamExtraInningsRunsString}"/>
+                <TextBlock Grid.Row="2" Grid.Column="10" x:Name="extraInningsHomeTeamRunsString" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamExtraInningsRunsString}"/>
                 <TextBlock Grid.Row="0" Grid.Column="11" Text="R" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <TextBlock Grid.Row="1" Grid.Column="11" x:Name="totalAwayTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding AwayTeamTotalRuns}"/>
                 <TextBlock Grid.Row="2" Grid.Column="11" x:Name="totalHomeTeamRuns" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding HomeTeamTotalRuns}"/>

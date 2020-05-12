@@ -1,7 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using Microsoft.VisualStudio.PlatformUI;
 using System.Linq;
-using System.Windows.Input;
 
 namespace FantasyBaseball.UI.ViewModels
 {
@@ -44,6 +43,13 @@ namespace FantasyBaseball.UI.ViewModels
             set { _selectedBenchBatter = value; RaisePropertyChanged("SelectedBenchBatter"); }
         }
 
+        private bool _isGameStarted { get; set; }
+        public bool IsGameStarted
+        {
+            get { return _isGameStarted; }
+            set { _isGameStarted = value; RaisePropertyChanged("IsGameStarted"); _moveDownCommand.RaiseCanExecuteChanged(); _moveUpCommand.RaiseCanExecuteChanged(); _switchInLineupCommand.RaiseCanExecuteChanged(); }
+        }
+
         public SingleGameTeamLineupEditorViewModel(TeamViewModel teamViewModel)
         {
             SwitchInLineupCommand = new DelegateCommand(SwitchInLineup, CanSwitchInLineup);
@@ -55,6 +61,7 @@ namespace FantasyBaseball.UI.ViewModels
             {
                 SelectedBenchBatter = Team.Bench.ElementAt(0);
             }
+            IsGameStarted = false;
         }
 
         private void SwitchInLineup()
@@ -62,14 +69,22 @@ namespace FantasyBaseball.UI.ViewModels
             var selectedLineupBatter = SelectedLineupBatter;
             var selectedBenchBatter = SelectedBenchBatter;
             Team.Lineup[SelectedLineupBatter.CurrentGameLineupIndex.Value] = selectedBenchBatter;
-            Team.Bench[SelectedBenchBatter.CurrentGameBenchIndex.Value] = selectedLineupBatter;
             SelectedLineupBatter = selectedBenchBatter;
-            SelectedBenchBatter = selectedLineupBatter;
-            SelectedLineupBatter.CurrentGameLineupIndex = SelectedBenchBatter.CurrentGameLineupIndex;
-            SelectedBenchBatter.CurrentGameBenchIndex = SelectedLineupBatter.CurrentGameBenchIndex;
+            SelectedLineupBatter.CurrentGameLineupIndex = selectedLineupBatter.CurrentGameLineupIndex;
+            SelectedLineupBatter.CurrentGamePosition = selectedLineupBatter.CurrentGamePosition;
+            if (IsGameStarted == false)
+            {
+                Team.Bench[selectedBenchBatter.CurrentGameBenchIndex.Value] = selectedLineupBatter;
+                SelectedBenchBatter = selectedLineupBatter;
+                SelectedBenchBatter.CurrentGameBenchIndex = selectedBenchBatter.CurrentGameBenchIndex;
+                SelectedBenchBatter.CurrentGamePosition = null;
+            }
+            else
+            {
+                Team.Bench.RemoveAt(selectedBenchBatter.CurrentGameBenchIndex.Value);
+                Team.UnavailablePlayers.Add(selectedLineupBatter);
+            }
             SelectedLineupBatter.CurrentGameBenchIndex = null;
-            SelectedLineupBatter.CurrentGamePosition = SelectedBenchBatter.CurrentGamePosition;
-            SelectedBenchBatter.CurrentGamePosition = null;
         }
 
         private void MoveDown()
@@ -93,12 +108,12 @@ namespace FantasyBaseball.UI.ViewModels
 
         private bool CanMoveDown()
         {
-            return SelectedLineupBatter != null && SelectedLineupBatter.CurrentGameLineupIndex < 8;
+            return IsGameStarted == false && (SelectedLineupBatter != null && SelectedLineupBatter.CurrentGameLineupIndex < 8);
         }
 
         private bool CanMoveUp()
         {
-            return SelectedLineupBatter != null && SelectedLineupBatter.CurrentGameLineupIndex > 0;
+            return IsGameStarted == false && (SelectedLineupBatter != null && SelectedLineupBatter.CurrentGameLineupIndex > 0);
         }
     }
 }

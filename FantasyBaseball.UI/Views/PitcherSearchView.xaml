@@ -29,7 +29,7 @@
         <Label Grid.Row="1" Grid.Column="0" Content="Pitcher Last Name:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
         <TextBox x:Name="pitcherLastNameTextBox" Grid.Row="1" Grid.Column="1" Margin="1 1 1 1" Text="{Binding LastName}"/>
         <Label Grid.Row="1" Grid.Column="2" Content="Year:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
-        <ComboBox x:Name="yearTextBox" Grid.Row="1" Grid.Column="3" Margin="1 1 1 1" Text="{Binding Year}" ItemsSource="{Binding Years}"/>
+        <ComboBox x:Name="yearTextBox" Grid.Row="1" Grid.Column="3" Margin="1 1 1 1" SelectedItem="{Binding Year}" ItemsSource="{Binding Years}"/>
         <Button x:Name="pitcherSearchButton" Click="pitcherSearchButton_Click" Grid.Column="4" Grid.Row="1" Content="Search"/>
         <DataGrid x:Name="dataGrid" Grid.Row="3" Grid.ColumnSpan="5" Grid.Column="0" Grid.RowSpan="5" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Pitchers, Mode=OneWay}" IsReadOnly="True">
             <DataGrid.Columns>
@@ -49,11 +49,11 @@
                 <DataGridTextColumn Header="IP" Binding="{Binding Path='IP'}"/>
                 <DataGridTextColumn Header="W" Binding="{Binding Path='Wins'}"/>
                 <DataGridTextColumn Header="L" Binding="{Binding Path='Losses'}"/>
-                <DataGridTextColumn Header="SV" Binding="{Binding Path='Saves'}"/>
                 <DataGridTextColumn Header="K" Binding="{Binding Path='Strikeouts'}"/>
                 <DataGridTextColumn Header="BB" Binding="{Binding Path='Walks'}"/>
                 <DataGridTextColumn Header="H" Binding="{Binding Path='Hits'}"/>
                 <DataGridTextColumn Header="HR" Binding="{Binding Path='HomeRuns'}"/>
+                <DataGridTextColumn Header="SV" Binding="{Binding Path='Saves'}"/>
                 <DataGridTextColumn Header="ERA" Binding="{Binding Path='EarnedRunAverage'}"/>
                 <DataGridTextColumn Header="WHIP" Binding="{Binding Path='WHIP'}"/>
             </DataGrid.Columns>

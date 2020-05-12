@@ -22,6 +22,16 @@
         <Label Content="{Binding Team.TeamName}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Label Content="Current Pitcher" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <DataGrid x:Name="currentPitcherDataGrid" Grid.Row="2" Grid.Column="0" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding CurrentPitcher, Mode=OneWay}">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="Background" Value="Blue" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="First Name" Binding="{Binding Path='FirstName'}"/>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
@@ -32,11 +42,11 @@
                 <DataGridTextColumn Header="IP" Binding="{Binding Path='IP'}"/>
                 <DataGridTextColumn Header="W" Binding="{Binding Path='Wins'}"/>
                 <DataGridTextColumn Header="L" Binding="{Binding Path='Losses'}"/>
-                <DataGridTextColumn Header="SV" Binding="{Binding Path='Saves'}"/>
                 <DataGridTextColumn Header="K" Binding="{Binding Path='Strikeouts'}"/>
                 <DataGridTextColumn Header="BB" Binding="{Binding Path='Walks'}"/>
                 <DataGridTextColumn Header="H" Binding="{Binding Path='Hits'}"/>
                 <DataGridTextColumn Header="HR" Binding="{Binding Path='HomeRuns'}"/>
+                <DataGridTextColumn Header="SV" Binding="{Binding Path='Saves'}"/>
                 <DataGridTextColumn Header="ERA" Binding="{Binding Path='EarnedRunAverage'}"/>
                 <DataGridTextColumn Header="WHIP" Binding="{Binding Path='WHIP'}"/>
             </DataGrid.Columns>
@@ -45,6 +55,16 @@
         <DataGrid x:Name="bullpenDataGrid" Grid.Row="4" Grid.Column="0" Margin="5 5 5 5" CanUserAddRows="False" AutoGenerateColumns="False"
                   ItemsSource="{Binding Team.Bullpen, Mode=OneWay}" SelectedItem="{Binding SelectedBullpenPitcher, Mode=TwoWay}" IsReadOnly="True"
                   CanUserSortColumns="False" SelectionMode="Single">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="Background" Value="Blue" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="First Name" Binding="{Binding Path='FirstName'}"/>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
@@ -52,14 +72,13 @@
                 <DataGridTextColumn Header="Team" Binding="{Binding Path='TeamShortName'}"/>
                 <DataGridTextColumn Header="G" Binding="{Binding Path='Games'}"/>
                 <DataGridTextColumn Header="GS" Binding="{Binding Path='GamesStarted'}"/>
-                <DataGridTextColumn Header="IP" Binding="{Binding Path='IP'}"/>
                 <DataGridTextColumn Header="W" Binding="{Binding Path='Wins'}"/>
                 <DataGridTextColumn Header="L" Binding="{Binding Path='Losses'}"/>
-                <DataGridTextColumn Header="SV" Binding="{Binding Path='Saves'}"/>
                 <DataGridTextColumn Header="K" Binding="{Binding Path='Strikeouts'}"/>
                 <DataGridTextColumn Header="BB" Binding="{Binding Path='Walks'}"/>
                 <DataGridTextColumn Header="H" Binding="{Binding Path='Hits'}"/>
                 <DataGridTextColumn Header="HR" Binding="{Binding Path='HomeRuns'}"/>
+                <DataGridTextColumn Header="SV" Binding="{Binding Path='Saves'}"/>
                 <DataGridTextColumn Header="ERA" Binding="{Binding Path='EarnedRunAverage'}"/>
                 <DataGridTextColumn Header="WHIP" Binding="{Binding Path='WHIP'}"/>
             </DataGrid.Columns>

@@ -40,7 +40,7 @@ namespace FantasyBaseball.UI.Views
         private void homeTeamBenchButton_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = (SingleGameViewModel)DataContext;
-            var homeTeamLineupEditor = new SingleGameTeamLineupEditorView(ViewModelFactory, viewModel.HomeTeam);
+            var homeTeamLineupEditor = new SingleGameTeamLineupEditorView(ViewModelFactory, viewModel.HomeTeam, true);
             homeTeamLineupEditor.ShowDialog();
             var homeTeamLineupEditorViewModel = (SingleGameTeamLineupEditorViewModel)homeTeamLineupEditor.DataContext;
             var homeTeam = homeTeamLineupEditorViewModel.Team;
@@ -50,7 +50,7 @@ namespace FantasyBaseball.UI.Views
         private void homeTeamBullpenButton_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = (SingleGameViewModel)DataContext;
-            var homeTeamBullpenEditor = new SingleGameTeamBullpenEditorView(ViewModelFactory, viewModel.HomeTeam);
+            var homeTeamBullpenEditor = new SingleGameTeamBullpenEditorView(ViewModelFactory, viewModel.HomeTeam, true);
             homeTeamBullpenEditor.ShowDialog();
             var homeTeamBullpenEditorViewModel = (SingleGameTeamBullpenEditorViewModel)homeTeamBullpenEditor.DataContext;
             var homeTeam = homeTeamBullpenEditorViewModel.Team;
@@ -60,7 +60,7 @@ namespace FantasyBaseball.UI.Views
         private void awayTeamBenchButton_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = (SingleGameViewModel)DataContext;
-            var awayTeamLineupEditor = new SingleGameTeamLineupEditorView(ViewModelFactory, viewModel.AwayTeam);
+            var awayTeamLineupEditor = new SingleGameTeamLineupEditorView(ViewModelFactory, viewModel.AwayTeam, true);
             awayTeamLineupEditor.ShowDialog();
             var awayTeamLineupEditorViewModel = (SingleGameTeamLineupEditorViewModel)awayTeamLineupEditor.DataContext;
             var awayTeam = awayTeamLineupEditorViewModel.Team;
@@ -70,7 +70,7 @@ namespace FantasyBaseball.UI.Views
         private void awayTeamBullpenButton_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = (SingleGameViewModel)DataContext;
-            var awayTeamBullpenEditor = new SingleGameTeamBullpenEditorView(ViewModelFactory, viewModel.AwayTeam);
+            var awayTeamBullpenEditor = new SingleGameTeamBullpenEditorView(ViewModelFactory, viewModel.AwayTeam, true);
             awayTeamBullpenEditor.ShowDialog();
             var awayTeamBullpenEditorViewModel = (SingleGameTeamBullpenEditorViewModel)awayTeamBullpenEditor.DataContext;
             var awayTeam = awayTeamBullpenEditorViewModel.Team;

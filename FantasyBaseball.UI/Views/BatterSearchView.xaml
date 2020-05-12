@@ -44,15 +44,19 @@
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
                 <DataGridTextColumn Header="Year" Binding="{Binding Path='Year'}"/>
                 <DataGridTextColumn Header="Team" Binding="{Binding Path='TeamShortName'}"/>
+                <DataGridTextColumn Header="POS" Binding="{Binding Path='AllPositionsString'}"/>
                 <DataGridTextColumn Header="G" Binding="{Binding Path='Games'}"/>
                 <DataGridTextColumn Header="AB" Binding="{Binding Path='AtBats'}"/>
                 <DataGridTextColumn Header="H" Binding="{Binding Path='Hits'}"/>
+                <DataGridTextColumn Header="BB" Binding="{Binding Path='Walks'}"/>
                 <DataGridTextColumn Header="R" Binding="{Binding Path='Runs'}"/>
-                <DataGridTextColumn Header="RBI" Binding="{Binding Path='RunsBattedIn'}"/>
                 <DataGridTextColumn Header="HR" Binding="{Binding Path='HomeRuns'}"/>
+                <DataGridTextColumn Header="RBI" Binding="{Binding Path='RunsBattedIn'}"/>
                 <DataGridTextColumn Header="AVG" Binding="{Binding Path='BattingAverage'}"/>
                 <DataGridTextColumn Header="OBP" Binding="{Binding Path='OnBasePercentage'}"/>
                 <DataGridTextColumn Header="SLG" Binding="{Binding Path='SluggingPercentage'}"/>
+                <DataGridTextColumn Header="SB" Binding="{Binding Path='StolenBases'}"/>
+                <DataGridTextColumn Header="CS" Binding="{Binding Path='CaughtStealing'}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

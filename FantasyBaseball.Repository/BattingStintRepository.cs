@@ -47,7 +47,7 @@ namespace FantasyBaseball.Repository
             using (var db = new FantasyBaseballDbContext())
             {
                 var q = (from f in db.FieldingStint.AsNoTracking()
-                         where f.Position == position && f.Year == year && f.Games >= minimumGamesPlayed
+                         where f.Position == position && f.Year == year && f.Games >= minimumGamesPlayed && f.InningsPlayedOuts > 0
                          join b in db.BattingStint.AsNoTracking()
                          on new { f.PersonId, f.Stint, f.Year }
                          equals new { b.PersonId, b.Stint, b.Year }
