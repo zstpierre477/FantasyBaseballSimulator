@@ -171,7 +171,7 @@ namespace FantasyBaseball.UI.ViewModels
         private string _inningString { get; set; }
         public string InningString
         {
-            get { return (IsTopOfInning ? "Top" : "Bot") + Inning.ToString() ; }
+            get { return (IsTopOfInning ? "Top" : "Bot") + Inning.ToString(); }
         }
 
         private int _awayTeamLineupIndex { get; set; }
@@ -180,17 +180,17 @@ namespace FantasyBaseball.UI.ViewModels
             get { return _awayTeamLineupIndex; }
             set
             {
-                _awayTeamLineupIndex = value%9;
+                _awayTeamLineupIndex = value % 9;
             }
         }
 
         private int _homeTeamLineupIndex { get; set; }
         public int HomeTeamLineupIndex {
-            get { return _homeTeamLineupIndex; } 
+            get { return _homeTeamLineupIndex; }
             set
             {
-                _homeTeamLineupIndex = value%9;
-            } 
+                _homeTeamLineupIndex = value % 9;
+            }
         }
 
         private int _awayTeamInning1Runs { get; set; }
@@ -209,7 +209,7 @@ namespace FantasyBaseball.UI.ViewModels
         public int AwayTeamInning2Runs
         {
             get { return _awayTeamInning2Runs; }
-            set { _awayTeamInning1Runs = value; RaisePropertyChanged("AwayTeamInning2Runs"); RaisePropertyChanged("AwayTeamInning2RunsString"); }
+            set { _awayTeamInning2Runs = value; RaisePropertyChanged("AwayTeamInning2Runs"); RaisePropertyChanged("AwayTeamInning2RunsString"); }
         }
 
         public string AwayTeamInning2RunsString
@@ -221,7 +221,7 @@ namespace FantasyBaseball.UI.ViewModels
         public int AwayTeamInning3Runs
         {
             get { return _awayTeamInning3Runs; }
-            set { _awayTeamInning1Runs = value; RaisePropertyChanged("AwayTeamInning3Runs"); RaisePropertyChanged("AwayTeamInning3RunsString"); }
+            set { _awayTeamInning3Runs = value; RaisePropertyChanged("AwayTeamInning3Runs"); RaisePropertyChanged("AwayTeamInning3RunsString"); }
         }
 
         public string AwayTeamInning3RunsString
@@ -305,7 +305,7 @@ namespace FantasyBaseball.UI.ViewModels
         public int AwayTeamExtraInningsRuns
         {
             get { return _awayTeamExtraInningsRuns; }
-            set { _awayTeamInning9Runs = value; RaisePropertyChanged("AwayTeamExtraInningsRuns"); RaisePropertyChanged("AwayTeamExtraInningsRunsString"); }
+            set { _awayTeamExtraInningsRuns = value; RaisePropertyChanged("AwayTeamExtraInningsRuns"); RaisePropertyChanged("AwayTeamExtraInningsRunsString"); }
         }
 
         public string AwayTeamExtraInningsRunsString
@@ -350,7 +350,7 @@ namespace FantasyBaseball.UI.ViewModels
         public int HomeTeamInning2Runs
         {
             get { return _homeTeamInning2Runs; }
-            set { _homeTeamInning1Runs = value; RaisePropertyChanged("HomeTeamInning2Runs"); RaisePropertyChanged("HomeTeamInning2RunsString"); }
+            set { _homeTeamInning2Runs = value; RaisePropertyChanged("HomeTeamInning2Runs"); RaisePropertyChanged("HomeTeamInning2RunsString"); }
         }
 
         public string HomeTeamInning2RunsString
@@ -362,7 +362,7 @@ namespace FantasyBaseball.UI.ViewModels
         public int HomeTeamInning3Runs
         {
             get { return _homeTeamInning3Runs; }
-            set { _homeTeamInning1Runs = value; RaisePropertyChanged("HomeTeamInning3Runs"); RaisePropertyChanged("HomeTeamInning3RunsString"); }
+            set { _homeTeamInning3Runs = value; RaisePropertyChanged("HomeTeamInning3Runs"); RaisePropertyChanged("HomeTeamInning3RunsString"); }
         }
 
         public string HomeTeamInning3RunsString
@@ -446,7 +446,7 @@ namespace FantasyBaseball.UI.ViewModels
         public int HomeTeamExtraInningsRuns
         {
             get { return _homeTeamExtraInningsRuns; }
-            set { _homeTeamInning9Runs = value; RaisePropertyChanged("HomeTeamExtraInningsRuns"); RaisePropertyChanged("HomeTeamExtraInningsRunsString"); }
+            set { _homeTeamExtraInningsRuns = value; RaisePropertyChanged("HomeTeamExtraInningsRuns"); RaisePropertyChanged("HomeTeamExtraInningsRunsString"); }
         }
 
         public string HomeTeamExtraInningsRunsString
@@ -515,7 +515,7 @@ namespace FantasyBaseball.UI.ViewModels
         public ISingleGameService SingleGameService { get; set; }
 
         private ObservableCollection<PlayByPlayViewModel> _playByPlay { get; set; }
-        public ObservableCollection<PlayByPlayViewModel> PlayByPlay 
+        public ObservableCollection<PlayByPlayViewModel> PlayByPlay
         {
             get { return _playByPlay; }
             set { _playByPlay = value; RaisePropertyChanged("PlayByPlay"); }
@@ -662,8 +662,7 @@ namespace FantasyBaseball.UI.ViewModels
                         throw new ArgumentOutOfRangeException($"{result} is not a valid batting result.");
                 }
             }
-
-            StealCommand.RaiseCanExecuteChanged();
+            _stealCommand.RaiseCanExecuteChanged();
         }
 
         private void ProcessFieldingResult(IPlayerViewModel fielder, PositionType positionType)
@@ -745,7 +744,6 @@ namespace FantasyBaseball.UI.ViewModels
                 default:
                     throw new ArgumentOutOfRangeException($"{result} is not a valid fielding result.");
             }
-            StealCommand.RaiseCanExecuteChanged();
         }
 
         private void SwitchBatter()
@@ -950,49 +948,46 @@ namespace FantasyBaseball.UI.ViewModels
                 RunnerOnThird = null;
                 return;
             }
-            StealCommand.RaiseCanExecuteChanged();
+            _stealCommand.RaiseCanExecuteChanged();
         }
 
-        private void ProcessBattedOut(string play)
+        private void ProcessBattedOut(string play, bool switchBatter = true)
         {
             AtPlateBatter.CurrentGameAtBats++;
-            ProcessOut(play, true);
+            ProcessOut(play, switchBatter);
         }
 
         private void ProcessGroundoutLeadRunnerOut(PositionType positionType)
         {
-            if (RunnerOnThird != null)
+            if (Outs != 2)
             {
-                ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType}, {RunnerOnThird.LastName} was thrown out at home");
-                RunnerOnThird = null;
-                AdvanceRunnersOneBase();
-                if (Outs != 0)
+                if (RunnerOnThird != null)
                 {
+                    ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType}, {RunnerOnThird.LastName} was thrown out at home", false);
+                    RunnerOnThird = null;
+                    AdvanceRunnersOneBase();
                     RunnerOnFirst = AtPlateBatter;
+                    SwitchBatter();
+                    return;
+                }
+                if (RunnerOnSecond != null)
+                {
+                    ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType}, {RunnerOnSecond.LastName} was thrown out at third", false);
+                    RunnerOnSecond = null;
+                    AdvanceRunnersOneBase();
+                    RunnerOnFirst = AtPlateBatter;
+                    SwitchBatter();
+                    return;
+                }
+                if (RunnerOnFirst != null)
+                {
+                    ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType}, {RunnerOnFirst.LastName} was thrown out at second", false);
+                    RunnerOnFirst = AtPlateBatter;
+                    SwitchBatter();
+                    return;
                 }
             }
-            else if (RunnerOnSecond != null)
-            {
-                ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType}, {RunnerOnSecond.LastName} was thrown out at third");
-                RunnerOnSecond = null;
-                AdvanceRunnersOneBase();
-                if (Outs != 0)
-                {
-                    RunnerOnFirst = AtPlateBatter;
-                }
-            }
-            else if (RunnerOnFirst != null)
-            {
-                ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType}, {RunnerOnFirst.LastName} was thrown out at second");
-                if (Outs != 0)
-                {
-                    RunnerOnFirst = AtPlateBatter;
-                }
-            }
-            else
-            {
-                ProcessBattedOut($"{AtPlateBatter.LastName} grounded out to the {positionType}");
-            }
+            ProcessBattedOut($"{AtPlateBatter.LastName} grounded out to the {positionType}");
         }
 
         private void ProcessGroundoutLeadForceRunnerOut(PositionType positionType, bool advanceRunners = false)
@@ -1000,29 +995,34 @@ namespace FantasyBaseball.UI.ViewModels
             if (Outs == 2 || RunnerOnFirst == null)
             {
                 ProcessBattedOut($"{AtPlateBatter.LastName} grounded out to the {positionType}");
+                if (advanceRunners)
+                {
+                    AdvanceRunnersOneBase();
+                }
                 return;
             }
             else if (RunnerOnSecond == null)
             {
-                ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType} forcing out {RunnerOnFirst.LastName} at second");
+                ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType} forcing out {RunnerOnFirst.LastName} at second", false);
                 RunnerOnFirst = null;
             }
             else if (RunnerOnThird == null)
             {
-                ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType} forcing out {RunnerOnSecond.LastName} at third");
+                ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType} forcing out {RunnerOnSecond.LastName} at third", false);
                 RunnerOnSecond = null;
             }
             else
             {
-                ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType} forcing out {RunnerOnThird.LastName} at home");
+                ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType} forcing out {RunnerOnThird.LastName} at home", false);
                 RunnerOnThird = null;
             }
 
-            RunnerOnFirst = AtPlateBatter;
             if (advanceRunners)
             {
                 AdvanceRunnersOneBase();
             }
+
+            RunnerOnFirst = AtPlateBatter;
         }
 
         private void ProcessGroundoutDoublePlay(PositionType positionType)
@@ -1031,7 +1031,7 @@ namespace FantasyBaseball.UI.ViewModels
             {
                 ProcessBattedOut($"{AtPlateBatter.LastName} grounded out to the {positionType}");
             }
-            else if (RunnerOnFirst == null)
+            else
             {
                 ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType}");
                 ProcessOut($"{RunnerOnFirst.LastName} was thrown out at second for a double play");
@@ -1043,20 +1043,17 @@ namespace FantasyBaseball.UI.ViewModels
         {
             ProcessBattedOut($"{AtPlateBatter.LastName} lined out to the {positionType}");
 
-            if (Outs < 2)
+            if (RunnerOnThird != null)
             {
-                if (RunnerOnThird != null)
-                {
-                    ProcessOut($"{RunnerOnThird.LastName} was doubled off third");
-                }
-                else if (RunnerOnSecond != null)
-                {
-                    ProcessOut($"{RunnerOnSecond.LastName} was doubled off second");
-                }
-                else if (RunnerOnFirst != null)
-                {
-                    ProcessOut($"{RunnerOnFirst.LastName} was doubled off first");
-                }
+                ProcessOut($"{RunnerOnThird.LastName} was doubled off third");
+            }
+            else if (RunnerOnSecond != null)
+            {
+                ProcessOut($"{RunnerOnSecond.LastName} was doubled off second");
+            }
+            else if (RunnerOnFirst != null)
+            {
+                ProcessOut($"{RunnerOnFirst.LastName} was doubled off first");
             }
         }
 
@@ -1092,20 +1089,16 @@ namespace FantasyBaseball.UI.ViewModels
 
         private void AdvanceForcedRunnersOneBase(bool rbi = true)
         {
-            if (RunnerOnThird != null && RunnerOnSecond != null && RunnerOnFirst != null)
-            {
-                ScoreRun(RunnerOnThird, rbi);
-            }
             if (RunnerOnSecond != null && RunnerOnFirst != null)
             {
-                RunnerOnThird = RunnerOnSecond;
+                AdvanceRunnersOneBase(true);
             }
-            if (RunnerOnFirst != null)
+            else if (RunnerOnFirst != null)
             {
                 RunnerOnSecond = RunnerOnFirst;
                 RunnerOnFirst = null;
             }
-            StealCommand.RaiseCanExecuteChanged();
+            _stealCommand.RaiseCanExecuteChanged();
         }
 
         private void AdvanceRunnerOnThird(bool rbi = true)
@@ -1115,7 +1108,7 @@ namespace FantasyBaseball.UI.ViewModels
                 ScoreRun(RunnerOnThird, rbi);
             }
             RunnerOnThird = null;
-            StealCommand.RaiseCanExecuteChanged();
+            _stealCommand.RaiseCanExecuteChanged();
         }
 
         private void AdvanceRunnersOneBase(bool rbi = true)
@@ -1127,7 +1120,7 @@ namespace FantasyBaseball.UI.ViewModels
             RunnerOnThird = RunnerOnSecond;
             RunnerOnSecond = RunnerOnFirst;
             RunnerOnFirst = null;
-            StealCommand.RaiseCanExecuteChanged();
+            _stealCommand.RaiseCanExecuteChanged();
         }
 
         private void AdvanceRunnersTwoBases(bool rbi = true)
@@ -1143,7 +1136,7 @@ namespace FantasyBaseball.UI.ViewModels
             }
             RunnerOnThird = RunnerOnFirst;
             RunnerOnFirst = null;
-            StealCommand.RaiseCanExecuteChanged();
+            _stealCommand.RaiseCanExecuteChanged();
         }
 
         private void AdvanceRunnersThreeBases(bool rbi = true)
@@ -1163,7 +1156,7 @@ namespace FantasyBaseball.UI.ViewModels
                 ScoreRun(RunnerOnFirst, rbi);
                 RunnerOnFirst = null;
             }
-            StealCommand.RaiseCanExecuteChanged();
+            _stealCommand.RaiseCanExecuteChanged();
         }
 
         private void ScoreRun(BatterViewModel runner, bool rbi = true)
