@@ -76,5 +76,12 @@ namespace FantasyBaseball.UI.Views
             var awayTeam = awayTeamBullpenEditorViewModel.Team;
             viewModel.UpdateAwayTeamBullpen(awayTeam);
         }
+
+        private void returnToHomeScreenButton_Click(object sender, RoutedEventArgs e)
+        {
+            var main = new MainView(ViewModelFactory);
+            main.Show();
+            Close();
+        }
     }
 }

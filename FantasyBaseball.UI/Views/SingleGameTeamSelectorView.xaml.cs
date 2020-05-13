@@ -1,4 +1,5 @@
-﻿using FantasyBaseball.UI.ViewModels;
+﻿using FantasyBaseball.Entities.Models;
+using FantasyBaseball.UI.ViewModels;
 using System.Windows;
 
 namespace FantasyBaseball.UI.Views
@@ -10,15 +11,20 @@ namespace FantasyBaseball.UI.Views
     {
         private IViewModelFactory ViewModelFactory { get; set; }
 
-        public SingleGameTeamSelectorView(IViewModelFactory viewModelFactory, bool generateRandomTeams = false)
+        public SingleGameTeamSelectorView(IViewModelFactory viewModelFactory)
+        {
+            InitializeComponent();
+            ViewModelFactory = viewModelFactory;
+            DataContext = viewModelFactory.GetViewModel(GetType().ToString());
+        }
+
+        public SingleGameTeamSelectorView(IViewModelFactory viewModelFactory, TeamViewModel homeTeam, TeamViewModel awayTeam)
         {
             InitializeComponent();
             ViewModelFactory = viewModelFactory;
             var vm = (SingleGameTeamSelectorViewModel)viewModelFactory.GetViewModel(GetType().ToString());
-            if (generateRandomTeams)
-            {
-                vm.GenerateRandomTeams();
-            }
+            vm.HomeTeam = homeTeam;
+            vm.AwayTeam = awayTeam;
             DataContext = vm;
         }
 

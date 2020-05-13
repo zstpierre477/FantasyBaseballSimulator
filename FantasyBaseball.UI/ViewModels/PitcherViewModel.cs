@@ -57,8 +57,8 @@ namespace FantasyBaseball.UI.ViewModels
         public short Strikeouts { get; set; }
         
         public double OpponentBattingAverage { get; set; }
-        
-        public double EarnedRunAverage { get; set; }
+
+        public double EarnedRunAverage => Math.Round(((double)EarnedRuns * 9) / IP, 2);
                 
         public short HitBatters { get; set; }
                 
@@ -89,7 +89,6 @@ namespace FantasyBaseball.UI.ViewModels
             Walks = playerStint.PitchingStint.Walks;
             Strikeouts = playerStint.PitchingStint.Strikeouts;
             OpponentBattingAverage = playerStint.PitchingStint.OpponentBattingAverage ?? .000;
-            EarnedRunAverage = playerStint.PitchingStint.EarnedRunAverage ?? .000;
             HitBatters = playerStint.PitchingStint.HitBatters;
             RaisePropertyChanged("PlayerInfoString");
             RemovedFromGame = false;

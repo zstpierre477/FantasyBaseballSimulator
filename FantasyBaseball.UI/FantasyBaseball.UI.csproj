@@ -10,6 +10,7 @@
     <None Remove="Images\fenway-top-view.jpg" />
     <None Remove="Images\fenway.jpg" />
     <None Remove="Images\PlayBall.png" />
+    <None Remove="Images\world-series-trophy.jpg" />
     <None Remove="ViewModels\xr4zqm1j.xkv~" />
   </ItemGroup>
 
@@ -27,6 +28,13 @@
     <Resource Include="Images\fenway-top-view.jpg" />
     <Resource Include="Images\fenway.jpg" />
     <Resource Include="Images\PlayBall.png" />
+    <Resource Include="Images\world-series-trophy.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Images\loading.GIF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

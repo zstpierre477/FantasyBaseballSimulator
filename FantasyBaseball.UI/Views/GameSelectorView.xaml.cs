@@ -20,7 +20,12 @@ namespace FantasyBaseball.UI.Views
         {
             var singleGame = new SingleGameSetupView(ViewModelFactory);
             singleGame.Show();
-            this.Close();
+            Close();
+        }
+
+        private void quitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

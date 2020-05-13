@@ -20,11 +20,13 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Select Game Mode" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" />
         <Button x:Name="SingleGameButton" Click="SingleGameButton_Click" Content="Single Game" FontSize="28" Grid.Column="1" Grid.Row="2" Margin="5 5 5 5" Background="LightGray"/>
         <Button x:Name="FranchiseButton" Grid.Column="1" Grid.Row="3" Margin="5 5 5 5" Background="LightGray">
             <TextBlock Text="Franchise Game (Not Implemented)" FontSize="28" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Button>
+        <Button x:Name="quitButton" Content="Quit" FontSize="28" Grid.Column="1" Grid.Row="4" Click="quitButton_Click" Margin="5 5 5 5"/>
     </Grid>
 </Window>

@@ -491,6 +491,27 @@ namespace FantasyBaseball.UI.ViewModels
             set { _batterColor = value; RaisePropertyChanged("BatterColor"); }
         }
 
+        private string _winnerColor { get; set; }
+        public string WinnerColor
+        {
+            get { return _winnerColor; }
+            set { _winnerColor = value; RaisePropertyChanged("WinnerColor"); }
+        }
+
+        private string _winnerMessage { get; set; }
+        public string WinnerMessage
+        {
+            get { return _winnerMessage; }
+            set { _winnerMessage = value; RaisePropertyChanged("WinnerMessage"); }
+        }
+
+        private string _winnerMessageVisibility { get; set; }
+        public string WinnerMessageVisibility
+        {
+            get { return _winnerMessageVisibility; }
+            set { _winnerMessageVisibility = value; RaisePropertyChanged("WinnerMessageVisibility"); }
+        }
+
         private DelegateCommand _swingCommand { get; set; }
         public DelegateCommand SwingCommand
         {
@@ -532,6 +553,7 @@ namespace FantasyBaseball.UI.ViewModels
             PlayByPlay = new ObservableCollection<PlayByPlayViewModel>();
             FielderColor = "LightSalmon";
             BatterColor = "MediumPurple";
+            WinnerMessageVisibility = "Hidden";
             GameOver = false;
             IsTopOfInning = true;
             Inning = 1;
@@ -1301,11 +1323,19 @@ namespace FantasyBaseball.UI.ViewModels
             GameOver = true;
             if (HomeTeamTotalRuns > AwayTeamTotalRuns)
             {
-                InsertToPlayByPlay($"{HomeTeam.TeamName} Win!");
+                var message = $"{HomeTeam.TeamName} Win!";
+                InsertToPlayByPlay(message);
+                WinnerColor = "LightSalmon";
+                WinnerMessage = message;
+                WinnerMessageVisibility = "Visible";
             }
             else
             {
-                InsertToPlayByPlay($"{AwayTeam.TeamName} Win!");
+                var message = $"{AwayTeam.TeamName} Win!";
+                InsertToPlayByPlay(message);
+                WinnerColor = "MediumPurple";
+                WinnerMessage = message;
+                WinnerMessageVisibility = "Visible";
             }
 
             StealCommand.RaiseCanExecuteChanged();

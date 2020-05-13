@@ -218,7 +218,7 @@ namespace FantasyBaseball.UI.ViewModels
             var allPositions = "";
             foreach (var f in PlayerStint.FieldingStints)
             {
-                allPositions += f.Position + ": " + f.FieldingPercentage;
+                allPositions += f.Position + ": " + f.FieldingPercentage + " ";
             }
             if (string.IsNullOrWhiteSpace(allPositions))
             {

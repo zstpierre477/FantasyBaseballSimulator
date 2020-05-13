@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FantasyBaseball.Entities.Models
 {
@@ -88,5 +89,8 @@ namespace FantasyBaseball.Entities.Models
         public virtual ICollection<PostseasonSeries> PostseasonSeriesLosingTeam { get; set; }
         public virtual ICollection<PostseasonSeries> PostseasonSeriesWinningTeam { get; set; }
         public virtual ICollection<Salary> Salary { get; set; }
+
+        [NotMapped]
+        public IEnumerable<PlayerStint> PlayerStints { get; set; }
     }
 }

@@ -50,5 +50,10 @@ namespace FantasyBaseball.UI.Views
             DialogResult = true;
             Close();
         }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

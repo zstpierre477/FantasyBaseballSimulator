@@ -26,10 +26,12 @@ namespace FantasyBaseball.UI.ViewModels
                     return new BatterSearchViewModel(ServiceProvider.GetService<IPlayerSearchServiceFactory>());
                 case "FantasyBaseball.UI.Views.PitcherSearchView":
                     return new PitcherSearchViewModel(ServiceProvider.GetService<IPlayerSearchServiceFactory>());
+                case "FantasyBaseball.UI.Views.SingleGameSetupView":
+                    return new SingleGameSetupViewModel(ServiceProvider.GetService<IRandomPlayerSelectorService>(), ServiceProvider.GetService<IHistoricalTeamService>());
                 case "FantasyBaseball.UI.Views.SingleGameView":
                     return new SingleGameViewModel(ServiceProvider.GetService<ISingleGameService>(), viewModels);
                 case "FantasyBaseball.UI.Views.SingleGameTeamSelectorView":
-                    return new SingleGameTeamSelectorViewModel(ServiceProvider.GetService<IRandomPlayerSelectorService>());
+                    return new SingleGameTeamSelectorViewModel();
                 case "FantasyBaseball.UI.Views.SingleGameTeamLineupEditorView":
                     return new SingleGameTeamLineupEditorViewModel((TeamViewModel)viewModels.First());
                 case "FantasyBaseball.UI.Views.SingleGameTeamBullpenEditorView":

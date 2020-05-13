@@ -27,7 +27,7 @@ namespace FantasyBaseball.UI.ViewModels
         public PitcherSearchViewModel(IPlayerSearchServiceFactory playerSearchServiceFactory)
         {
             PlayerSearchService = playerSearchServiceFactory.GetPlayerSearchService(PlayerType.Pitcher);
-            Years = new ObservableCollection<int>(Enumerable.Range(1871, 2019));
+            Years = new ObservableCollection<int>(Enumerable.Range(1871, 149));
             Year = 2019;
         }
 

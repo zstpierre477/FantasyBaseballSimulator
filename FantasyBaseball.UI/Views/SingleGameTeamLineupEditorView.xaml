@@ -53,6 +53,7 @@
                 <DataGridTextColumn Header="SLG" Binding="{Binding Path='SluggingPercentage'}"/>
                 <DataGridTextColumn Header="SB" Binding="{Binding Path='StolenBases'}"/>
                 <DataGridTextColumn Header="CS" Binding="{Binding Path='CaughtStealing'}"/>
+                <DataGridTextColumn Header="FLD PCT" Binding="{Binding Path='CurrentGamePositionFieldingPercentage'}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Bench" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -87,6 +88,7 @@
                 <DataGridTextColumn Header="SLG" Binding="{Binding Path='SluggingPercentage'}"/>
                 <DataGridTextColumn Header="SB" Binding="{Binding Path='StolenBases'}"/>
                 <DataGridTextColumn Header="CS" Binding="{Binding Path='CaughtStealing'}"/>
+                <DataGridTextColumn Header="FLD PCT" Binding="{Binding Path='AllPositionsAndFieldingPercentageString'}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="2" Grid.Column="1">

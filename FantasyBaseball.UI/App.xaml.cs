@@ -24,13 +24,15 @@ namespace FantasyBaseball.UI
 
         private void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IPlayerSearchServiceFactory, PlayerSearchServiceFactory>();
-            services.AddSingleton<IBattingStintRepository, BattingStintRepository>();
+            services.AddScoped<IViewModelFactory, ViewModelFactory>();
+            services.AddScoped<IBattingStintRepository, BattingStintRepository>();
             services.AddSingleton<IPitchingStintRepository, PitchingStintRepository>();
-            services.AddSingleton<ISingleGameService, SingleGameService>();
-            services.AddSingleton<IViewModelFactory, ViewModelFactory>();
-            services.AddSingleton<IRandomPlayerSelectorService, RandomPlayerSelectorService>();
-            services.AddSingleton<MainView>();
+            services.AddSingleton<IPlayerSearchServiceFactory, PlayerSearchServiceFactory>();
+            services.AddSingleton<ITeamRepository, TeamRepository>();
+            services.AddScoped<ISingleGameService, SingleGameService>();
+            services.AddScoped<IRandomPlayerSelectorService, RandomPlayerSelectorService>();
+            services.AddScoped<IHistoricalTeamService, HistoricalTeamService>();
+            services.AddTransient<MainView>();
         }
 
         private void OnStartup(object sender, StartupEventArgs e)

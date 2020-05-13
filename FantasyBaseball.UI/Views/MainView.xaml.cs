@@ -20,7 +20,7 @@ namespace FantasyBaseball.UI.Views
         private void PlayBallButton_Click(object sender, RoutedEventArgs e)
         {
             var gameSelectorWindow = new GameSelectorView(ViewModelFactory);
-            gameSelectorWindow.ShowDialog();
+            gameSelectorWindow.Show();
             Close();
         }
     }
