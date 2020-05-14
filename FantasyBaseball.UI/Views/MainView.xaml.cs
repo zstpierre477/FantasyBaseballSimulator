@@ -16,7 +16,14 @@ namespace FantasyBaseball.UI.Views
         {
             InitializeComponent();
             ViewModelFactory = viewModelFactory;
-            pageContentFrame.Source = new HomeView(viewModelFactory);
+        }
+
+        private void PlayBallButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            var gameSelectorWindow = new GameSelectorView(ViewModelFactory);
+            gameSelectorWindow.Show();
+            Close();
         }
     }
 }
