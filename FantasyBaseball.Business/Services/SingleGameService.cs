@@ -301,6 +301,11 @@ namespace FantasyBaseball.Business.Services
                 catcher = FieldingStintHelperFunctions.CreateFieldingStintForPlayerOutOfPosition(PositionType.Catcher);
             }
 
+            if (catcher.InningsPlayedOuts == 0)
+            {
+                catcher.InningsPlayedOuts = (short)(catcher.Games * 8 * 3);
+            }
+
             var successThreshold = ((double)catcher.PassedBalls / (catcher.InningsPlayedOuts*2))* 1000;
             return randomResult <= successThreshold;
         }

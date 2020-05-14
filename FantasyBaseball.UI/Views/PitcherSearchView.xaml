@@ -44,6 +44,7 @@
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
                 <DataGridTextColumn Header="Year" Binding="{Binding Path='Year'}"/>
                 <DataGridTextColumn Header="Team" Binding="{Binding Path='TeamShortName'}"/>
+                <DataGridTextColumn Header="Throws" Binding="{Binding Path='ThrowingHand'}"/>
                 <DataGridTextColumn Header="G" Binding="{Binding Path='Games'}"/>
                 <DataGridTextColumn Header="GS" Binding="{Binding Path='GamesStarted'}"/>
                 <DataGridTextColumn Header="IP" Binding="{Binding Path='IP'}"/>

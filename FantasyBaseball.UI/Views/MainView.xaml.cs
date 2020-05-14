@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using FantasyBaseball.UI.ViewModels;
 
 namespace FantasyBaseball.UI.Views
@@ -15,13 +16,7 @@ namespace FantasyBaseball.UI.Views
         {
             InitializeComponent();
             ViewModelFactory = viewModelFactory;
-        }
-
-        private void PlayBallButton_Click(object sender, RoutedEventArgs e)
-        {
-            var gameSelectorWindow = new GameSelectorView(ViewModelFactory);
-            gameSelectorWindow.Show();
-            Close();
+            pageContentFrame.Source = new HomeView(viewModelFactory);
         }
     }
 }

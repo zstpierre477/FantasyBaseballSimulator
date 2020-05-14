@@ -564,5 +564,12 @@ namespace FantasyBaseball.UI.Views
                 vm.AwayTeam.ReliefPitcher7 = pitcher;
             }
         }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            var setupdWindow = new SingleGameSetupView(ViewModelFactory);
+            setupdWindow.Show();
+            Close();
+        }
     }
 }

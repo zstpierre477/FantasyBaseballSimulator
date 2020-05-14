@@ -51,21 +51,21 @@ namespace FantasyBaseball.UI.ViewModels
         public BatterViewModel LeftFielder
         {
             get { return _leftFielder; }
-            set { _leftFielder = value; RaisePropertyChanged("LeftFielder"); _leftFielder.CurrentGamePosition = "LF"; }
+            set { _leftFielder = value; RaisePropertyChanged("LeftFielder"); if (_leftFielder != null) { _leftFielder.CurrentGamePosition = "LF"; } }
         }
 
         private BatterViewModel _centerFielder { get; set; }
         public BatterViewModel CenterFielder
         {
             get { return _centerFielder; }
-            set { _centerFielder = value; RaisePropertyChanged("CenterFielder"); _centerFielder.CurrentGamePosition = "CF"; }
+            set { _centerFielder = value; RaisePropertyChanged("CenterFielder"); if (_centerFielder != null) { _centerFielder.CurrentGamePosition = "CF"; } }
         }
 
         private BatterViewModel _rightFielder { get; set; }
         public BatterViewModel RightFielder
         {
             get { return _rightFielder; }
-            set { _rightFielder = value; RaisePropertyChanged("RightFielder"); _rightFielder.CurrentGamePosition = "RF"; }
+            set { _rightFielder = value; RaisePropertyChanged("RightFielder"); if (_rightFielder != null) { _rightFielder.CurrentGamePosition = "RF"; } }
         }
 
         private BatterViewModel _designatedHitter { get; set; }

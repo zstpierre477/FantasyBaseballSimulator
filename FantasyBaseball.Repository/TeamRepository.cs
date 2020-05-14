@@ -55,14 +55,10 @@ namespace FantasyBaseball.Repository
                              Team = t
                          })).ToList();
 
-                var team = new Team
-                {
-                    Name = q.First().Team.Name,
-                    Year = q.First().Team.Year,
-                    BattingStint = q.GroupBy(s => s.BattingStint.BattingStintId).Select(s => s.First().BattingStint).ToList(),
-                    PitchingStint = q.GroupBy(s => s.PitchingStint.PitchingStintId).Select(s => s.First().PitchingStint).ToList(),
-                    FieldingStint = q.GroupBy(s => s.FieldingStint.FieldingStintId).Select(s => s.First().FieldingStint).ToList(),
-                };
+                var team = q.First().Team;
+                team.BattingStint = q.GroupBy(s => s.BattingStint.BattingStintId).Select(s => s.First().BattingStint).ToList();
+                team.PitchingStint = q.GroupBy(s => s.PitchingStint.PitchingStintId).Select(s => s.First().PitchingStint).ToList();
+                team.FieldingStint = q.GroupBy(s => s.FieldingStint.FieldingStintId).Select(s => s.First().FieldingStint).ToList();
 
                 team.PlayerStints = q.GroupBy(p => p.Person.PersonId).Select(p => p.First()).Select(p => new PlayerStint
                 {

@@ -12,10 +12,13 @@ namespace FantasyBaseball.UI.Views
     {
         private IViewModelFactory ViewModelFactory { get; set; }
 
+        private SingleGameTeamSelectorViewModel TeamSetup { get; set; }
+
         public SingleGameView(IViewModelFactory viewModelFactory, SingleGameTeamSelectorViewModel singleGameTeamSelectorViewModel)
         {
             InitializeComponent();
             ViewModelFactory = viewModelFactory;
+            TeamSetup = singleGameTeamSelectorViewModel;
             var awayTeam = singleGameTeamSelectorViewModel.AwayTeam;
             var awayTeamLineupEditor = new SingleGameTeamLineupEditorView(viewModelFactory, awayTeam);
             awayTeamLineupEditor.ShowDialog();
@@ -81,6 +84,13 @@ namespace FantasyBaseball.UI.Views
         {
             var main = new MainView(ViewModelFactory);
             main.Show();
+            Close();
+        }
+
+        private void playAgainButton_Click(object sender, RoutedEventArgs e)
+        {
+            var newGame = new SingleGameView(ViewModelFactory, TeamSetup);
+            newGame.Show();
             Close();
         }
     }

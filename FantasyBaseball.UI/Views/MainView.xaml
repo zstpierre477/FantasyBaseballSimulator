@@ -7,37 +7,14 @@
         mc:Ignorable="d"
         d:DesignHeight="500" d:DesignWidth="850"
         Title="Fantasy Baseball Simulator">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Panel.ZIndex="1" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" FontWeight="Bold">
-            <TextBlock.Text>
-                Fantasy Baseball Simulator
-            </TextBlock.Text>
-            <TextBlock.Effect>
-                <DropShadowEffect ShadowDepth="5" BlurRadius="5" Color="DarkSlateGray"/>
-            </TextBlock.Effect>
-        </TextBlock>
-        <Image Source="/Images/fenway.jpg" Stretch="Fill" Grid.ColumnSpan="7" Grid.RowSpan="8"  />
-        <Button x:Name="PlayBallButton" Click="PlayBallButton_Click" Grid.Column="3" Grid.Row="3" Background="Transparent" Grid.RowSpan="2">
-            <Image Source="/Images/PlayBall.png"/>
-        </Button>
-    </Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open"/>
+				<MenuItem Header="_Close"/>
+				<MenuItem Header="_Save"/>
+			</MenuItem>
+		</Menu>
+        <Frame x:Name="pageContentFrame"/>
+    </DockPanel>
 </Window>

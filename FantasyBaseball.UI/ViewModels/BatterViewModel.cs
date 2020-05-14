@@ -63,6 +63,20 @@ namespace FantasyBaseball.UI.ViewModels
 
         public short SacrificeFlies { get; set; }
 
+        public Handedness BattingHandedness { get; set; }
+
+        private string _battingHand { get; set; }
+        public string BattingHand
+        {
+            get { return _battingHand; }
+            set
+            {
+                _battingHand = value; RaisePropertyChanged("BattingHand");
+                BattingHandedness = HandednessHelperFunctions.StringToHandedness(_battingHand);
+                RaisePropertyChanged("BattingHandedness");
+            }
+        }
+
         public double BattingAverage => AtBats > 0 ? Math.Round(Hits / (double)AtBats, 3) : .000;
 
         public double OnBasePercentage => AtBats > 0 ? Math.Round((Hits + Walks + HitByPitch) / (double)(AtBats + Walks + HitByPitch + SacrificeFlies), 3) : .000;
@@ -91,6 +105,7 @@ namespace FantasyBaseball.UI.ViewModels
             Walks = playerStint.BattingStint.Walks;
             HitByPitch = playerStint.BattingStint.HitByPitch;
             SacrificeFlies = playerStint.BattingStint.SacrificeFlies;
+            BattingHand = playerStint.Person.Bats;
             RaisePropertyChanged("PlayerInfoString");
             RemovedFromGame = false;
         }
@@ -165,10 +180,23 @@ namespace FantasyBaseball.UI.ViewModels
             }
         }
 
-        private double _currentGamePositionFieldingPercentage => PlayerStint.FieldingStints.SingleOrDefault(s => s.PositionType == CurrentGamePositionType)?.FieldingPercentage ?? .000;
+        private double _currentGamePositionFieldingPercentage => GetCurrentGamePositionFieldingPercentage();
         public double CurrentGamePositionFieldingPercentage
         {
             get { return _currentGamePositionFieldingPercentage; }
+        }
+
+        private double GetCurrentGamePositionFieldingPercentage()
+        {
+            var fp = PlayerStint.FieldingStints.SingleOrDefault(s => s.PositionType == CurrentGamePositionType)?.FieldingPercentage;
+            if (fp == null) 
+            {
+                if (CurrentGamePositionType == PositionType.LeftFielder || CurrentGamePositionType == PositionType.CenterFielder || CurrentGamePositionType == PositionType.RightFielder)
+                {
+                    fp = PlayerStint.FieldingStints.SingleOrDefault(s => s.PositionType == PositionType.OutFielder)?.FieldingPercentage;
+                }
+            }
+            return fp ?? .000;
         }
 
         private int? _currentGameLineupIndex { get; set; }

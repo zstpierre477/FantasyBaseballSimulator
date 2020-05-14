@@ -512,6 +512,41 @@ namespace FantasyBaseball.UI.ViewModels
             set { _winnerMessageVisibility = value; RaisePropertyChanged("WinnerMessageVisibility"); }
         }
 
+        private ObservableCollection<InfieldShiftType> _infieldShiftTypes { get; set; }
+        public ObservableCollection<InfieldShiftType> InfieldShiftTypes 
+        { 
+            get { return _infieldShiftTypes; }
+            set { _infieldShiftTypes = value; RaisePropertyChanged("InfieldShiftTypes");}
+        }
+
+        private ObservableCollection<OutfieldShiftType> _outfieldShiftTypes { get; set; }
+        public ObservableCollection<OutfieldShiftType> OutfieldShiftTypes
+        {
+            get { return _outfieldShiftTypes; }
+            set { _outfieldShiftTypes = value; RaisePropertyChanged("OutfieldShiftTypes"); }
+        }
+
+        private InfieldShiftType _selectedInfieldShiftType { get; set; }
+        public InfieldShiftType SelectedInfieldShiftType
+        {
+            get { return _selectedInfieldShiftType; }
+            set { _selectedInfieldShiftType = value; RaisePropertyChanged("SelectedInfieldShiftType"); }
+        }
+
+        private OutfieldShiftType _selectedOutfieldShiftType { get; set; }
+        public OutfieldShiftType SelectedOutfieldShiftType
+        {
+            get { return _selectedOutfieldShiftType; }
+            set { _selectedOutfieldShiftType = value; RaisePropertyChanged("SelectedOutfieldShiftType"); }
+        }
+
+        private int _batterGridColumn => HandednessHelperFunctions.DetermineBattingHandednessFromPitchingHandedness(AtPlateBatter.BattingHandedness, OnFieldPitcher.ThrowingHandedness)
+            == Handedness.Left ? 2 : 1; 
+        public int BatterGridColumn
+        {
+            get { return _batterGridColumn; }
+        }
+
         private DelegateCommand _swingCommand { get; set; }
         public DelegateCommand SwingCommand
         {
@@ -558,6 +593,10 @@ namespace FantasyBaseball.UI.ViewModels
             IsTopOfInning = true;
             Inning = 1;
             SetFieldingTeam();
+            SelectedInfieldShiftType = InfieldShiftType.None;
+            SelectedOutfieldShiftType = OutfieldShiftType.None;
+            InfieldShiftTypes = new ObservableCollection<InfieldShiftType>((IEnumerable<InfieldShiftType>)Enum.GetValues(SelectedInfieldShiftType.GetType()));
+            OutfieldShiftTypes = new ObservableCollection<OutfieldShiftType>((IEnumerable<OutfieldShiftType>)Enum.GetValues(SelectedOutfieldShiftType.GetType()));
         }
 
         public void UpdateAwayTeamLineup(TeamViewModel team)
@@ -774,11 +813,13 @@ namespace FantasyBaseball.UI.ViewModels
             {
                 AwayTeamLineupIndex++;
                 AtPlateBatter = AwayTeam.Lineup.ElementAt(AwayTeamLineupIndex);
-                return;
             }
-            HomeTeamLineupIndex++;
-            AtPlateBatter = HomeTeam.Lineup.ElementAt(HomeTeamLineupIndex);
-            return;
+            else
+            {
+                HomeTeamLineupIndex++;
+                AtPlateBatter = HomeTeam.Lineup.ElementAt(HomeTeamLineupIndex);
+            }
+            RaisePropertyChanged("BatterGridColumn");
         }
 
         private void ProcessSingle()
@@ -911,6 +952,7 @@ namespace FantasyBaseball.UI.ViewModels
             OnFieldCenterFielder = fieldingTeam.Lineup.Single(l => l.CurrentGamePositionType == PositionType.CenterFielder);
             OnFieldRightFielder = fieldingTeam.Lineup.Single(l => l.CurrentGamePositionType == PositionType.RightFielder);
             AtPlateBatter = battingTeam.Lineup.ElementAt(index);
+            RaisePropertyChanged("BatterGridColumn");
         }
 
         private void UpdateScoreboard()

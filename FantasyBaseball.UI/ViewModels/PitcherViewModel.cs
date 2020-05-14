@@ -1,4 +1,6 @@
-﻿using FantasyBaseball.Entities.Models;
+﻿using FantasyBaseball.Entities.Enums;
+using FantasyBaseball.Entities.Helpers;
+using FantasyBaseball.Entities.Models;
 using GalaSoft.MvvmLight;
 using System;
 
@@ -32,6 +34,20 @@ namespace FantasyBaseball.UI.ViewModels
         {
             get { return _teamShortName; }
             set { _teamShortName = value; RaisePropertyChanged("PlayerInfoString"); RaisePropertyChanged("TeamShortName"); }
+        }
+
+        public Handedness ThrowingHandedness { get; set; }
+
+        private string _throwingHand { get; set; }
+        public string ThrowingHand
+        {
+            get { return _throwingHand; }
+            set
+            {
+                _throwingHand = value; RaisePropertyChanged("ThrowingHand");
+                ThrowingHandedness = HandednessHelperFunctions.StringToHandedness(_throwingHand);
+                RaisePropertyChanged("ThrowingHandedness");
+            }
         }
 
         public short Wins { get; set; }
@@ -90,6 +106,7 @@ namespace FantasyBaseball.UI.ViewModels
             Strikeouts = playerStint.PitchingStint.Strikeouts;
             OpponentBattingAverage = playerStint.PitchingStint.OpponentBattingAverage ?? .000;
             HitBatters = playerStint.PitchingStint.HitBatters;
+            ThrowingHand = playerStint.Person.Throws;
             RaisePropertyChanged("PlayerInfoString");
             RemovedFromGame = false;
         }

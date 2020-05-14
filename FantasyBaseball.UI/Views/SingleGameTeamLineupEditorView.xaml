@@ -40,6 +40,7 @@
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
                 <DataGridTextColumn Header="Year" Binding="{Binding Path='Year'}"/>
                 <DataGridTextColumn Header="Team" Binding="{Binding Path='TeamShortName'}"/>
+                <DataGridTextColumn Header="Bats" Binding="{Binding Path='BattingHand'}"/>
                 <DataGridTextColumn Header="POS" Binding="{Binding Path='CurrentGamePosition'}"/>
                 <DataGridTextColumn Header="G" Binding="{Binding Path='Games'}"/>
                 <DataGridTextColumn Header="AB" Binding="{Binding Path='AtBats'}"/>
@@ -75,6 +76,7 @@
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
                 <DataGridTextColumn Header="Year" Binding="{Binding Path='Year'}"/>
                 <DataGridTextColumn Header="Team" Binding="{Binding Path='TeamShortName'}"/>
+                <DataGridTextColumn Header="Bats" Binding="{Binding Path='BattingHand'}"/>
                 <DataGridTextColumn Header="POS" Binding="{Binding Path='AllPositionsString'}"/>
                 <DataGridTextColumn Header="G" Binding="{Binding Path='Games'}"/>
                 <DataGridTextColumn Header="AB" Binding="{Binding Path='AtBats'}"/>
@@ -99,7 +101,7 @@
             <Button x:Name="moveUpButton" Command="{Binding MoveUpCommand}" Grid.Column="0" Grid.Row="0" Content="Move Up" Margin="5 5 5 5"/>
             <Button x:Name="moveDownButton" Command="{Binding MoveDownCommand}" Grid.Column="0" Grid.Row="1" Content="Move Down" Margin="5 5 5 5"/>
         </Grid>
-        <Button x:Name="closeButton" Grid.Column="1" Grid.Row="1" Content="Ready" Margin="5 5 5 5" Click="closeButton_Click"/>
+        <Button x:Name="closeButton" Grid.Column="1" Grid.Row="0"  Grid.RowSpan="2" Content="Ready" Margin="5 5 5 5" Click="closeButton_Click"/>
         <Button x:Name="switchInLineupButton" Command="{Binding SwitchInLineupCommand}" Grid.Column="1" Grid.Row="4" Content="Switch In Lineup" Margin="5 5 5 5"/>
     </Grid>
 </Window>

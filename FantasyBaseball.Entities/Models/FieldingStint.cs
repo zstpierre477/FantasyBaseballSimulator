@@ -1,5 +1,6 @@
 ﻿using FantasyBaseball.Entities.Enums;
 using FantasyBaseball.Entities.Helpers;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FantasyBaseball.Entities.Models
@@ -13,7 +14,7 @@ namespace FantasyBaseball.Entities.Models
         public string TeamAbbreviation { get; set; }
         public int? TeamId { get; set; }
         public int? LeagueId { get; set; }
-        private string _position;
+        private string _position { get; set; }
         public string Position
         {
             get { return _position; }
@@ -41,7 +42,7 @@ namespace FantasyBaseball.Entities.Models
         public virtual Team Team { get; set; }
 
         [NotMapped]
-        public double FieldingPercentage => ((double)Putouts + Assists) / (Putouts + Assists + Errors);
+        public double FieldingPercentage => (Putouts + Assists + Errors) != 0 ? Math.Round(((double)Putouts + Assists) / (Putouts + Assists + Errors), 3) : .000;
 
         [NotMapped]
         public PositionType PositionType { get; set; }

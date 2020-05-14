@@ -42,7 +42,7 @@ namespace FantasyBaseball.Repository
             }
         }
 
-        public IEnumerable<PlayerStint> GetBattingStintByPositionYearAndMinimumGamesPlayed(string position, int year, int minimumGamesPlayed)
+        public IEnumerable<PlayerStint> GetBattingStintByPositionYearMinimumGamesPlayedAndMinimumAtBats(string position, int year, int minimumGamesPlayed, int minimumAtBats)
         {
             using (var db = new FantasyBaseballDbContext())
             {
@@ -51,6 +51,7 @@ namespace FantasyBaseball.Repository
                          join b in db.BattingStint.AsNoTracking()
                          on new { f.PersonId, f.Stint, f.Year }
                          equals new { b.PersonId, b.Stint, b.Year }
+                         where b.AtBats >= minimumAtBats
                          join p in db.Person.AsNoTracking()
                          on b.PersonId equals p.PersonId
                          join t in db.Team.AsNoTracking()
