@@ -62,7 +62,7 @@ namespace FantasyBaseball.UI.ViewModels
             else
             {
                 Team.Bullpen.RemoveAt(Team.CurrentPitcher.BullpenIndex.Value);
-                Team.UnavailablePlayers.Add(currentPitcher);
+                Team.UsedPitchers.Add(currentPitcher);
             }
             Team.CurrentPitcher.BullpenIndex = null;
             RaisePropertyChanged("CurrentPitcher");

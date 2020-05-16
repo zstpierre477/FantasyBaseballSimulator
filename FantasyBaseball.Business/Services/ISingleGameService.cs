@@ -5,9 +5,12 @@ namespace FantasyBaseball.Business.Services
 {
     public interface ISingleGameService
     {
-        bool GetStealResult(BattingStint runner, FieldingStint catcher);
-        BattingResult GetBattingResult(BattingStint batter, PitchingStint pitcher);
-        public FieldingResult GetFieldingResult(FieldingStint fielder, PositionType positionType);
-        public bool GetIsPassedBallResult(FieldingStint fielder);
+        bool GetStealResult(BattingStint runner, FieldingStint catcher, BaseballBase baseballBase);
+        BattingResult GetBattingResult(BattingStint batter, PitchingStint pitcher, bool isPitcherTired);
+        FieldingResult GetFieldingResult(FieldingStint fielder, PositionType positionType, InfieldShiftType infieldShiftType, OutfieldShiftType outfieldShiftType);
+        bool GetIsPassedBallResult(FieldingStint fielder);
+        FieldingResult GetSacrificeBuntResult(BattingStint batter);
+        FieldingResult GetBuntForAHitResult(BattingStint batter);
+        bool GetHitAndRunResult(BattingStint batter);
     }
 }

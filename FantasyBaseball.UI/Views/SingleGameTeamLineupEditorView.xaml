@@ -18,6 +18,8 @@
             <RowDefinition Height="10*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <Label Content="{Binding Team.TeamName}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Label Content="Batting Order" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -91,6 +93,21 @@
                 <DataGridTextColumn Header="SB" Binding="{Binding Path='StolenBases'}"/>
                 <DataGridTextColumn Header="CS" Binding="{Binding Path='CaughtStealing'}"/>
                 <DataGridTextColumn Header="FLD PCT" Binding="{Binding Path='AllPositionsAndFieldingPercentageString'}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Used Batters" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <DataGrid Grid.Row="6" x:Name="usedPitchersGrid" CanUserAddRows="False" AutoGenerateColumns="False" Margin="5 5 5 5" ItemsSource="{Binding Team.UsedBatters, Mode=OneWay}" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
+                <DataGridTextColumn Header="Bats" Binding="{Binding Path='BattingHand'}"/>
+                <DataGridTextColumn Header="AB" Binding="{Binding Path='CurrentGameAtBats'}"/>
+                <DataGridTextColumn Header="H" Binding="{Binding Path='CurrentGameHits'}"/>
+                <DataGridTextColumn Header="BB" Binding="{Binding Path='CurrentGameWalks'}"/>
+                <DataGridTextColumn Header="HR" Binding="{Binding Path='CurrentGameHomeRuns'}"/>
+                <DataGridTextColumn Header="R" Binding="{Binding Path='CurrentGameRuns'}"/>
+                <DataGridTextColumn Header="RBI" Binding="{Binding Path='CurrentGameRunsBattedIn'}"/>
+                <DataGridTextColumn Header="SB" Binding="{Binding Path='CurrentGameStolenBases'}"/>
+                <DataGridTextColumn Header="E" Binding="{Binding Path='CurrentGameErrors'}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="2" Grid.Column="1">

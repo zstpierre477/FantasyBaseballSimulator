@@ -27,7 +27,7 @@ namespace FantasyBaseball.Business.Services
             string position;
             if (positionType == PositionType.DesignatedHitter)
             {
-                var pos = random.Next(1, 10);
+                var pos = random.Next(2, 10);
                 position = PositionTypeHelperFunctions.NumberToPositionAbbreviationString(pos);
             }
             else if (positionType == PositionType.CornerInfielder)

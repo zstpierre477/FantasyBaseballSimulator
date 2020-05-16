@@ -120,5 +120,11 @@ namespace FantasyBaseball.Entities.Helpers
                     return "None";
             }
         }
+
+        public static bool IsOutFieldPosition(this PositionType positionType)
+        {
+            return positionType == PositionType.LeftFielder || positionType == PositionType.CenterFielder ||
+                positionType == PositionType.RightFielder || positionType == PositionType.OutFielder;
+        }
     }
 }

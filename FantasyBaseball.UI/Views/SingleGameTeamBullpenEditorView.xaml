@@ -17,7 +17,9 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="12*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
         <Label Content="{Binding Team.TeamName}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Label Content="Current Pitcher" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -84,6 +86,19 @@
                 <DataGridTextColumn Header="SV" Binding="{Binding Path='Saves'}"/>
                 <DataGridTextColumn Header="ERA" Binding="{Binding Path='EarnedRunAverage'}"/>
                 <DataGridTextColumn Header="WHIP" Binding="{Binding Path='WHIP'}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Used Pitchers" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <DataGrid Grid.Row="6" x:Name="usedPitchersGrid" CanUserAddRows="False" AutoGenerateColumns="False" Margin="5 5 5 5" ItemsSource="{Binding Team.UsedPitchers, Mode=OneWay}" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding Path='LastName'}"/>
+                <DataGridTextColumn Header="Throws" Binding="{Binding Path='ThrowingHand'}"/>
+                <DataGridTextColumn Header="IP" Binding="{Binding Path='CurrentGameInningsPitched'}"/>
+                <DataGridTextColumn Header="K" Binding="{Binding Path='CurrentGameStrikeouts'}"/>
+                <DataGridTextColumn Header="H" Binding="{Binding Path='CurrentGameHits'}"/>
+                <DataGridTextColumn Header="BB" Binding="{Binding Path='CurrentGameWalks'}"/>
+                <DataGridTextColumn Header="R" Binding="{Binding Path='CurrentGameRuns'}"/>
+                <DataGridTextColumn Header="E" Binding="{Binding Path='CurrentGameErrors'}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="closeButton" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Content="Ready" Margin="5 5 5 5" Click="closeButton_Click"/>

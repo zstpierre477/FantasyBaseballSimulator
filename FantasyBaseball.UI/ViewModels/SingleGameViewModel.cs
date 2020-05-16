@@ -2,6 +2,7 @@
 using FantasyBaseball.Entities.Enums;
 using FantasyBaseball.Entities.Helpers;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.VisualStudio.PlatformUI;
 using System;
 using System.Collections.Generic;
@@ -554,11 +555,46 @@ namespace FantasyBaseball.UI.ViewModels
             set { _swingCommand = value; }
         }
 
-        private DelegateCommand _stealCommand { get; set; }
-        public DelegateCommand StealCommand
+        private DelegateCommand _stealSecondCommand { get; set; }
+        public DelegateCommand StealSecondCommand
         {
-            get { return _stealCommand; }
-            set { _stealCommand = value; }
+            get { return _stealSecondCommand; }
+            set { _stealSecondCommand = value; }
+        }
+
+        private DelegateCommand _stealThirdCommand { get; set; }
+        public DelegateCommand StealThirdCommand
+        {
+            get { return _stealThirdCommand; }
+            set { _stealThirdCommand = value; }
+        }
+
+        private DelegateCommand _stealHomeCommand { get; set; }
+        public DelegateCommand StealHomeCommand
+        {
+            get { return _stealHomeCommand; }
+            set { _stealHomeCommand = value; }
+        }
+
+        private DelegateCommand _hitAndRunCommand { get; set; }
+        public DelegateCommand HitAndRunCommand
+        {
+            get { return _hitAndRunCommand; }
+            set { _hitAndRunCommand = value; }
+        }
+
+        private DelegateCommand _sacrificeBuntCommand { get; set; }
+        public DelegateCommand SacrificeBuntCommand
+        {
+            get { return _sacrificeBuntCommand; }
+            set { _sacrificeBuntCommand = value; }
+        }
+
+        private DelegateCommand _buntForAHitCommand { get; set; }
+        public DelegateCommand BuntForAHitCommand
+        {
+            get { return _buntForAHitCommand; }
+            set { _buntForAHitCommand = value; }
         }
 
         private DelegateCommand _intentionalWalkCommand { get; set; }
@@ -582,8 +618,13 @@ namespace FantasyBaseball.UI.ViewModels
             SingleGameService = singleGameService;
             HomeTeam = (TeamViewModel)viewModels.First();
             AwayTeam = (TeamViewModel)viewModels.ElementAt(1);
-            SwingCommand = new DelegateCommand(ProcessSwingResult, IsGameNotOver);
-            StealCommand = new DelegateCommand(GetStealResult, CanSteal);
+            SwingCommand = new DelegateCommand(() => ProcessSwingResult(), IsGameNotOver);
+            StealSecondCommand = new DelegateCommand(StealSecond, CanStealSecond);
+            StealThirdCommand = new DelegateCommand(StealThird, CanStealThird);
+            StealHomeCommand = new DelegateCommand(StealHome, CanStealHome);
+            HitAndRunCommand = new DelegateCommand(HitAndRun, CanMoveRunner);
+            SacrificeBuntCommand = new DelegateCommand(SacrificeBunt, CanMoveRunner);
+            BuntForAHitCommand = new DelegateCommand(BuntForAHit);
             IntentionalWalkCommand = new DelegateCommand(ProcessIntentionalWalk, IsGameNotOver);
             PlayByPlay = new ObservableCollection<PlayByPlayViewModel>();
             FielderColor = "LightSalmon";
@@ -639,23 +680,37 @@ namespace FantasyBaseball.UI.ViewModels
             RaisePropertyChanged("HomeTeamCurrentPitcher");
         }
 
-        public void ProcessSwingResult()
+        public void ProcessSwingResult(bool hitAndRun = false)
         {
             var isPassedBall = SingleGameService.GetIsPassedBallResult(OnFieldCatcher.PlayerStint.FieldingStints.SingleOrDefault(f => f.Position == "C"));
 
             if (isPassedBall)
             {
-                AdvanceRunnersOneBase(false);
+                if (hitAndRun)
+                {
+                    AdvanceRunnersTwoBases(false);
+                }
+                else
+                {
+                    AdvanceRunnersOneBase(false);
+                }
                 InsertToPlayByPlay($"{OnFieldCatcher.LastName} allowed a passed ball");
             }
             else
             {
-                var result = SingleGameService.GetBattingResult(AtPlateBatter.PlayerStint.BattingStint, OnFieldPitcher.PlayerStint.PitchingStint);
+                var result = SingleGameService.GetBattingResult(AtPlateBatter.PlayerStint.BattingStint, OnFieldPitcher.PlayerStint.PitchingStint, OnFieldPitcher.CurrentGameIsTired);
 
                 switch (result)
                 {
                     case BattingResult.WildPitch:
-                        AdvanceRunnersOneBase();
+                        if (hitAndRun)
+                        {
+                            AdvanceRunnersTwoBases(false);
+                        }
+                        else
+                        {
+                            AdvanceRunnersOneBase(false);
+                        }
                         InsertToPlayByPlay($"{OnFieldPitcher.LastName} threw a wild pitch");
                         break;
                     case BattingResult.Balk:
@@ -663,35 +718,39 @@ namespace FantasyBaseball.UI.ViewModels
                         InsertToPlayByPlay($"{OnFieldPitcher.LastName} balked");
                         break;
                     case BattingResult.FieldedByPitcher:
-                        ProcessFieldingResult(OnFieldPitcher, PositionType.Pitcher);
+                        ProcessFieldingResult(OnFieldPitcher, PositionType.Pitcher, hitAndRun);
                         break;
                     case BattingResult.FieldedByCatcher:
-                        ProcessFieldingResult(OnFieldCatcher, PositionType.Catcher);
+                        ProcessFieldingResult(OnFieldCatcher, PositionType.Catcher, hitAndRun);
                         break;
                     case BattingResult.FieldedByFirstBaseman:
-                        ProcessFieldingResult(OnFieldFirstBaseman, PositionType.FirstBaseman);
+                        ProcessFieldingResult(OnFieldFirstBaseman, PositionType.FirstBaseman, hitAndRun);
                         break;
                     case BattingResult.FieldedBySecondBaseman:
-                        ProcessFieldingResult(OnFieldSecondBaseman, PositionType.SecondBaseman);
+                        ProcessFieldingResult(OnFieldSecondBaseman, PositionType.SecondBaseman, hitAndRun);
                         break;
                     case BattingResult.FieldedByThirdBaseman:
-                        ProcessFieldingResult(OnFieldThirdBaseman, PositionType.ThirdBaseman);
+                        ProcessFieldingResult(OnFieldThirdBaseman, PositionType.ThirdBaseman, hitAndRun);
                         break;
                     case BattingResult.FieldedByShortstop:
-                        ProcessFieldingResult(OnFieldShortstop, PositionType.Shortstop);
+                        ProcessFieldingResult(OnFieldShortstop, PositionType.Shortstop, hitAndRun);
                         break;
                     case BattingResult.FieldedByLeftFielder:
-                        ProcessFieldingResult(OnFieldLeftFielder, PositionType.LeftFielder);
+                        ProcessFieldingResult(OnFieldLeftFielder, PositionType.LeftFielder, hitAndRun);
                         break;
                     case BattingResult.FieldedByCenterFielder:
-                        ProcessFieldingResult(OnFieldCenterFielder, PositionType.CenterFielder);
+                        ProcessFieldingResult(OnFieldCenterFielder, PositionType.CenterFielder, hitAndRun);
                         break;
                     case BattingResult.FieldedByRightFielder:
-                        ProcessFieldingResult(OnFieldRightFielder, PositionType.RightFielder);
+                        ProcessFieldingResult(OnFieldRightFielder, PositionType.RightFielder, hitAndRun);
                         break;
                     case BattingResult.Strikeout:
                         OnFieldPitcher.CurrentGameStrikeouts++;
                         ProcessBattedOut($"{AtPlateBatter.LastName} struckout");
+                        if (hitAndRun && Outs > 0)
+                        {
+                            LeadRunnerSteal();
+                        }
                         break;
                     case BattingResult.HitByPitch:
                         AdvanceForcedRunnersOneBase();
@@ -708,10 +767,16 @@ namespace FantasyBaseball.UI.ViewModels
                         SwitchBatter();
                         break;
                     case BattingResult.Single:
-                        ProcessSingle();
+                        ProcessSingle(hitAndRun, false);
+                        break;
+                    case BattingResult.Single2Bases:
+                        ProcessSingle(true);
                         break;
                     case BattingResult.Double:
-                        ProcessDouble();
+                        ProcessDouble(hitAndRun);
+                        break;
+                    case BattingResult.Double3Bases:
+                        ProcessDouble(true);
                         break;
                     case BattingResult.Triple:
                         ProcessTriple();
@@ -723,10 +788,10 @@ namespace FantasyBaseball.UI.ViewModels
                         throw new ArgumentOutOfRangeException($"{result} is not a valid batting result.");
                 }
             }
-            _stealCommand.RaiseCanExecuteChanged();
+            UpdateRunnerBasedCommands();
         }
 
-        private void ProcessFieldingResult(IPlayerViewModel fielder, PositionType positionType)
+        private void ProcessFieldingResult(IPlayerViewModel fielder, PositionType positionType, bool hitAndRun = false)
         {
             var fieldingStint = fielder.PlayerStint.FieldingStints.SingleOrDefault(f => f.Position == PositionTypeHelperFunctions.PositionTypeToPositionAbbreviationString(positionType));
             if (fieldingStint == null && (positionType == PositionType.CenterFielder || positionType == PositionType.LeftFielder || positionType == PositionType.RightFielder))
@@ -734,7 +799,7 @@ namespace FantasyBaseball.UI.ViewModels
                 fieldingStint = fielder.PlayerStint.FieldingStints.SingleOrDefault(f => f.Position == "OF");
             }
 
-            var result = SingleGameService.GetFieldingResult(fieldingStint, positionType);
+            var result = SingleGameService.GetFieldingResult(fieldingStint, positionType, SelectedInfieldShiftType, SelectedOutfieldShiftType);
 
             switch (result)
             {
@@ -753,23 +818,54 @@ namespace FantasyBaseball.UI.ViewModels
                     ProcessBattedOut($"{AtPlateBatter.LastName} fouled out to the {positionType}");
                     break;
                 case FieldingResult.Groundout:
-                    ProcessGroundoutLeadForceRunnerOut(positionType);
+                    ProcessGroundout(positionType);
                     break;
                 case FieldingResult.GroundoutAllAdvance:
                     ProcessBattedOut($"{AtPlateBatter.LastName} grounded out to the {positionType}");
                     AdvanceRunnersOneBase();
                     break;
                 case FieldingResult.GroundoutDoublePlay:
-                    ProcessGroundoutDoublePlay(positionType);
+                    if (hitAndRun)
+                    {
+                        ProcessBattedOut($"{AtPlateBatter.LastName} grounded out to the {positionType}");
+                        AdvanceRunnersOneBase();
+                    }
+                    else
+                    {
+                        ProcessGroundoutDoublePlay(positionType);
+                    }
                     break;
                 case FieldingResult.GroundoutFieldersChoice:
-                    ProcessGroundoutLeadRunnerOut(positionType);
+                    if (hitAndRun)
+                    {
+                        ProcessBattedOut($"{AtPlateBatter.LastName} grounded out to the {positionType}");
+                        AdvanceRunnersOneBase();
+                    }
+                    else
+                    {
+                        ProcessGroundoutLeadRunnerOut(positionType);
+                    }
                     break;
                 case FieldingResult.GroundoutFieldersChoiceForce:
-                    ProcessGroundoutLeadForceRunnerOut(positionType, true);
+                    if (hitAndRun)
+                    {
+                        ProcessBattedOut($"{AtPlateBatter.LastName} grounded out to the {positionType}");
+                        AdvanceRunnersOneBase();
+                    }
+                    else
+                    {
+                        ProcessGroundoutLeadForceRunnerOut(positionType, true);
+                    }
                     break;
                 case FieldingResult.Lineout:
-                    ProcessBattedOut($"{AtPlateBatter.LastName} lined out to the {positionType}");
+                    if (hitAndRun)
+                    {
+                        ProcessLineoutDoublePlay(positionType);
+                    }
+                    else
+                    {
+                        ProcessBattedOut($"{AtPlateBatter.LastName} lined out to the {positionType}");
+                    }
                     break;
                 case FieldingResult.LineoutDoublePlay:
                     ProcessLineoutDoublePlay(positionType);
@@ -794,13 +890,13 @@ namespace FantasyBaseball.UI.ViewModels
                     break;
                 case FieldingResult.OneBaseError:
                     // handle incrementing unearned runs
-                    ProcessError(fielder, 1);
+                    ProcessError(fielder, 1, hitAndRun);
                     break;
                 case FieldingResult.TwoBaseError:
-                    ProcessError(fielder, 2);
+                    ProcessError(fielder, 2, hitAndRun);
                     break;
                 case FieldingResult.ThreeBaseError:
-                    ProcessError(fielder, 3);
+                    ProcessError(fielder, 3, hitAndRun);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException($"{result} is not a valid fielding result.");
@@ -822,19 +918,34 @@ namespace FantasyBaseball.UI.ViewModels
             RaisePropertyChanged("BatterGridColumn");
         }
 
-        private void ProcessSingle()
+        private void ProcessSingle(bool advanceExtraBase = false, bool bunt = false)
         {
+            var message = bunt ? "hit a bunt single" : "singled";
             IncrementHits();
-            AdvanceRunnersOneBase();
+            if (advanceExtraBase)
+            {
+                AdvanceRunnersTwoBases();
+            }
+            else
+            {
+                AdvanceRunnersOneBase();
+            }
             RunnerOnFirst = AtPlateBatter;
-            InsertToPlayByPlay($"{AtPlateBatter.LastName} singled");
+            InsertToPlayByPlay($"{AtPlateBatter.LastName} {message}");
             SwitchBatter();
         }
 
-        private void ProcessDouble()
+        private void ProcessDouble(bool advanceExtraBase = false)
         {
             IncrementHits();
-            AdvanceRunnersTwoBases();
+            if (advanceExtraBase)
+            {
+                AdvanceRunnersThreeBases();
+            }
+            else
+            {
+                AdvanceRunnersTwoBases();
+            }
             RunnerOnSecond = AtPlateBatter;
             InsertToPlayByPlay($"{AtPlateBatter.LastName} doubled");
             SwitchBatter();
@@ -885,18 +996,32 @@ namespace FantasyBaseball.UI.ViewModels
             HomeTeamTotalHits++;
         }
 
-        private void ProcessError(IPlayerViewModel fielder, int bases)
+        private void ProcessError(IPlayerViewModel fielder, int bases, bool runnersAdvanceExtraBase = false)
         {
             IncrementErrors(fielder);
 
             switch (bases)
             {
                 case 1:
-                    AdvanceRunnersOneBase(false);
+                    if (runnersAdvanceExtraBase)
+                    {
+                        AdvanceRunnersTwoBases(false);
+                    }
+                    else
+                    {
+                        AdvanceRunnersOneBase(false);
+                    }
                     RunnerOnFirst = AtPlateBatter;
                     break;
                 case 2:
-                    AdvanceRunnersTwoBases(false);
+                    if (runnersAdvanceExtraBase)
+                    {
+                        AdvanceRunnersThreeBases(false);
+                    }
+                    else
+                    {
+                        AdvanceRunnersTwoBases(false);
+                    }
                     RunnerOnSecond = AtPlateBatter;
                     break;
                 case 3:
@@ -1012,7 +1137,7 @@ namespace FantasyBaseball.UI.ViewModels
                 RunnerOnThird = null;
                 return;
             }
-            _stealCommand.RaiseCanExecuteChanged();
+            UpdateRunnerBasedCommands();
         }
 
         private void ProcessBattedOut(string play, bool switchBatter = true)
@@ -1021,13 +1146,31 @@ namespace FantasyBaseball.UI.ViewModels
             ProcessOut(play, switchBatter);
         }
 
-        private void ProcessGroundoutLeadRunnerOut(PositionType positionType)
+        private void ProcessGroundout(PositionType positionType, bool bunt = false)
         {
+            if (AreBasesLoaded())
+            {
+                ProcessGroundoutLeadForceRunnerOut(positionType, true, bunt);
+            }
+            if (bunt)
+            {
+                ProcessOut($"{AtPlateBatter.LastName} laid down a bunt", true);
+            }
+            else
+            {
+                ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType}");
+            }
+            AdvanceForcedRunnersOneBase();
+        }
+
+        private void ProcessGroundoutLeadRunnerOut(PositionType positionType, bool bunt = false)
+        {
+            var message = bunt ? "laid down a bunt" : $"grounded to the {positionType}";
             if (Outs != 2)
             {
                 if (RunnerOnThird != null)
                 {
-                    ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType}, {RunnerOnThird.LastName} was thrown out at home", false);
+                    ProcessBattedOut($"{AtPlateBatter.LastName} {message}, {RunnerOnThird.LastName} was thrown out at home", false);
                     RunnerOnThird = null;
                     AdvanceRunnersOneBase();
                     RunnerOnFirst = AtPlateBatter;
@@ -1036,7 +1179,7 @@ namespace FantasyBaseball.UI.ViewModels
                 }
                 if (RunnerOnSecond != null)
                 {
-                    ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType}, {RunnerOnSecond.LastName} was thrown out at third", false);
+                    ProcessBattedOut($"{AtPlateBatter.LastName} {message}, {RunnerOnSecond.LastName} was thrown out at third", false);
                     RunnerOnSecond = null;
                     AdvanceRunnersOneBase();
                     RunnerOnFirst = AtPlateBatter;
@@ -1045,20 +1188,21 @@ namespace FantasyBaseball.UI.ViewModels
                 }
                 if (RunnerOnFirst != null)
                 {
-                    ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType}, {RunnerOnFirst.LastName} was thrown out at second", false);
+                    ProcessBattedOut($"{AtPlateBatter.LastName} {message}, {RunnerOnFirst.LastName} was thrown out at second", false);
                     RunnerOnFirst = AtPlateBatter;
                     SwitchBatter();
                     return;
                 }
             }
-            ProcessBattedOut($"{AtPlateBatter.LastName} grounded out to the {positionType}");
+            ProcessBattedOut($"{AtPlateBatter.LastName} {message}");
         }
 
-        private void ProcessGroundoutLeadForceRunnerOut(PositionType positionType, bool advanceRunners = false)
+        private void ProcessGroundoutLeadForceRunnerOut(PositionType positionType, bool advanceRunners = false, bool bunt = false)
         {
+            var message = bunt ? "laid down a bunt" : $"grounded to the {positionType}";
             if (Outs == 2 || RunnerOnFirst == null)
             {
-                ProcessBattedOut($"{AtPlateBatter.LastName} grounded out to the {positionType}");
+                ProcessBattedOut($"{AtPlateBatter.LastName} {message}");
                 if (advanceRunners)
                 {
                     AdvanceRunnersOneBase();
@@ -1067,17 +1211,17 @@ namespace FantasyBaseball.UI.ViewModels
             }
             else if (RunnerOnSecond == null)
             {
-                ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType} forcing out {RunnerOnFirst.LastName} at second", false);
+                ProcessBattedOut($"{AtPlateBatter.LastName} {message} forcing out {RunnerOnFirst.LastName} at second", false);
                 RunnerOnFirst = null;
             }
             else if (RunnerOnThird == null)
             {
-                ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType} forcing out {RunnerOnSecond.LastName} at third", false);
+                ProcessBattedOut($"{AtPlateBatter.LastName} {message} forcing out {RunnerOnSecond.LastName} at third", false);
                 RunnerOnSecond = null;
             }
             else
             {
-                ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType} forcing out {RunnerOnThird.LastName} at home", false);
+                ProcessBattedOut($"{AtPlateBatter.LastName} {message} forcing out {RunnerOnThird.LastName} at home", false);
                 RunnerOnThird = null;
             }
 
@@ -1089,17 +1233,40 @@ namespace FantasyBaseball.UI.ViewModels
             RunnerOnFirst = AtPlateBatter;
         }
 
-        private void ProcessGroundoutDoublePlay(PositionType positionType)
+        private void ProcessGroundoutDoublePlay(PositionType positionType, bool bunt = false)
         {
-            if (Outs == 2 || RunnerOnFirst == null)
+            if (Outs == 2)
             {
                 ProcessBattedOut($"{AtPlateBatter.LastName} grounded out to the {positionType}");
             }
             else
             {
-                ProcessBattedOut($"{AtPlateBatter.LastName} grounded to the {positionType}");
-                ProcessOut($"{RunnerOnFirst.LastName} was thrown out at second for a double play");
-                RunnerOnFirst = null;
+                if (SelectedInfieldShiftType == InfieldShiftType.InfieldIn || bunt)
+                {
+                    if (AreBasesLoaded())
+                    {
+                        var message = bunt ? $"laid down a bunt" : $"grounded out to the {positionType}";
+                        ProcessBattedOut($"{AtPlateBatter.LastName} {message}");
+                        ProcessOut($"{RunnerOnThird.LastName} was thrown out at home for a double play");
+                        RunnerOnThird = null;
+                        return;
+                    }
+                    ProcessBattedOut($"{AtPlateBatter.LastName} grounded out to the {positionType}");
+                }
+                else
+                {
+                    if (RunnerOnFirst != null)
+                    {
+                        ProcessBattedOut($"{AtPlateBatter.LastName} grounded out to the {positionType}");
+                        ProcessOut($"{RunnerOnFirst.LastName} was thrown out at second for a double play");
+                        RunnerOnFirst = null;
+                    }
+                    else
+                    {
+                        ProcessBattedOut($"{AtPlateBatter.LastName} grounded out to the {positionType}");
+                    }
+                    AdvanceRunnersOneBase();
+                }
             }
         }
 
@@ -1162,7 +1329,7 @@ namespace FantasyBaseball.UI.ViewModels
                 RunnerOnSecond = RunnerOnFirst;
                 RunnerOnFirst = null;
             }
-            _stealCommand.RaiseCanExecuteChanged();
+            UpdateRunnerBasedCommands();
         }
 
         private void AdvanceRunnerOnThird(bool rbi = true)
@@ -1172,7 +1339,7 @@ namespace FantasyBaseball.UI.ViewModels
                 ScoreRun(RunnerOnThird, rbi);
             }
             RunnerOnThird = null;
-            _stealCommand.RaiseCanExecuteChanged();
+            UpdateRunnerBasedCommands();
         }
 
         private void AdvanceRunnersOneBase(bool rbi = true)
@@ -1184,7 +1351,7 @@ namespace FantasyBaseball.UI.ViewModels
             RunnerOnThird = RunnerOnSecond;
             RunnerOnSecond = RunnerOnFirst;
             RunnerOnFirst = null;
-            _stealCommand.RaiseCanExecuteChanged();
+            UpdateRunnerBasedCommands();
         }
 
         private void AdvanceRunnersTwoBases(bool rbi = true)
@@ -1200,7 +1367,7 @@ namespace FantasyBaseball.UI.ViewModels
             }
             RunnerOnThird = RunnerOnFirst;
             RunnerOnFirst = null;
-            _stealCommand.RaiseCanExecuteChanged();
+            UpdateRunnerBasedCommands();
         }
 
         private void AdvanceRunnersThreeBases(bool rbi = true)
@@ -1220,7 +1387,7 @@ namespace FantasyBaseball.UI.ViewModels
                 ScoreRun(RunnerOnFirst, rbi);
                 RunnerOnFirst = null;
             }
-            _stealCommand.RaiseCanExecuteChanged();
+            UpdateRunnerBasedCommands();
         }
 
         private void ScoreRun(BatterViewModel runner, bool rbi = true)
@@ -1324,42 +1491,6 @@ namespace FantasyBaseball.UI.ViewModels
             }
         }
 
-        private void RemoveLeadRunner()
-        {
-            if (RunnerOnThird != null)
-            {
-                RunnerOnThird = null;
-                return;
-            }
-            if (RunnerOnSecond != null)
-            {
-                RunnerOnSecond = null;
-                return;
-            }
-            if (RunnerOnFirst != null)
-            {
-                RunnerOnFirst = null;
-                return;
-            }
-        }
-
-        private BatterViewModel GetLeadRunner()
-        {
-            if (RunnerOnThird != null)
-            {
-                return RunnerOnThird;
-            }
-            if (RunnerOnSecond != null)
-            {
-                return RunnerOnSecond;
-            }
-            if (RunnerOnFirst != null)
-            {
-                return RunnerOnFirst;
-            }
-            return null;
-        }
-
         private void EndGame()
         {
             GameOver = true;
@@ -1380,41 +1511,193 @@ namespace FantasyBaseball.UI.ViewModels
                 WinnerMessageVisibility = "Visible";
             }
 
-            StealCommand.RaiseCanExecuteChanged();
+            UpdateRunnerBasedCommands();
             IntentionalWalkCommand.RaiseCanExecuteChanged();
             SwingCommand.RaiseCanExecuteChanged();
         }
 
-        private void GetStealResult()
+        private void UpdateRunnerBasedCommands()
         {
-            var leadRunner = GetLeadRunner();
-            // implement harder difficulty for different bases
-            var result = SingleGameService.GetStealResult(leadRunner.PlayerStint.BattingStint,
-                OnFieldCatcher.PlayerStint.FieldingStints.SingleOrDefault(f => f.PositionType == PositionType.Catcher));
+            _stealSecondCommand.RaiseCanExecuteChanged();
+            _stealThirdCommand.RaiseCanExecuteChanged();
+            _stealHomeCommand.RaiseCanExecuteChanged();
+            _sacrificeBuntCommand.RaiseCanExecuteChanged();
+            _hitAndRunCommand.RaiseCanExecuteChanged();
+        }
 
-            if (result)
+        private void ProcessStealResult(BatterViewModel runner, BaseballBase baseballBase)
+        {
+            var isBaseStolen = SingleGameService.GetStealResult(runner.PlayerStint.BattingStint,
+                OnFieldCatcher.PlayerStint.FieldingStints.SingleOrDefault(f => f.PositionType == PositionType.Catcher), baseballBase);
+
+            if (isBaseStolen)
             {
+                switch(baseballBase)
+                {
+                    case BaseballBase.Second:
+                        RunnerOnFirst.StolenBases++;
+                        InsertToPlayByPlay($"{RunnerOnFirst.LastName} stole second base");
+                        break;
+                    case BaseballBase.Third:
+                        RunnerOnSecond.StolenBases++;
+                        InsertToPlayByPlay($"{RunnerOnSecond.LastName} stole third base");
+                        break;
+                    case BaseballBase.Home:
+                        RunnerOnThird.StolenBases++;
+                        InsertToPlayByPlay($"{RunnerOnThird.LastName} stole home");
+                        break;
+                }
                 AdvanceRunnersOneBase(false);
-                leadRunner.StolenBases++;
-                InsertToPlayByPlay($"{leadRunner.LastName} stole a base");
                 return;
             }
             else
             {
-                RemoveLeadRunner();
-                ProcessOut($"{leadRunner.LastName} was caught stealing");
+                switch (baseballBase)
+                {
+                    case BaseballBase.Second:
+                        ProcessOut($"{RunnerOnFirst.LastName} was caught stealing second base");
+                        RunnerOnFirst = null;
+                        break;
+                    case BaseballBase.Third:
+                        ProcessOut($"{RunnerOnSecond.LastName} was caught stealing third base");
+                        RunnerOnSecond = null;
+                        break;
+                    case BaseballBase.Home:
+                        ProcessOut($"{RunnerOnThird.LastName} was caught stealing home");
+                        RunnerOnThird = null;
+                        break;
+                }
                 AdvanceRunnersOneBase(false);
+            }
+            UpdateRunnerBasedCommands();
+        }
+
+        private void StealSecond()
+        {
+            ProcessStealResult(RunnerOnFirst, BaseballBase.Second);
+        }
+
+        private void StealThird()
+        {
+            ProcessStealResult(RunnerOnSecond, BaseballBase.Third);
+        }
+
+        private void StealHome()
+        {
+            ProcessStealResult(RunnerOnThird, BaseballBase.Home);
+        }
+
+        private void LeadRunnerSteal()
+        {
+            if (RunnerOnThird != null)
+            {
+                StealHome();
+                return;
+            }
+            if (RunnerOnSecond != null)
+            {
+                StealThird();
+                return;
+            }
+            if (RunnerOnFirst != null)
+            {
+                StealSecond();
+                return;
             }
         }
 
-        private bool CanSteal()
+        public void HitAndRun()
         {
-            return IsGameNotOver() && (RunnerOnFirst != null || RunnerOnSecond != null || RunnerOnThird != null);
+            var hitAndRunResult = SingleGameService.GetHitAndRunResult(AtPlateBatter.PlayerStint.BattingStint);
+            if (hitAndRunResult)
+            {
+                ProcessSwingResult(true);
+                return;
+            }
+            LeadRunnerSteal();
+        }
+
+        public void SacrificeBunt()
+        {
+            var buntResult = SingleGameService.GetSacrificeBuntResult(AtPlateBatter.PlayerStint.BattingStint);
+            ProcessBuntResult(buntResult);
+        }
+
+        public void BuntForAHit()
+        {
+            var buntResult = SingleGameService.GetBuntForAHitResult(AtPlateBatter.PlayerStint.BattingStint);
+            ProcessBuntResult(buntResult);
+        }
+
+        private void ProcessBuntResult(FieldingResult buntResult)
+        {
+            switch (buntResult)
+            {
+                case FieldingResult.Single:
+                    ProcessSingle(false, true);
+                    break;
+                case FieldingResult.GroundoutAllAdvance:
+                    if (Outs != 2)
+                    {
+                        ProcessOut($"{AtPlateBatter.LastName} laid down a bunt", true);
+                        AdvanceRunnersOneBase();
+                        return;
+                    }
+                    ProcessBattedOut($"{AtPlateBatter.LastName} laid down a bunt");
+                    break;
+                case FieldingResult.Popout:
+                    ProcessBattedOut($"{AtPlateBatter.LastName} popped out trying to bunt");
+                    break;
+                case FieldingResult.GroundoutFieldersChoice:
+                    ProcessGroundoutLeadRunnerOut(PositionType.None, true);
+                    break;
+                case FieldingResult.Groundout:
+                    ProcessGroundout(PositionType.None, true);
+                    break;
+                case FieldingResult.GroundoutDoublePlay:
+                    ProcessGroundoutDoublePlay(PositionType.None, true);
+                    break;
+                case FieldingResult.Strikeout:
+                    ProcessBattedOut($"{AtPlateBatter.LastName} struck out trying to bunt");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException($"{buntResult} is not a valid bunt result");
+            }
+        }
+
+        private bool CanStealSecond()
+        {
+            return IsGameNotOver() && RunnerOnFirst != null;
+        }
+
+        private bool CanStealThird()
+        {
+            return IsGameNotOver() && RunnerOnSecond != null;
+        }
+
+        private bool CanStealHome()
+        {
+            return IsGameNotOver() && RunnerOnThird != null;
         }
 
         private bool IsGameNotOver()
         {
             return GameOver == false;
+        }
+
+        private bool CanMoveRunner()
+        {
+            return IsGameNotOver() && AreBasesEmpty() == false;
+        }
+
+        private bool AreBasesEmpty()
+        {
+            return RunnerOnFirst == null && RunnerOnSecond == null && RunnerOnThird == null;
+        }
+
+        private bool AreBasesLoaded()
+        {
+            return RunnerOnFirst != null && RunnerOnSecond != null && RunnerOnThird != null;
         }
 
         private void SetRunners()

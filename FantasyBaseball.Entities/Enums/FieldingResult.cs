@@ -9,7 +9,8 @@
         OneBaseError,
         TwoBaseError,
         ThreeBaseError,
-        // lead forced runner is out, others hold
+        // batter is out, forced runners advance, others hold
+        // unless bases loaded, then lead runner is out others advance
         Groundout,
         // batter is out, runners advance
         GroundoutAllAdvance,
@@ -34,6 +35,7 @@
         // batter is out, only runner on third advances
         FlyoutSacrifice,
         // batter is out, runners hold
-        Foulout
+        Foulout,
+        Strikeout
     }
 }

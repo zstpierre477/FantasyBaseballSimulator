@@ -367,19 +367,25 @@
                         <Button x:Name="swingButton" Command="{Binding SwingCommand}" Content="Swing" Margin="1 1 1 1"/>
                     </Border>
                     <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" Grid.Column="0">
-                        <Button x:Name="stealButton" Command="{Binding StealCommand}" Content="Steal" Margin="1 1 1 1"/>
+                        <Menu Background="LightGray" Margin="1 1 1 1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <MenuItem Header="Steal" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                                <MenuItem Header="Steal Second" Command="{Binding StealSecondCommand}"/>
+                                <MenuItem Header="Steal Third" Command="{Binding StealThirdCommand}"/>
+                                <MenuItem Header="Steal Home" Command="{Binding StealHomeCommand}"/>
+                            </MenuItem>
+                        </Menu>
                     </Border>
                     <Border BorderBrush="Black" BorderThickness="1" Grid.Row="2" Grid.Column="0">
-                        <Button x:Name="sacrificeBuntButton" Content="Sac. Bunt" Margin="1 1 1 1"/>
+                        <Button x:Name="sacrificeBuntButton" Content="Sac. Bunt" Margin="1 1 1 1" Command="{Binding SacrificeBuntCommand}"/>
                     </Border>
                     <Border BorderBrush="Black" BorderThickness="1" Grid.Row="0" Grid.Column="1">
                         <Button x:Name="intentionalWalkButton" Command="{Binding IntentionalWalkCommand}" Content="Int. BB" Margin="1 1 1 1"/>
                     </Border>
                     <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" Grid.Column="1">
-                        <Button x:Name="hitRunButton" Content="Hit &amp; Run" Margin="1 1 1 1"/>
+                        <Button x:Name="hitAndRunButton" Content="Hit &amp; Run" Margin="1 1 1 1" Command="{Binding HitAndRunCommand}"/>
                     </Border>
                     <Border BorderBrush="Black" BorderThickness="1" Grid.Row="2" Grid.Column="1">
-                        <Button x:Name="buntForHitButton" Content="Bunt For Hit" Margin="1 1 1 1"/>
+                        <Button x:Name="buntForHitButton" Content="Bunt For A Hit" Margin="1 1 1 1" Command="{Binding BuntForAHitCommand}"/>
                     </Border>
                     <Border BorderBrush="Black" BorderThickness="1" Grid.Row="3" Grid.Column="0">
                         <Viewbox Stretch="Fill">

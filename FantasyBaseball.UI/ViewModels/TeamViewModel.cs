@@ -216,16 +216,24 @@ namespace FantasyBaseball.UI.ViewModels
             set { _bench = value; RaisePropertyChanged("Bench"); }
         }
 
-        private ObservableCollection<IPlayerViewModel> _unavailablePlayers { get; set; }
-        public ObservableCollection<IPlayerViewModel> UnavailablePlayers
+        private ObservableCollection<PitcherViewModel> _usedPitchers { get; set; }
+        public ObservableCollection<PitcherViewModel> UsedPitchers
         {
-            get { return _unavailablePlayers; }
-            set { _unavailablePlayers = value; RaisePropertyChanged("UnavailablePlayers"); }
+            get { return _usedPitchers; }
+            set { _usedPitchers = value; RaisePropertyChanged("UsedPitchers"); }
+        }
+
+        private ObservableCollection<BatterViewModel> _usedBatters { get; set; }
+        public ObservableCollection<BatterViewModel> UsedBatters
+        {
+            get { return _usedBatters; }
+            set { _usedBatters = value; RaisePropertyChanged("UsedBatters"); }
         }
 
         public TeamViewModel()
         {
-            UnavailablePlayers = new ObservableCollection<IPlayerViewModel>();
+            UsedPitchers = new ObservableCollection<PitcherViewModel>();
+            UsedBatters = new ObservableCollection<BatterViewModel>();
             Bullpen = new ObservableCollection<PitcherViewModel>();
             Bench = new ObservableCollection<BatterViewModel>();
             Lineup = new ObservableCollection<BatterViewModel>();

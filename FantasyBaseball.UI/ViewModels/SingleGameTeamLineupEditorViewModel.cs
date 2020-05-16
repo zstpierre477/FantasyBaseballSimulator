@@ -82,7 +82,7 @@ namespace FantasyBaseball.UI.ViewModels
             else
             {
                 Team.Bench.RemoveAt(selectedBenchBatter.CurrentGameBenchIndex.Value);
-                Team.UnavailablePlayers.Add(selectedLineupBatter);
+                Team.UsedBatters.Add(selectedLineupBatter);
             }
             SelectedLineupBatter.CurrentGameBenchIndex = null;
         }

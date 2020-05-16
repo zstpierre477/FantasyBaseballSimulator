@@ -8,7 +8,11 @@
         HitByPitch,        
         Walk,
         Single,
+        // runners advance 2 bases
+        Single2Bases,
         Double,
+        //runners advance 3 bases
+        Double3Bases,
         Triple,
         HomeRun,
         FieldedByPitcher,
@@ -20,5 +24,6 @@
         FieldedByLeftFielder,
         FieldedByCenterFielder,
         FieldedByRightFielder,
+        Steal
     }
 }
