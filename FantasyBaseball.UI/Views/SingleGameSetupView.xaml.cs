@@ -1,8 +1,6 @@
-﻿using FantasyBaseball.Entities.Models;
-using FantasyBaseball.UI.ViewModels;
+﻿using FantasyBaseball.UI.ViewModels;
 using System;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -54,6 +52,16 @@ namespace FantasyBaseball.UI.Views
             });
         }
 
+        private void LoadHistoricalFranchises(SingleGameSetupViewModel vm)
+        {
+            vm.LoadHistoricalFranchises();
+            Dispatcher.Invoke(() =>
+            {
+                vm.ToggleLoading();
+                vm.ToggleHistoricalFranchiseSelector();
+            });
+        }
+
         private void SubmitHistoricalTeamsButton_Click(object sender, RoutedEventArgs e)
         {
             var vm = (SingleGameSetupViewModel)DataContext;
@@ -72,6 +80,24 @@ namespace FantasyBaseball.UI.Views
             });
         }
 
+        private void SubmitHistoricalFranchisesButton_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = (SingleGameSetupViewModel)DataContext;
+            vm.ToggleLoading();
+            Task.Run(() => SubmitHistoricalFranchises(vm));
+        }
+
+        private void SubmitHistoricalFranchises(SingleGameSetupViewModel vm)
+        {
+            var teams = vm.AssembleHistoricalFranchiseAllTimeTeams();
+            Dispatcher.Invoke(() =>
+            {
+                var singleGameTeamSelector = new SingleGameTeamSelectorView(ViewModelFactory, teams.First(), teams.ElementAt(1));
+                singleGameTeamSelector.Show();
+                Close();
+            });
+        }
+
         private void GenerateRandomTeamsButton_Click(object sender, RoutedEventArgs e)
         {
             var vm = (SingleGameSetupViewModel)DataContext;
@@ -79,9 +105,9 @@ namespace FantasyBaseball.UI.Views
             Task.Run(() => GenerateRandomTeams(vm));
         }
 
-        private void GenerateRandomTeams(SingleGameSetupViewModel vm)
+        private void GenerateRandomTeams(SingleGameSetupViewModel vm, bool hallOfFamers = false, bool allStars = false)
         {
-            var teams = vm.GenerateRandomTeams();
+            var teams = vm.GenerateRandomTeams(hallOfFamers, allStars);
             Dispatcher.Invoke(() =>
             {
                 var singleGameTeamSelector = new SingleGameTeamSelectorView(ViewModelFactory, teams.First(), teams.ElementAt(1));
@@ -107,6 +133,40 @@ namespace FantasyBaseball.UI.Views
         {
             var vm = (SingleGameSetupViewModel)DataContext;
             vm.ToggleHistoricalTeamSelector();
+        }
+
+        private void HistoricalFranchiseSelectorBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = (SingleGameSetupViewModel)DataContext;
+            vm.ToggleHistoricalFranchiseSelector();
+        }
+
+        private void GenerateRandomAllStarsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = (SingleGameSetupViewModel)DataContext;
+            vm.ToggleLoading();
+            Task.Run(() => GenerateRandomTeams(vm, false, true));
+        }
+
+        private void SelectFranchiseAllTimeAllStarTeamsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = (SingleGameSetupViewModel)DataContext;
+            if (vm.HistoricalFranchises == null)
+            {
+                vm.ToggleLoading();
+                Task.Run(() => LoadHistoricalFranchises(vm));
+            }
+            else
+            {
+                vm.ToggleHistoricalFranchiseSelector();
+            }
+        }
+
+        private void GenerateRandomHallOfFamersButton_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = (SingleGameSetupViewModel)DataContext;
+            vm.ToggleLoading();
+            Task.Run(() => GenerateRandomTeams(vm, true));
         }
     }
 }

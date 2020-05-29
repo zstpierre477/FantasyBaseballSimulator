@@ -1,4 +1,8 @@
-﻿namespace FantasyBaseball.Entities.Models
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FantasyBaseball.Entities.Models
 {
     public partial class BattingStint
     {
@@ -31,5 +35,14 @@
         public virtual League League { get; set; }
         public virtual Person Person { get; set; }
         public virtual Team Team { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public double OnBasePercentage { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public double SluggingPercentage { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public double OnBasePlusSlugging { get; set; }
     }
 }

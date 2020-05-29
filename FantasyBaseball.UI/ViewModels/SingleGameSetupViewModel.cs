@@ -24,6 +24,13 @@ namespace FantasyBaseball.UI.ViewModels
             set { _historicalTeamSelectorVisibility = value; RaisePropertyChanged("HistoricalTeamSelectorVisibility"); }
         }
 
+        private string _historicalFranchiseSelectorVisibility { get; set; }
+        public string HistoricalFranchiseSelectorVisibility
+        {
+            get { return _historicalFranchiseSelectorVisibility; }
+            set { _historicalFranchiseSelectorVisibility = value; RaisePropertyChanged("HistoricalFranchiseSelectorVisibility"); }
+        }
+
         private ObservableCollection<string> _homeTeamHistoricalTeamNames { get; set; }
         public ObservableCollection<string> HomeTeamHistoricalTeamNames
         {
@@ -81,7 +88,37 @@ namespace FantasyBaseball.UI.ViewModels
             set { _years = value; RaisePropertyChanged("Years"); }
         }
 
+        private ObservableCollection<string> _homeTeamHistoricalFranchiseNames { get; set; }
+        public ObservableCollection<string> HomeTeamHistoricalFranchiseNames
+        {
+            get { return _homeTeamHistoricalFranchiseNames; }
+            set { _homeTeamHistoricalFranchiseNames = value; RaisePropertyChanged("HomeTeamHistoricalFranchiseNames"); }
+        }
+
+        private string _selectedHomeTeamHistoricalFranchiseName { get; set; }
+        public string SelectedHomeTeamHistoricalFranchiseName
+        {
+            get { return _selectedHomeTeamHistoricalFranchiseName; }
+            set { _selectedHomeTeamHistoricalFranchiseName = value; RaisePropertyChanged("SelectedHomeTeamHistoricalFranchiseName"); }
+        }
+
+        private ObservableCollection<string> _awayTeamHistoricalFranchiseNames { get; set; }
+        public ObservableCollection<string> AwayTeamHistoricalFranchiseNames
+        {
+            get { return _awayTeamHistoricalFranchiseNames; }
+            set { _awayTeamHistoricalFranchiseNames = value; RaisePropertyChanged("AwayTeamHistoricalFranchiseNames"); }
+        }
+
+        private string _selectedAwayTeamHistoricalFranchiseName { get; set; }
+        public string SelectedAwayTeamHistoricalFranchiseName
+        {
+            get { return _selectedAwayTeamHistoricalFranchiseName; }
+            set { _selectedAwayTeamHistoricalFranchiseName = value; RaisePropertyChanged("SelectedAwayTeamHistoricalFranchiseName"); }
+        }
+
         public IEnumerable<Team> HistoricalTeams { get; set; }
+
+        public IEnumerable<Franchise> HistoricalFranchises { get; set; }
 
         public IRandomPlayerSelectorService RandomPlayerSelectorService { get; set; }
 
@@ -93,6 +130,7 @@ namespace FantasyBaseball.UI.ViewModels
             RandomPlayerSelectorService = randomPlayerSelectorService;
             LoadingVisibility = "Hidden";
             HistoricalTeamSelectorVisibility = "Hidden";
+            HistoricalFranchiseSelectorVisibility = "Hidden";
             Years = new ObservableCollection<int>(Enumerable.Range(1871, 149));
             SelectedAwayTeamYear = 2019;
             SelectedHomeTeamYear = 2019;
@@ -108,11 +146,25 @@ namespace FantasyBaseball.UI.ViewModels
             HistoricalTeamSelectorVisibility = HistoricalTeamSelectorVisibility == "Visible" ? "Hidden" : "Visible";
         }
 
+        public void ToggleHistoricalFranchiseSelector()
+        {
+            HistoricalFranchiseSelectorVisibility = HistoricalFranchiseSelectorVisibility == "Visible" ? "Hidden" : "Visible";
+        }
+
         public void LoadHistoricalTeams()
         {
             HistoricalTeams = HistoricalTeamService.GetHistoricalTeams();
             UpdateAwayTeamTeamAndYearCombinations();
             UpdateHomeTeamTeamAndYearCombinations();
+        }
+
+        public void LoadHistoricalFranchises()
+        {
+            HistoricalFranchises = HistoricalTeamService.GetActiveHistoricalFranchises();
+            HomeTeamHistoricalFranchiseNames = new ObservableCollection<string>(HistoricalFranchises.Select(t => t.FranchiseName));
+            SelectedHomeTeamHistoricalFranchiseName = HomeTeamHistoricalFranchiseNames.First();
+            AwayTeamHistoricalFranchiseNames = new ObservableCollection<string>(HistoricalFranchises.Select(t => t.FranchiseName));
+            SelectedAwayTeamHistoricalFranchiseName = AwayTeamHistoricalFranchiseNames.First();
         }
 
         public IEnumerable<TeamViewModel> AssembleHistoricalTeams()
@@ -126,62 +178,73 @@ namespace FantasyBaseball.UI.ViewModels
             return new List<TeamViewModel> { homeTeamViewModel, awayTeamViewModel };
         }
 
-        public IEnumerable<TeamViewModel> GenerateRandomTeams()
+        public IEnumerable<TeamViewModel> AssembleHistoricalFranchiseAllTimeTeams()
+        {
+            var homeTeam = HistoricalTeamService.GetHistoricalFranchiseAllTimePlayers(HistoricalFranchises.Single(h => h.FranchiseName == SelectedHomeTeamHistoricalFranchiseName).FranchiseId);
+            var awayTeam = HistoricalTeamService.GetHistoricalFranchiseAllTimePlayers(HistoricalFranchises.Single(h => h.FranchiseName == SelectedAwayTeamHistoricalFranchiseName).FranchiseId);
+            var homeTeamViewModel = SetupHistoricalTeamViewModel(homeTeam);
+            var awayTeamViewModel = SetupHistoricalTeamViewModel(awayTeam);
+            homeTeamViewModel.TeamName = "Home Team";
+            awayTeamViewModel.TeamName = "Away Team";
+            return new List<TeamViewModel> { homeTeamViewModel, awayTeamViewModel };
+        }
+
+        public IEnumerable<TeamViewModel> GenerateRandomTeams(bool hallOfFamer = false, bool allStar = false)
         {
             var homeTeam = new TeamViewModel();
             var awayTeam = new TeamViewModel();
             homeTeam.TeamName = "Home Team";
             awayTeam.TeamName = "Away Team";
-            homeTeam.Catcher = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.Catcher, true));
-            awayTeam.Catcher = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.Catcher, true));
-            homeTeam.FirstBaseman = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.FirstBaseman, true));
-            awayTeam.FirstBaseman = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.FirstBaseman, true));
-            homeTeam.SecondBaseman = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.SecondBaseman, true));
-            awayTeam.SecondBaseman = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.SecondBaseman, true));
-            homeTeam.ThirdBaseman = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.ThirdBaseman, true));
-            awayTeam.ThirdBaseman = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.ThirdBaseman, true));
-            homeTeam.Shortstop = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.Shortstop, true));
-            awayTeam.Shortstop = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.Shortstop, true));
-            homeTeam.LeftFielder = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.LeftFielder, true));
-            awayTeam.LeftFielder = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.LeftFielder, true));
-            homeTeam.CenterFielder = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.CenterFielder, true));
-            awayTeam.CenterFielder = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.CenterFielder, true));
-            homeTeam.RightFielder = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.RightFielder, true));
-            awayTeam.RightFielder = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.RightFielder, true));
-            homeTeam.DesignatedHitter = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.DesignatedHitter, true));
-            awayTeam.DesignatedHitter = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.DesignatedHitter, true));
-            homeTeam.BenchPlayer1 = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.Catcher));
-            awayTeam.BenchPlayer1 = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.Catcher));
-            homeTeam.BenchPlayer2 = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.CornerInfielder));
-            awayTeam.BenchPlayer2 = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.CornerInfielder));
-            homeTeam.BenchPlayer3 = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.MiddleInfielder));
-            awayTeam.BenchPlayer3 = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.MiddleInfielder));
-            homeTeam.BenchPlayer4 = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.OutFielder));
-            awayTeam.BenchPlayer4 = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.OutFielder));
-            homeTeam.StartingPitcher1 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true));
-            awayTeam.StartingPitcher1 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true));
-            homeTeam.StartingPitcher2 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true));
-            awayTeam.StartingPitcher2 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true));
-            homeTeam.StartingPitcher3 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true));
-            awayTeam.StartingPitcher3 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true));
-            homeTeam.StartingPitcher4 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true));
-            awayTeam.StartingPitcher4 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true));
-            homeTeam.StartingPitcher5 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true));
-            awayTeam.StartingPitcher5 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true));
-            homeTeam.ReliefPitcher1 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher());
-            awayTeam.ReliefPitcher1 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher());
-            homeTeam.ReliefPitcher2 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher());
-            awayTeam.ReliefPitcher2 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher());
-            homeTeam.ReliefPitcher3 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher());
-            awayTeam.ReliefPitcher3 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher());
-            homeTeam.ReliefPitcher4 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher());
-            awayTeam.ReliefPitcher4 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher());
-            homeTeam.ReliefPitcher5 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher());
-            awayTeam.ReliefPitcher5 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher());
-            homeTeam.ReliefPitcher6 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher());
-            awayTeam.ReliefPitcher6 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher());
-            homeTeam.ReliefPitcher7 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher());
-            awayTeam.ReliefPitcher7 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher());
+            homeTeam.Catcher = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.Catcher, true, hallOfFamer, allStar));
+            awayTeam.Catcher = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.Catcher, true, hallOfFamer, allStar));
+            homeTeam.FirstBaseman = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.FirstBaseman, true, hallOfFamer, allStar));
+            awayTeam.FirstBaseman = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.FirstBaseman, true, hallOfFamer, allStar));
+            homeTeam.SecondBaseman = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.SecondBaseman, true, hallOfFamer, allStar));
+            awayTeam.SecondBaseman = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.SecondBaseman, true, hallOfFamer, allStar));
+            homeTeam.ThirdBaseman = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.ThirdBaseman, true, hallOfFamer, allStar));
+            awayTeam.ThirdBaseman = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.ThirdBaseman, true, hallOfFamer, allStar));
+            homeTeam.Shortstop = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.Shortstop, true, hallOfFamer, allStar));
+            awayTeam.Shortstop = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.Shortstop, true, hallOfFamer, allStar));
+            homeTeam.LeftFielder = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.LeftFielder, true, hallOfFamer, allStar));
+            awayTeam.LeftFielder = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.LeftFielder, true, hallOfFamer, allStar));
+            homeTeam.CenterFielder = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.CenterFielder, true, hallOfFamer, allStar));
+            awayTeam.CenterFielder = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.CenterFielder, true, hallOfFamer, allStar));
+            homeTeam.RightFielder = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.RightFielder, true, hallOfFamer, allStar));
+            awayTeam.RightFielder = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.RightFielder, true, hallOfFamer, allStar));
+            homeTeam.DesignatedHitter = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.DesignatedHitter, true, hallOfFamer, allStar));
+            awayTeam.DesignatedHitter = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.DesignatedHitter, true, hallOfFamer, allStar));
+            homeTeam.BenchPlayer1 = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.Catcher, false, hallOfFamer, allStar));
+            awayTeam.BenchPlayer1 = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.Catcher, false, hallOfFamer, allStar));
+            homeTeam.BenchPlayer2 = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.CornerInfielder, false, hallOfFamer, allStar));
+            awayTeam.BenchPlayer2 = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.CornerInfielder, false, hallOfFamer, allStar));
+            homeTeam.BenchPlayer3 = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.MiddleInfielder, false, hallOfFamer, allStar));
+            awayTeam.BenchPlayer3 = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.MiddleInfielder, false, hallOfFamer, allStar));
+            homeTeam.BenchPlayer4 = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.OutFielder, false, hallOfFamer, allStar));
+            awayTeam.BenchPlayer4 = new BatterViewModel(RandomPlayerSelectorService.SelectRandomBatter(PositionType.OutFielder, false, hallOfFamer, allStar));
+            homeTeam.StartingPitcher1 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true, hallOfFamer, allStar));
+            awayTeam.StartingPitcher1 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true, hallOfFamer, allStar));
+            homeTeam.StartingPitcher2 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true, hallOfFamer, allStar));
+            awayTeam.StartingPitcher2 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true, hallOfFamer, allStar));
+            homeTeam.StartingPitcher3 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true, hallOfFamer, allStar));
+            awayTeam.StartingPitcher3 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true, hallOfFamer, allStar));
+            homeTeam.StartingPitcher4 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true, hallOfFamer, allStar));
+            awayTeam.StartingPitcher4 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true, hallOfFamer, allStar));
+            homeTeam.StartingPitcher5 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true, hallOfFamer, allStar));
+            awayTeam.StartingPitcher5 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(true, hallOfFamer, allStar));
+            homeTeam.ReliefPitcher1 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(false, hallOfFamer, allStar));
+            awayTeam.ReliefPitcher1 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(false, hallOfFamer, allStar));
+            homeTeam.ReliefPitcher2 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(false, hallOfFamer, allStar));
+            awayTeam.ReliefPitcher2 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(false, hallOfFamer, allStar));
+            homeTeam.ReliefPitcher3 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(false, hallOfFamer, allStar));
+            awayTeam.ReliefPitcher3 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(false, hallOfFamer, allStar));
+            homeTeam.ReliefPitcher4 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(false, hallOfFamer, allStar));
+            awayTeam.ReliefPitcher4 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(false, hallOfFamer, allStar));
+            homeTeam.ReliefPitcher5 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(false, hallOfFamer, allStar));
+            awayTeam.ReliefPitcher5 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(false, hallOfFamer, allStar));
+            homeTeam.ReliefPitcher6 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(false, hallOfFamer, allStar));
+            awayTeam.ReliefPitcher6 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(false, hallOfFamer, allStar));
+            homeTeam.ReliefPitcher7 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(false, hallOfFamer, allStar));
+            awayTeam.ReliefPitcher7 = new PitcherViewModel(RandomPlayerSelectorService.SelectRandomPitcher(false, hallOfFamer, allStar));
 
             return new List<TeamViewModel> { homeTeam, awayTeam };
         }

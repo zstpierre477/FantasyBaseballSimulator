@@ -6,6 +6,9 @@ namespace FantasyBaseball.Repository
     public interface IPitchingStintRepository
     {
         IEnumerable<PlayerStint> GetPitchingStintByLastNameAndYear(string lastName, int year);
-        IEnumerable<PlayerStint> GetPitchingStintByYearMinimumGamesStartedAndMinimumInningsPitchedOuts(int year, int minimumGamesStarted, int minimumInningsPitchedOuts);
+        PlayerStint GetRandomPitchingStintByYearMinimumGamesStartedAndMinimumInningsPitchedOuts(int year, int minimumGamesStarted, int minimumInningsPitchedOuts);
+        PlayerStint GetRandomHallOfFamePitchingStintByMinimumGamesStartedAndMinimumInningsPitchedOuts(int minimumGamesStarted, int minimumInningsPitchedOuts);
+        PlayerStint GetRandomAllStarPitchingStintByMinimumGamesStartedAndMinimumInningsPitchedOuts(int minimumGamesStarted, int minimumInningsPitchedOuts);
+        IEnumerable<PlayerStint> GetBestPitchingStintsByPositionFranchiseMinimumGamesPlayedAndMinimumAtBats(int count, int franchiseId, int minimumGamesStarted, int minimumInningsPitchedOuts);
     }
 }

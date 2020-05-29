@@ -3,7 +3,6 @@ using FantasyBaseball.Entities.Helpers;
 using FantasyBaseball.Entities.Models;
 using FantasyBaseball.Repository;
 using System;
-using System.Linq;
 
 namespace FantasyBaseball.Business.Services
 {
@@ -19,7 +18,7 @@ namespace FantasyBaseball.Business.Services
             PitchingStintRepository = pitchingStintRepository;
         }
 
-        public PlayerStint SelectRandomBatter(PositionType positionType, bool starter = false)
+        public PlayerStint SelectRandomBatter(PositionType positionType, bool starter = false, bool hallOfFamer = false, bool allStar = false)
         {
             var random = new Random();
             var year = random.Next(1873, 2020);
@@ -57,24 +56,40 @@ namespace FantasyBaseball.Business.Services
 
             var minimumGamesPlayed = starter ? 80 : 20;
             var minimumAtBats = 20;
-            var batters = BattingStintRepository.GetBattingStintByPositionYearMinimumGamesPlayedAndMinimumAtBats(position, year, minimumGamesPlayed, minimumAtBats).Where(b => b.FieldingStints.Any(f => f.PositionType != PositionType.Pitcher));
-            
-            while (batters.Count() == 0)
+
+            if (hallOfFamer)
+            {
+                return BattingStintRepository.GetRandomHallOfFameBattingStintByPositionMinimumGamesPlayedAndMinimumAtBats(position, minimumGamesPlayed, minimumAtBats);
+            }
+            if (allStar)
+            {
+                return BattingStintRepository.GetRandomAllStarBattingStintByPositionMinimumGamesPlayedAndMinimumAtBats(position, minimumGamesPlayed, minimumAtBats);
+            }
+
+            var batter = BattingStintRepository.GetRandomBattingStintByPositionYearMinimumGamesPlayedAndMinimumAtBats(position, year, minimumGamesPlayed, minimumAtBats);
+            while (batter == null)
             {
                 year = random.Next(1873, 2020);
-                batters = BattingStintRepository.GetBattingStintByPositionYearMinimumGamesPlayedAndMinimumAtBats(position, year, minimumGamesPlayed, minimumAtBats).Where(b => b.FieldingStints.Any(f => f.PositionType != PositionType.Pitcher));
+                batter = BattingStintRepository.GetRandomBattingStintByPositionYearMinimumGamesPlayedAndMinimumAtBats(position, year, minimumGamesPlayed, minimumAtBats);
             }
-            return batters.ElementAt(random.Next(0, batters.Count()));
+            return batter;
         }
 
-        public PlayerStint SelectRandomPitcher(bool starter = false)
+        public PlayerStint SelectRandomPitcher(bool starter = false, bool hallOfFamer = false, bool allStar = false)
         {
             var random = new Random();
             var year = random.Next(1873, 2020);
             var minimumGamesStarted = starter ? 10 : 0;
             var minimumInningsPitchedOuts = 45;
-            var pitchers = PitchingStintRepository.GetPitchingStintByYearMinimumGamesStartedAndMinimumInningsPitchedOuts(year, minimumGamesStarted, minimumInningsPitchedOuts);
-            return pitchers.ElementAt(random.Next(0, pitchers.Count()));
+            if (hallOfFamer)
+            {
+                return PitchingStintRepository.GetRandomHallOfFamePitchingStintByMinimumGamesStartedAndMinimumInningsPitchedOuts(minimumGamesStarted, minimumInningsPitchedOuts);
+            }
+            if (allStar)
+            {
+                return PitchingStintRepository.GetRandomAllStarPitchingStintByMinimumGamesStartedAndMinimumInningsPitchedOuts(minimumGamesStarted, minimumInningsPitchedOuts);
+            }
+            return PitchingStintRepository.GetRandomPitchingStintByYearMinimumGamesStartedAndMinimumInningsPitchedOuts(year, minimumGamesStarted, minimumInningsPitchedOuts);
         }
     }
 }

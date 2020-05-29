@@ -20,10 +20,9 @@ namespace FantasyBaseball.Repository
                             Year = t.Year
                         }).ToList();
             }
-
         }
 
-            public Team GetTeamWithPlayers(int teamId)
+        public Team GetTeamWithPlayers(int teamId)
         {
             using (var db = new FantasyBaseballDbContext())
             {
@@ -70,6 +69,20 @@ namespace FantasyBaseball.Repository
                 }).ToList();
 
                 return team;
+            }
+        }
+
+        public IEnumerable<Franchise> GetActiveFranchiseNames()
+        {
+            using (var db = new FantasyBaseballDbContext())
+            {
+                return (from f in db.Franchise.AsNoTracking()
+                        where f.Active == true
+                        select new Franchise
+                        {
+                            FranchiseId = f.FranchiseId,
+                            FranchiseName = f.FranchiseName
+                        }).ToList();
             }
         }
     }

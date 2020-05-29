@@ -52,19 +52,20 @@ namespace FantasyBaseball.UI.ViewModels
         private void SwitchPitcher()
         {
             var currentPitcher = Team.CurrentPitcher;
-            Team.CurrentPitcher = Team.Bullpen[SelectedBullpenPitcher.BullpenIndex.Value];
             if (IsGameStarted == false)
             {
+                Team.CurrentPitcher = Team.Bullpen[SelectedBullpenPitcher.BullpenIndex.Value];
                 Team.Bullpen[SelectedBullpenPitcher.BullpenIndex.Value] = currentPitcher;
                 SelectedBullpenPitcher = currentPitcher;
                 SelectedBullpenPitcher.BullpenIndex = Team.CurrentPitcher.BullpenIndex;
+                Team.CurrentPitcher.BullpenIndex = null;
             }
             else
             {
-                Team.Bullpen.RemoveAt(Team.CurrentPitcher.BullpenIndex.Value);
+                Team.CurrentPitcher = SelectedBullpenPitcher;
+                Team.Bullpen.Remove(Team.CurrentPitcher);
                 Team.UsedPitchers.Add(currentPitcher);
             }
-            Team.CurrentPitcher.BullpenIndex = null;
             RaisePropertyChanged("CurrentPitcher");
         }
 

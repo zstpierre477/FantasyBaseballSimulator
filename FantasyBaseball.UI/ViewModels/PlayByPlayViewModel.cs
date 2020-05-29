@@ -1,21 +1,26 @@
-﻿namespace FantasyBaseball.UI.ViewModels
+﻿using System.Drawing;
+
+namespace FantasyBaseball.UI.ViewModels
 {
     public class PlayByPlayViewModel
     {
         public string Play { get; set; }
 
-        public int Inning { get; set; }
+        public string InningString { get; set; }
 
         public int Outs { get; set; }
 
         public string Score { get; set; }
 
-        public PlayByPlayViewModel(string play, int inning, int outs, string score)
+        public string Color { get; set; }
+
+        public PlayByPlayViewModel(string play, string inningString, int outs, string score, string color)
         {
             Play = play;
-            Inning = inning;
+            InningString = inningString;
             Outs = outs;
             Score = score;
+            Color = color;
         }
     }
 }

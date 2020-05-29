@@ -7,5 +7,7 @@ namespace FantasyBaseball.Business.Services
     {
         IEnumerable<Team> GetHistoricalTeams();
         Team GetHistoricalTeamWithPlayers(int teamId);
+        IEnumerable<Franchise> GetActiveHistoricalFranchises();
+        Team GetHistoricalFranchiseAllTimePlayers(int franchiseId);
     }
 }

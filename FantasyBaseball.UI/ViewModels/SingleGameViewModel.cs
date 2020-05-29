@@ -172,7 +172,7 @@ namespace FantasyBaseball.UI.ViewModels
         private string _inningString { get; set; }
         public string InningString
         {
-            get { return (IsTopOfInning ? "Top" : "Bot") + Inning.ToString(); }
+            get { return (IsTopOfInning ? "Top" : "Bot") + " " + Inning.ToString(); }
         }
 
         private int _awayTeamLineupIndex { get; set; }
@@ -1043,7 +1043,7 @@ namespace FantasyBaseball.UI.ViewModels
         private void ProcessIntentionalWalk()
         {
             AtPlateBatter.CurrentGameWalks++;
-            AdvanceRunnersOneBase();
+            AdvanceForcedRunnersOneBase();
             RunnerOnFirst = AtPlateBatter;
             InsertToPlayByPlay($"{AtPlateBatter.LastName} was intentionally walked");
             SwitchBatter();
@@ -1231,6 +1231,7 @@ namespace FantasyBaseball.UI.ViewModels
             }
 
             RunnerOnFirst = AtPlateBatter;
+            SwitchBatter();
         }
 
         private void ProcessGroundoutDoublePlay(PositionType positionType, bool bunt = false)
@@ -1720,8 +1721,8 @@ namespace FantasyBaseball.UI.ViewModels
 
         private void InsertToPlayByPlay(string play)
         {
-            PlayByPlay.Insert(0, new PlayByPlayViewModel(play, Inning, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}"));
-
+            var color = IsTopOfInning ? "MediumPurple" : "LightSalmon";
+            PlayByPlay.Insert(0, new PlayByPlayViewModel(play, InningString, Outs, $"{AwayTeamTotalRuns} - {HomeTeamTotalRuns}", color));
         }
     }
 }

@@ -12,6 +12,11 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -22,16 +27,27 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Choose Team Creation Mode" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" />
-        <Button x:Name="CreateTeamsButton" Click="CreateTeamsButton_Click" Content="Create Teams" FontSize="28" Grid.Column="1" Grid.Row="2" Margin="5 5 5 5" Background="LightGray"/>
-        <Button x:Name="SelectHistoricalTeamsButton" Grid.Column="1" Grid.Row="3" Margin="5 5 5 5" Background="LightGray" Click="SelectHistoricalTeamsButton_Click">
+        <TextBlock Text="Choose Team Creation Mode" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="8" />
+        <Button x:Name="CreateTeamsButton" Click="CreateTeamsButton_Click" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Margin="5 5 5 5" Background="LightGray">
+            <TextBlock Text="Manually Search Players" FontSize="24" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="SelectHistoricalTeamsButton" Grid.Column="2" Grid.Row="4" Grid.ColumnSpan="2" Margin="5 5 5 5" Background="LightGray" Click="SelectHistoricalTeamsButton_Click">
             <TextBlock Text="Select Historical Teams" FontSize="24" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Button>
-        <Button x:Name="GenerateRandomTeamsButton" Grid.Column="1" Grid.Row="4" Margin="5 5 5 5" Background="LightGray" Click="GenerateRandomTeamsButton_Click">
+        <Button x:Name="GenerateRandomTeamsButton" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" Margin="5 5 5 5" Background="LightGray" Click="GenerateRandomTeamsButton_Click">
             <TextBlock Text="Generate Random Teams" FontSize="22" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Button>
-        <Button x:Name="backButton" Click="backButton_Click" Content="Back" FontSize="28" Grid.Column="1" Grid.Row="5" Margin="5 5 5 5" Background="LightGray"/>
-        <Grid x:Name="historicalTeamSelectorGrid" Grid.ColumnSpan="3" Grid.RowSpan="7" Visibility="{Binding HistoricalTeamSelectorVisibility}" Panel.ZIndex="2" Background="DarkSeaGreen">
+        <Button x:Name="GenerateRandomHallOfFamersButton" Click="GenerateRandomHallOfFamersButton_Click" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" Margin="5 5 5 5" Background="LightGray">
+            <TextBlock Text="Generate Team Of Random Hall Of Famers" FontSize="24" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="GenerateRandomAllStarsButton" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="2" Margin="5 5 5 5" Background="LightGray" Click="GenerateRandomAllStarsButton_Click">
+            <TextBlock Text="Generate Team Of Random All Stars" FontSize="24" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="SelectFranchiseAllTimeAllStarTeamsButton" Grid.Column="4" Grid.Row="4" Grid.ColumnSpan="2" Margin="5 5 5 5" Background="LightGray" Click="SelectFranchiseAllTimeAllStarTeamsButton_Click">
+            <TextBlock Text="Select Franchise All-Time All-Star Teams" FontSize="22" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+        <Button x:Name="backButton" Click="backButton_Click" Content="Back" FontSize="28" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="2" Margin="5 5 5 5" Background="LightGray"/>
+        <Grid x:Name="historicalTeamSelectorGrid" Grid.ColumnSpan="8" Grid.RowSpan="7" Visibility="{Binding HistoricalTeamSelectorVisibility}" Panel.ZIndex="2" Background="DarkSeaGreen">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -56,7 +72,33 @@
             <Button x:Name="SubmitHistoricalTeamsButton" Click="SubmitHistoricalTeamsButton_Click" Grid.Column="2" Grid.Row="3" Content="Submit" Margin="5 5 5 5"/>
             <Button x:Name="HistoricalTeamSelectorBackButton" Click="HistoricalTeamSelectorBackButton_Click" Grid.Column="2" Grid.Row="4" Content="Back" Margin="5 5 5 5"/>
         </Grid>
-        <Grid x:Name="loadingGrid" Grid.ColumnSpan="3" Grid.RowSpan="7" Visibility="{Binding LoadingVisibility}" Panel.ZIndex="3">
+        <Grid x:Name="historicalFranchiseSelectorGrid" Grid.ColumnSpan="8" Grid.RowSpan="7" Visibility="{Binding HistoricalFranchiseSelectorVisibility}" Panel.ZIndex="2" Background="DarkSeaGreen">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Away Team:" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2"/>
+            <ComboBox x:Name="awayTeamHistoricalFranchiseNameComboBox" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Margin="5 5 5 5" ItemsSource="{Binding AwayTeamHistoricalFranchiseNames}" SelectedItem="{Binding SelectedAwayTeamHistoricalFranchiseName}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <TextBlock Text="Home Team:" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2"/>
+            <ComboBox x:Name="homeTeamHistoricalFranchiseNameComboBox" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Margin="5 5 5 5" ItemsSource="{Binding HomeTeamHistoricalFranchiseNames}" SelectedItem="{Binding SelectedHomeTeamHistoricalFranchiseName}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Button x:Name="SubmitHistoricalFranchisesButton" Click="SubmitHistoricalFranchisesButton_Click" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="2" Content="Submit" Margin="5 5 5 5"/>
+            <Button x:Name="HistoricalFranchiseSelectorBackButton" Click="HistoricalFranchiseSelectorBackButton_Click" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="2" Content="Back" Margin="5 5 5 5"/>
+        </Grid>
+        <Grid x:Name="loadingGrid" Grid.ColumnSpan="8" Grid.RowSpan="7" Visibility="{Binding LoadingVisibility}" Panel.ZIndex="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

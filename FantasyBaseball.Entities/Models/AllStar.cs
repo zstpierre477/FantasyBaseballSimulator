@@ -4,7 +4,7 @@
     {
         public int AllStarId { get; set; }
         public int PersonId { get; set; }
-        public short? Year { get; set; }
+        public short Year { get; set; }
         public short GameNumber { get; set; }
         public string GameId { get; set; }
         public string TeamAbbreviation { get; set; }

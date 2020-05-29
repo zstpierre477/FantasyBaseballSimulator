@@ -5,7 +5,7 @@ namespace FantasyBaseball.Business.Services
 {
     public interface IRandomPlayerSelectorService
     {
-        PlayerStint SelectRandomBatter(PositionType positionType, bool starter = false);
-        PlayerStint SelectRandomPitcher(bool starter = false);
+        PlayerStint SelectRandomBatter(PositionType positionType, bool starter = false, bool hallOfFamer = false, bool allStar = false);
+        PlayerStint SelectRandomPitcher(bool starter = false, bool hallOfFamer = false, bool allStar = false);
     }
 }

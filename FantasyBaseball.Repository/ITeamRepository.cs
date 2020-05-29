@@ -7,5 +7,6 @@ namespace FantasyBaseball.Repository
     {
         IEnumerable<Team> GetAllTeamNamesAndYears();
         Team GetTeamWithPlayers(int teamId);
+        IEnumerable<Franchise> GetActiveFranchiseNames();
     }
 }

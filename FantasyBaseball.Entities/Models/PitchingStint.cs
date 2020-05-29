@@ -1,4 +1,7 @@
-﻿namespace FantasyBaseball.Entities.Models
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FantasyBaseball.Entities.Models
 {
     public partial class PitchingStint
     {
@@ -38,5 +41,11 @@
         public virtual League League { get; set; }
         public virtual Person Person { get; set; }
         public virtual Team Team { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public double WalksAndHitsPerInningsPitched { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public double WalksAndHitsPerInningsPitchedPlusEarnedRunAverage { get; set; }
     }
 }
