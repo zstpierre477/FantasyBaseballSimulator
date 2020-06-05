@@ -117,8 +117,8 @@ namespace FantasyBaseball.Repository
                           join t in db.Team.AsNoTracking()
                           on pi.TeamId equals t.TeamId
                           join b in db.BattingStint.AsNoTracking()
-                          on new { pi.PersonId, pi.Stint }
-                          equals new { b.PersonId, b.Stint }
+                          on new { pi.PersonId, pi.Stint, pi.Year }
+                          equals new { b.PersonId, b.Stint, b.Year }
                           join f in db.FieldingStint.AsNoTracking()
                           on new { pi.PersonId, pi.Stint, pi.Year }
                           equals new { f.PersonId, f.Stint, f.Year }
@@ -139,7 +139,7 @@ namespace FantasyBaseball.Repository
                     Person = q.First().Person,
                     PitchingStint = q.First().PitchingStint,
                     Team = q.First().Team,
-                    FieldingStints = q2.GroupBy(q => q.FieldingStint.FieldingStintId).Select(y => y.First().FieldingStint)
+                    FieldingStints = q.Select(y => y.FieldingStint)
                 });
             }
         }
