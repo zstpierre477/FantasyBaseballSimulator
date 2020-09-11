@@ -22,6 +22,8 @@ namespace FantasyBaseball.UI.ViewModels
         {
             switch (viewType)
             {
+                case "FantasyBaseball.UI.Views.GameSelectorView":
+                    return new GameSelectorViewModel(ServiceProvider.GetService<IDatabaseLoader>());
                 case "FantasyBaseball.UI.Views.BatterSearchView":
                     return new BatterSearchViewModel(ServiceProvider.GetService<IPlayerSearchServiceFactory>());
                 case "FantasyBaseball.UI.Views.PitcherSearchView":

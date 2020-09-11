@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FantasyBaseball.Repository"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FantasyBaseball.Business", "FantasyBaseball.Business\FantasyBaseball.Business.csproj", "{EDB0EB3F-6EC2-496A-B51B-2043FB756477}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FantasyBaseball.UI", "FantasyBaseball.UI\FantasyBaseball.UI.csproj", "{C1ECA380-E7C7-4B45-BBDE-7A49FAD50220}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FantasyBaseball.UI", "FantasyBaseball.UI\FantasyBaseball.UI.csproj", "{C1ECA380-E7C7-4B45-BBDE-7A49FAD50220}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

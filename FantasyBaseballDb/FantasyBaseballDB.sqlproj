@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{e6ded316-da20-4e3e-81aa-b994de190c1f}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -59,42 +59,38 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
-    <Folder Include="Scripts" />
-    <Folder Include="Scripts\InitializeDbScripts" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Scripts\InitializeDbScripts\AllStarData.sql" />
-    <None Include="Scripts\InitializeDbScripts\AppearancesData.sql" />
-    <None Include="Scripts\InitializeDbScripts\AwardData.sql" />
-    <None Include="Scripts\InitializeDbScripts\AwardVotingData.sql" />
-    <None Include="Scripts\InitializeDbScripts\BattingPostseasonRoundData.sql" />
-    <None Include="Scripts\InitializeDbScripts\BattingStintData.sql" />
-    <None Include="Scripts\InitializeDbScripts\CollegeStintData.sql" />
-    <None Include="Scripts\InitializeDbScripts\DivisionData.sql" />
-    <None Include="Scripts\InitializeDbScripts\FieldingOutfieldStintData.sql" />
-    <None Include="Scripts\InitializeDbScripts\FieldingPostseasonRoundData.sql" />
-    <None Include="Scripts\InitializeDbScripts\FieldingStintData.sql" />
-    <None Include="Scripts\InitializeDbScripts\FranchiseData.sql" />
-    <None Include="Scripts\InitializeDbScripts\HallOfFameMemberData.sql" />
-    <None Include="Scripts\InitializeDbScripts\LeagueData.sql" />
-    <None Include="Scripts\InitializeDbScripts\ManagerStintData.sql" />
-    <None Include="Scripts\InitializeDbScripts\ParkData.sql" />
-    <None Include="Scripts\InitializeDbScripts\ParkStintData.sql" />
-    <None Include="Scripts\InitializeDbScripts\PersonData.sql" />
-    <None Include="Scripts\InitializeDbScripts\PitchingPostseasonRoundData.sql" />
-    <None Include="Scripts\InitializeDbScripts\PitchingStintData.sql" />
-    <None Include="Scripts\InitializeDbScripts\PostseasonSeriesData.sql" />
-    <None Include="Scripts\InitializeDbScripts\SalaryData.sql" />
-    <None Include="Scripts\InitializeDbScripts\SchoolData.sql" />
-    <None Include="Scripts\InitializeDbScripts\TeamData.sql" />
+    <Folder Include="InitializeDbScripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\CreateDatabase.sql" />
+    <Build Include="InitializeDbScripts\AllStarData.sql" />
+    <Build Include="InitializeDbScripts\AppearancesData.sql" />
+    <Build Include="InitializeDbScripts\AwardData.sql" />
+    <Build Include="InitializeDbScripts\AwardVotingData.sql" />
+    <Build Include="InitializeDbScripts\BattingPostseasonRoundData.sql" />
+    <Build Include="InitializeDbScripts\BattingStintData.sql" />
+    <Build Include="InitializeDbScripts\CollegeStintData.sql" />
+    <Build Include="InitializeDbScripts\DivisionData.sql" />
+    <Build Include="InitializeDbScripts\FieldingOutfieldStintData.sql" />
+    <Build Include="InitializeDbScripts\FieldingPostseasonRoundData.sql" />
+    <Build Include="InitializeDbScripts\FieldingStintData.sql" />
+    <Build Include="InitializeDbScripts\FranchiseData.sql" />
+    <Build Include="InitializeDbScripts\HallOfFameMemberData.sql" />
+    <Build Include="InitializeDbScripts\LeagueData.sql" />
+    <Build Include="InitializeDbScripts\ManagerStintData.sql" />
+    <Build Include="InitializeDbScripts\ParkData.sql" />
+    <Build Include="InitializeDbScripts\ParkStintData.sql" />
+    <Build Include="InitializeDbScripts\PersonData.sql" />
+    <Build Include="InitializeDbScripts\PitchingPostseasonRoundData.sql" />
+    <Build Include="InitializeDbScripts\PitchingStintData.sql" />
+    <Build Include="InitializeDbScripts\PostseasonSeriesData.sql" />
+    <Build Include="InitializeDbScripts\SalaryData.sql" />
+    <Build Include="InitializeDbScripts\SchoolData.sql" />
+    <Build Include="InitializeDbScripts\TeamData.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="publish.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Scripts\PostDeploy.sql" />
   </ItemGroup>
 </Project>

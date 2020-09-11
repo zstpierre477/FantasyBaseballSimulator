@@ -28,5 +28,24 @@
             <TextBlock Text="Franchise Game (Not Implemented)" FontSize="28" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Button>
         <Button x:Name="quitButton" Content="Quit" FontSize="28" Grid.Column="1" Grid.Row="4" Click="quitButton_Click" Margin="5 5 5 5"/>
+        <Grid x:Name="loadingGrid" Grid.ColumnSpan="3" Grid.RowSpan="6" Visibility="{Binding LoadingVisibility}" Panel.ZIndex="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Viewbox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Stretch="Fill">
+                <Label Content="Loading..." Background="White"/>
+            </Viewbox>
+            <MediaElement x:Name="loadingGif" LoadedBehavior="Play" Stretch="Fill" Source="Images/loading.GIF" UnloadedBehavior="Manual" MediaEnded="loadingGif_MediaEnded" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <Border BorderThickness="3" BorderBrush="Black" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        </Grid>
     </Grid>
 </Window>
