@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using FantasyBaseball.Repository.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace FantasyBaseball.Repository
 {
@@ -43,26 +44,39 @@ namespace FantasyBaseball.Repository
 
         private void AddEntities<T>(string filePath)
         {
-            var lines = File.ReadAllLines(filePath);
-            var entities = lines.Select(l => l.CreateEntity<T>());
-
             var count = 0;
+            string line;
+            var file = new StreamReader(filePath);
             var db = new FantasyBaseballDbContext();
 
-            foreach (var entity in entities)
+            while ((line = file.ReadLine()) != null)
             {
+                var entity = line.CreateEntity<T>();
+
                 db.Add(entity);
 
-                if (count % 300 == 0)
+                if (count % 500 == 0)
                 {
+                    db.Database.OpenConnection();
+                    db.Database.ExecuteSqlRaw($"SET IDENTITY_INSERT {typeof(T).FullName.Replace("FantasyBaseball.Entities.Models.", "")} ON");
                     db.SaveChanges();
+                    db.Database.ExecuteSqlRaw($"SET IDENTITY_INSERT {typeof(T).FullName.Replace("FantasyBaseball.Entities.Models.", "")} OFF");
+                    db.Database.CloseConnection();
                     db.Dispose();
                     db = new FantasyBaseballDbContext();
                 }
+
+                count++;
             }
 
+            db.Database.OpenConnection();
+            db.Database.ExecuteSqlRaw($"SET IDENTITY_INSERT {typeof(T).FullName.Replace("FantasyBaseball.Entities.Models.", "")} ON");
             db.SaveChanges();
+            db.Database.ExecuteSqlRaw($"SET IDENTITY_INSERT {typeof(T).FullName.Replace("FantasyBaseball.Entities.Models.", "")} OFF");
+            db.Database.CloseConnection();
             db.Dispose();
+
+            file.Close();
         }
     }
 }

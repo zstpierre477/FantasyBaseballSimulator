@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="DatabaseLoaderFiles\BattingStintData.txt~RFcae64669.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FantasyBaseball.Entities\FantasyBaseball.Entities.csproj" />
   </ItemGroup>
 
