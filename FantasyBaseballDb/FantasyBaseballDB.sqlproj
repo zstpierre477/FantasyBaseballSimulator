@@ -59,34 +59,9 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
-    <Folder Include="InitializeDbScripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\CreateDatabase.sql" />
-    <Build Include="InitializeDbScripts\AllStarData.sql" />
-    <Build Include="InitializeDbScripts\AppearancesData.sql" />
-    <Build Include="InitializeDbScripts\AwardData.sql" />
-    <Build Include="InitializeDbScripts\AwardVotingData.sql" />
-    <Build Include="InitializeDbScripts\BattingPostseasonRoundData.sql" />
-    <Build Include="InitializeDbScripts\BattingStintData.sql" />
-    <Build Include="InitializeDbScripts\CollegeStintData.sql" />
-    <Build Include="InitializeDbScripts\DivisionData.sql" />
-    <Build Include="InitializeDbScripts\FieldingOutfieldStintData.sql" />
-    <Build Include="InitializeDbScripts\FieldingPostseasonRoundData.sql" />
-    <Build Include="InitializeDbScripts\FieldingStintData.sql" />
-    <Build Include="InitializeDbScripts\FranchiseData.sql" />
-    <Build Include="InitializeDbScripts\HallOfFameMemberData.sql" />
-    <Build Include="InitializeDbScripts\LeagueData.sql" />
-    <Build Include="InitializeDbScripts\ManagerStintData.sql" />
-    <Build Include="InitializeDbScripts\ParkData.sql" />
-    <Build Include="InitializeDbScripts\ParkStintData.sql" />
-    <Build Include="InitializeDbScripts\PersonData.sql" />
-    <Build Include="InitializeDbScripts\PitchingPostseasonRoundData.sql" />
-    <Build Include="InitializeDbScripts\PitchingStintData.sql" />
-    <Build Include="InitializeDbScripts\PostseasonSeriesData.sql" />
-    <Build Include="InitializeDbScripts\SalaryData.sql" />
-    <Build Include="InitializeDbScripts\SchoolData.sql" />
-    <Build Include="InitializeDbScripts\TeamData.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="publish.xml">

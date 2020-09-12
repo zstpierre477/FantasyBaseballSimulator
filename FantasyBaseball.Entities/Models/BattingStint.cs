@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace FantasyBaseball.Entities.Models
+﻿namespace FantasyBaseball.Entities.Models
 {
     public partial class BattingStint
     {
@@ -31,18 +27,12 @@ namespace FantasyBaseball.Entities.Models
         public short SacrificeHits { get; set; }
         public short SacrificeFlies { get; set; }
         public short GroundedIntoDoublePlay { get; set; }
+        public int? OnBasePercentage { get; set; }
+        public int? SluggingPercentage { get; set; }
+        public int? OnBasePlusSlugging { get; set; }
 
         public virtual League League { get; set; }
         public virtual Person Person { get; set; }
         public virtual Team Team { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public double OnBasePercentage { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public double SluggingPercentage { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public double OnBasePlusSlugging { get; set; }
     }
 }

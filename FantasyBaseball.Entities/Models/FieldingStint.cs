@@ -1,7 +1,7 @@
-﻿using FantasyBaseball.Entities.Enums;
-using FantasyBaseball.Entities.Helpers;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using FantasyBaseball.Entities.Enums;
+using FantasyBaseball.Entities.Helpers;
 
 namespace FantasyBaseball.Entities.Models
 {
@@ -31,10 +31,10 @@ namespace FantasyBaseball.Entities.Models
         public short Assists { get; set; }
         public short Errors { get; set; }
         public short DoublePlays { get; set; }
-        public short PassedBalls { get; set; }
-        public short WildPitches { get; set; }
-        public short StolenBases { get; set; }
-        public short CaughtStealing { get; set; }
+        public short? PassedBalls { get; set; }
+        public short? WildPitches { get; set; }
+        public short? StolenBases { get; set; }
+        public short? CaughtStealing { get; set; }
         public short? ZoneRating { get; set; }
 
         public virtual League League { get; set; }
