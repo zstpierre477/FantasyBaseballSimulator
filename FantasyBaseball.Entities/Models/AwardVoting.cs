@@ -7,9 +7,9 @@
         public short Year { get; set; }
         public int LeagueId { get; set; }
         public int PersonId { get; set; }
-        public short? PointsWon { get; set; }
-        public short? PointsMax { get; set; }
-        public short? VotesFirst { get; set; }
+        public double? PointsWon { get; set; }
+        public double? PointsMax { get; set; }
+        public double? VotesFirst { get; set; }
 
         public virtual League League { get; set; }
         public virtual Person Person { get; set; }
