@@ -54,6 +54,7 @@
                 <DataGridTextColumn Header="AVG" Binding="{Binding Path='BattingAverage'}"/>
                 <DataGridTextColumn Header="OBP" Binding="{Binding Path='OnBasePercentage'}"/>
                 <DataGridTextColumn Header="SLG" Binding="{Binding Path='SluggingPercentage'}"/>
+                <DataGridTextColumn Header="OPS" Binding="{Binding Path='OnBasePlusSlugging'}"/>
                 <DataGridTextColumn Header="SB" Binding="{Binding Path='StolenBases'}"/>
                 <DataGridTextColumn Header="CS" Binding="{Binding Path='CaughtStealing'}"/>
                 <DataGridTextColumn Header="FLD PCT" Binding="{Binding Path='CurrentGamePositionFieldingPercentage'}"/>

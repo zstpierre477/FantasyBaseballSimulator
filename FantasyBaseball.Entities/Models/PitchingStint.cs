@@ -1,4 +1,7 @@
-﻿namespace FantasyBaseball.Entities.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace FantasyBaseball.Entities.Models
 {
     public partial class PitchingStint
     {
@@ -34,7 +37,7 @@
         public short SacrificeHits { get; set; }
         public short SacrificeFlies { get; set; }
         public short InducedDoublePlays { get; set; }
-        public int? WalksAndHitsPerInningsPitched { get; set; }
+        public double? WalksAndHitsPerInningsPitched { get; set; }
         public double? WalksAndHitsPerInningsPitchedPlusEarnedRunAverage { get; set; }
 
         public virtual League League { get; set; }

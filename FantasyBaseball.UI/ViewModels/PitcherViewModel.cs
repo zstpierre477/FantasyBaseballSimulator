@@ -104,7 +104,7 @@ namespace FantasyBaseball.UI.ViewModels
             HomeRuns = playerStint.PitchingStint.HomeRuns;
             Walks = playerStint.PitchingStint.Walks;
             Strikeouts = playerStint.PitchingStint.Strikeouts;
-            OpponentBattingAverage = playerStint.PitchingStint.OpponentBattingAverage ?? .000;
+            OpponentBattingAverage = playerStint.PitchingStint.OpponentBattingAverage;
             HitBatters = playerStint.PitchingStint.HitBatters;
             ThrowingHand = playerStint.Person.Throws;
             RaisePropertyChanged("PlayerInfoString");

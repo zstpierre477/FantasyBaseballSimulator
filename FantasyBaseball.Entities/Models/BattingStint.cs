@@ -1,4 +1,7 @@
-﻿namespace FantasyBaseball.Entities.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace FantasyBaseball.Entities.Models
 {
     public partial class BattingStint
     {
@@ -27,9 +30,9 @@
         public short SacrificeHits { get; set; }
         public short SacrificeFlies { get; set; }
         public short GroundedIntoDoublePlay { get; set; }
-        public int? OnBasePercentage { get; set; }
-        public int? SluggingPercentage { get; set; }
-        public int? OnBasePlusSlugging { get; set; }
+        public double? OnBasePercentage { get; set; }
+        public double? SluggingPercentage { get; set; }
+        public double? OnBasePlusSlugging { get; set; }
 
         public virtual League League { get; set; }
         public virtual Person Person { get; set; }

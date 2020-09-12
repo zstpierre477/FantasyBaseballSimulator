@@ -6390,7 +6390,7 @@
 6390,17675,NLCS MVP,2017,6,1,Co-MVP
 6391,12631,Comeback Player of the Year,2017,2,,
 6392,19855,Comeback Player of the Year,2017,6,,
-6393,3923,Outstanding DH Award,2017,,,
+6393,3923,Outstanding DH Award,2017,2,,
 6394,9477,Reliever of the Year Award,2017,2,,
 6395,8733,Reliever of the Year Award,2017,6,,
 6396,15735,TSN All-Star,2017,2,,C

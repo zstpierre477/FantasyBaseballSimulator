@@ -24,7 +24,7 @@ namespace FantasyBaseball.Repository.Extensions
                         GamesPlayed = string.IsNullOrEmpty(objects[8]) == false ? short.Parse(objects[8]) : (short?)null,
                         StartingPositionId = string.IsNullOrEmpty(objects[9]) == false ? short.Parse(objects[9]) : (short?)null
                     }, typeof(T));
-                case "FantasyBaseball.Entities.Models.Appearance":
+                case "FantasyBaseball.Entities.Models.Appearances":
                     return (T)Convert.ChangeType(new Appearances
                     {
                         AppearancesId = int.Parse(objects[0]),
@@ -68,9 +68,9 @@ namespace FantasyBaseball.Repository.Extensions
                         Year = short.Parse(objects[2]),
                         LeagueId = int.Parse(objects[3]),
                         PersonId = int.Parse(objects[4]),
-                        PointsWon = string.IsNullOrEmpty(objects[5]) == false ? short.Parse(objects[5]) : (short?)null,
-                        PointsMax = string.IsNullOrEmpty(objects[6]) == false ? short.Parse(objects[6]) : (short?)null,
-                        VotesFirst = string.IsNullOrEmpty(objects[7]) == false ? short.Parse(objects[7]) : (short?)null,
+                        PointsWon = string.IsNullOrEmpty(objects[5]) == false ? double.Parse(objects[5]) : (double?)null,
+                        PointsMax = string.IsNullOrEmpty(objects[6]) == false ? double.Parse(objects[6]) : (double?)null,
+                        VotesFirst = string.IsNullOrEmpty(objects[7]) == false ? double.Parse(objects[7]) : (double?)null,
                     }, typeof(T));
                 case "FantasyBaseball.Entities.Models.BattingPostseasonRound":
                     return (T)Convert.ChangeType(new BattingPostseasonRound

@@ -79,9 +79,11 @@ namespace FantasyBaseball.UI.ViewModels
 
         public double BattingAverage => AtBats > 0 ? Math.Round(Hits / (double)AtBats, 3) : .000;
 
-        public double OnBasePercentage => AtBats > 0 ? Math.Round((Hits + Walks + HitByPitch) / (double)(AtBats + Walks + HitByPitch + SacrificeFlies), 3) : .000;
+        public double OnBasePercentage { get; set; }
 
-        public double SluggingPercentage => AtBats > 0 ? Math.Round((Hits + Doubles + (Triples * 2) + (HomeRuns * 3)) / (double)AtBats, 3) : .000;
+        public double SluggingPercentage { get; set; }
+
+        public double OnBasePlusSlugging { get; set; }
 
         public PlayerStint PlayerStint { get; set; }
 
@@ -106,6 +108,9 @@ namespace FantasyBaseball.UI.ViewModels
             HitByPitch = playerStint.BattingStint.HitByPitch;
             SacrificeFlies = playerStint.BattingStint.SacrificeFlies;
             BattingHand = playerStint.Person.Bats;
+            OnBasePercentage = playerStint.BattingStint.OnBasePercentage ?? .000;
+            SluggingPercentage = playerStint.BattingStint.SluggingPercentage ?? .000;
+            OnBasePlusSlugging = playerStint.BattingStint.OnBasePlusSlugging ?? .000;
             RaisePropertyChanged("PlayerInfoString");
             RemovedFromGame = false;
         }
