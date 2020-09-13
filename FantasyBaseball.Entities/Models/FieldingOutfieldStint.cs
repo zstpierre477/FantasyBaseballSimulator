@@ -1,4 +1,7 @@
-﻿namespace FantasyBaseball.Entities.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace FantasyBaseball.Entities.Models
 {
     public partial class FieldingOutfieldStint
     {

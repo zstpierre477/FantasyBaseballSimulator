@@ -2,6 +2,7 @@
 using System.IO;
 using FantasyBaseball.Repository.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace FantasyBaseball.Repository
 {
@@ -11,8 +12,13 @@ namespace FantasyBaseball.Repository
         {
             using (var db = new FantasyBaseballDbContext())
             {
-                db.Database.EnsureDeleted();
+                // uncomment to recreate and fill db every time
+                //db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
+                if (db.BattingStint.Any())
+                {
+                    return;
+                }
             }
 
             //AddEntities<Park>("C:\\Users\\320079761\\source\\repos\\FantasyBaseballSimulator\\FantasyBaseball.Repository\\DatabaseLoaderFiles\\ParkData.txt");

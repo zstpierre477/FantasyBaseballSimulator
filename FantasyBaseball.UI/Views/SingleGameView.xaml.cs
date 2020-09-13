@@ -14,13 +14,13 @@ namespace FantasyBaseball.UI.Views
 
         private SingleGameTeamSelectorViewModel TeamSetup { get; set; }
 
-        public SingleGameView(IViewModelFactory viewModelFactory, SingleGameTeamSelectorViewModel singleGameTeamSelectorViewModel)
+        public SingleGameView(IViewModelFactory viewModelFactory, SingleGameTeamSelectorViewModel singleGameTeamSelectorViewModel, bool sortLineup = true)
         {
             InitializeComponent();
             ViewModelFactory = viewModelFactory;
             TeamSetup = singleGameTeamSelectorViewModel;
             var awayTeam = singleGameTeamSelectorViewModel.AwayTeam;
-            var awayTeamLineupEditor = new SingleGameTeamLineupEditorView(viewModelFactory, awayTeam);
+            var awayTeamLineupEditor = new SingleGameTeamLineupEditorView(viewModelFactory, awayTeam, false, sortLineup);
             awayTeamLineupEditor.ShowDialog();
             var awayTeamLineupEditorViewModel = (SingleGameTeamLineupEditorViewModel)awayTeamLineupEditor.DataContext;
             awayTeam = awayTeamLineupEditorViewModel.Team;
@@ -29,7 +29,7 @@ namespace FantasyBaseball.UI.Views
             var awayTeamBullpenEditorViewModel = (SingleGameTeamBullpenEditorViewModel)awayTeamBullpenEditor.DataContext;
             awayTeam = awayTeamBullpenEditorViewModel.Team;
             var homeTeam = singleGameTeamSelectorViewModel.HomeTeam;
-            var homeTeamLineupEditor = new SingleGameTeamLineupEditorView(viewModelFactory, homeTeam);
+            var homeTeamLineupEditor = new SingleGameTeamLineupEditorView(viewModelFactory, homeTeam, false, sortLineup);
             homeTeamLineupEditor.ShowDialog();
             var homeTeamLineupEditorViewModel = (SingleGameTeamLineupEditorViewModel)homeTeamLineupEditor.DataContext;
             homeTeam = homeTeamLineupEditorViewModel.Team;
@@ -43,7 +43,7 @@ namespace FantasyBaseball.UI.Views
         private void homeTeamBenchButton_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = (SingleGameViewModel)DataContext;
-            var homeTeamLineupEditor = new SingleGameTeamLineupEditorView(ViewModelFactory, viewModel.HomeTeam, true);
+            var homeTeamLineupEditor = new SingleGameTeamLineupEditorView(ViewModelFactory, viewModel.HomeTeam, true, false);
             homeTeamLineupEditor.ShowDialog();
             var homeTeamLineupEditorViewModel = (SingleGameTeamLineupEditorViewModel)homeTeamLineupEditor.DataContext;
             var homeTeam = homeTeamLineupEditorViewModel.Team;
@@ -63,7 +63,7 @@ namespace FantasyBaseball.UI.Views
         private void awayTeamBenchButton_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = (SingleGameViewModel)DataContext;
-            var awayTeamLineupEditor = new SingleGameTeamLineupEditorView(ViewModelFactory, viewModel.AwayTeam, true);
+            var awayTeamLineupEditor = new SingleGameTeamLineupEditorView(ViewModelFactory, viewModel.AwayTeam, true, false);
             awayTeamLineupEditor.ShowDialog();
             var awayTeamLineupEditorViewModel = (SingleGameTeamLineupEditorViewModel)awayTeamLineupEditor.DataContext;
             var awayTeam = awayTeamLineupEditorViewModel.Team;
@@ -89,7 +89,7 @@ namespace FantasyBaseball.UI.Views
 
         private void playAgainButton_Click(object sender, RoutedEventArgs e)
         {
-            var newGame = new SingleGameView(ViewModelFactory, TeamSetup);
+            var newGame = new SingleGameView(ViewModelFactory, TeamSetup, false);
             newGame.Show();
             Close();
         }

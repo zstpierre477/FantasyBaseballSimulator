@@ -57,7 +57,6 @@ namespace FantasyBaseball.UI.ViewModels
                 Team.CurrentPitcher = Team.Bullpen[SelectedBullpenPitcher.BullpenIndex.Value];
                 Team.Bullpen[SelectedBullpenPitcher.BullpenIndex.Value] = currentPitcher;
                 SelectedBullpenPitcher = currentPitcher;
-                SelectedBullpenPitcher.BullpenIndex = Team.CurrentPitcher.BullpenIndex;
                 Team.CurrentPitcher.BullpenIndex = null;
             }
             else
@@ -65,8 +64,17 @@ namespace FantasyBaseball.UI.ViewModels
                 Team.CurrentPitcher = SelectedBullpenPitcher;
                 Team.Bullpen.Remove(Team.CurrentPitcher);
                 Team.UsedPitchers.Add(currentPitcher);
+                Team.CurrentPitcher.BullpenIndex = null;
+                SelectedBullpenPitcher = null;
+            }
+            var count = 0;
+            foreach (var pitcher in Team.Bullpen)
+            {
+                pitcher.BullpenIndex = count;
+                count++;
             }
             RaisePropertyChanged("CurrentPitcher");
+            RaisePropertyChanged("SelectedBullpenPitcher");
         }
 
         private bool CanSwitchPitcher()

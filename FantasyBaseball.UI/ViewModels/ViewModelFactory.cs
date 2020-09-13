@@ -18,7 +18,7 @@ namespace FantasyBaseball.UI.ViewModels
             ServiceProvider = serviceProvider;
         }
 
-        public INotifyPropertyChanged GetViewModel(string viewType, IEnumerable<ViewModelBase> viewModels = null)
+        public INotifyPropertyChanged GetViewModel(string viewType, IEnumerable<ViewModelBase> viewModels = null, bool sortLineup = true)
         {
             switch (viewType)
             {
@@ -35,7 +35,7 @@ namespace FantasyBaseball.UI.ViewModels
                 case "FantasyBaseball.UI.Views.SingleGameTeamSelectorView":
                     return new SingleGameTeamSelectorViewModel();
                 case "FantasyBaseball.UI.Views.SingleGameTeamLineupEditorView":
-                    return new SingleGameTeamLineupEditorViewModel((TeamViewModel)viewModels.First());
+                    return new SingleGameTeamLineupEditorViewModel((TeamViewModel)viewModels.First(), sortLineup);
                 case "FantasyBaseball.UI.Views.SingleGameTeamBullpenEditorView":
                     return new SingleGameTeamBullpenEditorViewModel((TeamViewModel)viewModels.First());
                 default:

@@ -6,6 +6,6 @@ namespace FantasyBaseball.UI.ViewModels
 {
     public interface IViewModelFactory
     {
-        public INotifyPropertyChanged GetViewModel(string viewType, IEnumerable<ViewModelBase> viewModels = null);
+        public INotifyPropertyChanged GetViewModel(string viewType, IEnumerable<ViewModelBase> viewModels = null, bool sortLineup = true);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using Microsoft.VisualStudio.PlatformUI;
 using System.Linq;
+using FantasyBaseball.UI.Extensions;
 
 namespace FantasyBaseball.UI.ViewModels
 {
@@ -50,14 +51,24 @@ namespace FantasyBaseball.UI.ViewModels
             set { _isGameStarted = value; RaisePropertyChanged("IsGameStarted"); _moveDownCommand.RaiseCanExecuteChanged(); _moveUpCommand.RaiseCanExecuteChanged(); _switchInLineupCommand.RaiseCanExecuteChanged(); }
         }
 
-        public SingleGameTeamLineupEditorViewModel(TeamViewModel teamViewModel)
+        public SingleGameTeamLineupEditorViewModel(TeamViewModel teamViewModel, bool sortLineup = true)
         {
             SwitchInLineupCommand = new DelegateCommand(SwitchInLineup, CanSwitchInLineup);
             MoveDownCommand = new DelegateCommand(MoveDown, CanMoveDown);
             MoveUpCommand = new DelegateCommand(MoveUp, CanMoveUp);
             Team = teamViewModel;
+            if (sortLineup)
+            {
+                Team.Lineup.Order(b => b.OnBasePlusSlugging, true);
+                var order = 0;
+                foreach (var batter in Team.Lineup)
+                {
+                    batter.CurrentGameLineupIndex = order;
+                    order++;
+                }
+            }
             SelectedLineupBatter = Team.Lineup.ElementAt(0);
-            if (Team.Bench.Count() > 0)
+            if (Team.Bench.Any())
             {
                 SelectedBenchBatter = Team.Bench.ElementAt(0);
             }

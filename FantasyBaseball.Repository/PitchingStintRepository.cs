@@ -149,6 +149,7 @@ namespace FantasyBaseball.Repository
             using (var db = new FantasyBaseballDbContext())
             {
                 var q1 = (from h in db.HallOfFameMember.AsNoTracking()
+                          where h.Inducted == true && h.Category == "Player"
                           join pi in db.PitchingStint.AsNoTracking()
                           on h.PersonId equals pi.PersonId
                           where pi.GamesStarted >= minimumGamesStarted && pi.InningsPitchedOuts >= minimumInningsPitchedOuts

@@ -108,9 +108,9 @@ namespace FantasyBaseball.UI.ViewModels
             HitByPitch = playerStint.BattingStint.HitByPitch;
             SacrificeFlies = playerStint.BattingStint.SacrificeFlies;
             BattingHand = playerStint.Person.Bats;
-            OnBasePercentage = playerStint.BattingStint.OnBasePercentage ?? .000;
-            SluggingPercentage = playerStint.BattingStint.SluggingPercentage ?? .000;
-            OnBasePlusSlugging = playerStint.BattingStint.OnBasePlusSlugging ?? .000;
+            OnBasePercentage = playerStint.BattingStint.OnBasePercentageDisplay ?? .000;
+            SluggingPercentage = playerStint.BattingStint.SluggingPercentageDisplay ?? .000;
+            OnBasePlusSlugging = playerStint.BattingStint.OnBasePlusSluggingDisplay ?? .000;
             RaisePropertyChanged("PlayerInfoString");
             RemovedFromGame = false;
         }

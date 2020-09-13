@@ -30,9 +30,13 @@ namespace FantasyBaseball.Entities.Models
         public short SacrificeHits { get; set; }
         public short SacrificeFlies { get; set; }
         public short GroundedIntoDoublePlay { get; set; }
-        public double? OnBasePercentage { get; set; }
-        public double? SluggingPercentage { get; set; }
-        public double? OnBasePlusSlugging { get; set; }
+        public double OnBasePercentage { get; set; }
+        public double SluggingPercentage { get; set; }
+        public double OnBasePlusSlugging { get; set; }
+
+        public double? OnBasePercentageDisplay => Math.Round(OnBasePercentage, 3);
+        public double? SluggingPercentageDisplay => Math.Round(SluggingPercentage, 3);
+        public double? OnBasePlusSluggingDisplay => Math.Round(OnBasePlusSlugging, 3);
 
         public virtual League League { get; set; }
         public virtual Person Person { get; set; }

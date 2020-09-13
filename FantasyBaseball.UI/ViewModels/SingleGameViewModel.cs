@@ -1278,14 +1278,17 @@ namespace FantasyBaseball.UI.ViewModels
             if (RunnerOnThird != null)
             {
                 ProcessOut($"{RunnerOnThird.LastName} was doubled off third");
+                RunnerOnThird = null;
             }
             else if (RunnerOnSecond != null)
             {
                 ProcessOut($"{RunnerOnSecond.LastName} was doubled off second");
+                RunnerOnSecond = null;
             }
             else if (RunnerOnFirst != null)
             {
                 ProcessOut($"{RunnerOnFirst.LastName} was doubled off first");
+                RunnerOnFirst = null;
             }
         }
 
@@ -1296,6 +1299,7 @@ namespace FantasyBaseball.UI.ViewModels
             if (RunnerOnThird != null)
             {
                 ProcessOut($"{RunnerOnThird.LastName} was doubled off third");
+                RunnerOnThird = null;
                 if (RunnerOnSecond != null)
                 {
                     ProcessOut($"{RunnerOnSecond.LastName} was also tagged out for a triple play!");
@@ -1308,6 +1312,7 @@ namespace FantasyBaseball.UI.ViewModels
             if (RunnerOnSecond != null)
             {
                 ProcessOut($"{RunnerOnSecond.LastName} was doubled off second");
+                RunnerOnSecond = null;
                 if (RunnerOnFirst != null)
                 {
                     ProcessOut($"{RunnerOnFirst.LastName} was also tagged out for a triple play!");
@@ -1316,6 +1321,7 @@ namespace FantasyBaseball.UI.ViewModels
             if (RunnerOnFirst != null)
             {
                 ProcessOut($"{RunnerOnFirst.LastName} was doubled off first");
+                RunnerOnFirst = null;
             }
         }
 

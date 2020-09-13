@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace FantasyBaseball.Entities.Models
 {
@@ -43,7 +45,7 @@ namespace FantasyBaseball.Entities.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=FantasyBaseballDb;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=FantasyBaseballDb;Trusted_Connection=True;");
             }
         }
 
@@ -63,18 +65,18 @@ namespace FantasyBaseball.Entities.Models
                 entity.HasOne(d => d.League)
                     .WithMany(p => p.AllStar)
                     .HasForeignKey(d => d.LeagueId)
-                    .HasConstraintName("FK__AllStar__LeagueI__6319B466");
+                    .HasConstraintName("FK__AllStar__LeagueI__1F2E9E6D");
 
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.AllStar)
                     .HasForeignKey(d => d.PersonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__AllStar__PersonI__6501FCD8");
+                    .HasConstraintName("FK__AllStar__PersonI__2116E6DF");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.AllStar)
                     .HasForeignKey(d => d.TeamId)
-                    .HasConstraintName("FK__AllStar__TeamId__640DD89F");
+                    .HasConstraintName("FK__AllStar__TeamId__2022C2A6");
             });
 
             modelBuilder.Entity<Appearances>(entity =>
@@ -92,18 +94,18 @@ namespace FantasyBaseball.Entities.Models
                 entity.HasOne(d => d.League)
                     .WithMany(p => p.Appearances)
                     .HasForeignKey(d => d.LeagueId)
-                    .HasConstraintName("FK__Appearanc__Leagu__65F62111");
+                    .HasConstraintName("FK__Appearanc__Leagu__220B0B18");
 
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.Appearances)
                     .HasForeignKey(d => d.PersonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Appearanc__Perso__67DE6983");
+                    .HasConstraintName("FK__Appearanc__Perso__23F3538A");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.Appearances)
                     .HasForeignKey(d => d.TeamId)
-                    .HasConstraintName("FK__Appearanc__TeamI__66EA454A");
+                    .HasConstraintName("FK__Appearanc__TeamI__22FF2F51");
             });
 
             modelBuilder.Entity<Award>(entity =>
@@ -125,13 +127,13 @@ namespace FantasyBaseball.Entities.Models
                     .WithMany(p => p.Award)
                     .HasForeignKey(d => d.LeagueId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Award__LeagueId__68D28DBC");
+                    .HasConstraintName("FK__Award__LeagueId__24E777C3");
 
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.Award)
                     .HasForeignKey(d => d.PersonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Award__PersonId__69C6B1F5");
+                    .HasConstraintName("FK__Award__PersonId__25DB9BFC");
             });
 
             modelBuilder.Entity<AwardVoting>(entity =>
@@ -149,13 +151,13 @@ namespace FantasyBaseball.Entities.Models
                     .WithMany(p => p.AwardVoting)
                     .HasForeignKey(d => d.LeagueId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__AwardVoti__Leagu__6ABAD62E");
+                    .HasConstraintName("FK__AwardVoti__Leagu__26CFC035");
 
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.AwardVoting)
                     .HasForeignKey(d => d.PersonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__AwardVoti__Perso__6BAEFA67");
+                    .HasConstraintName("FK__AwardVoti__Perso__27C3E46E");
             });
 
             modelBuilder.Entity<BattingPostseasonRound>(entity =>
@@ -177,18 +179,18 @@ namespace FantasyBaseball.Entities.Models
                 entity.HasOne(d => d.League)
                     .WithMany(p => p.BattingPostseasonRound)
                     .HasForeignKey(d => d.LeagueId)
-                    .HasConstraintName("FK__BattingPo__Leagu__6CA31EA0");
+                    .HasConstraintName("FK__BattingPo__Leagu__28B808A7");
 
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.BattingPostseasonRound)
                     .HasForeignKey(d => d.PersonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__BattingPo__Perso__6E8B6712");
+                    .HasConstraintName("FK__BattingPo__Perso__2AA05119");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.BattingPostseasonRound)
                     .HasForeignKey(d => d.TeamId)
-                    .HasConstraintName("FK__BattingPo__TeamI__6D9742D9");
+                    .HasConstraintName("FK__BattingPo__TeamI__29AC2CE0");
             });
 
             modelBuilder.Entity<BattingStint>(entity =>
@@ -197,11 +199,11 @@ namespace FantasyBaseball.Entities.Models
                     .HasName("UC_BattingStint")
                     .IsUnique();
 
-                entity.Property(e => e.OnBasePercentage).HasComputedColumnSql("(case when ((([AtBats]+[Walks])+[HitByPitch])+[SacrificeFlies])=(0) then (0) else (([Hits]+[Walks])+[HitByPitch])/((([AtBats]+[Walks])+[HitByPitch])+[SacrificeFlies]) end)");
+                entity.Property(e => e.OnBasePercentage).HasComputedColumnSql("(case when ((([AtBats]+[Walks])+[HitByPitch])+[SacrificeFlies])=(0) then (0) else (([Hits]+[Walks])+[HitByPitch])/(((CONVERT([float],[AtBats])+[Walks])+[HitByPitch])+[SacrificeFlies]) end)");
 
-                entity.Property(e => e.OnBasePlusSlugging).HasComputedColumnSql("(case when [AtBats]=(0) OR ((([AtBats]+[Walks])+[HitByPitch])+[SacrificeFlies])=(0) then (0) else (([Hits]+[Walks])+[HitByPitch])/((([AtBats]+[Walks])+[HitByPitch])+[SacrificeFlies])+((([Hits]+[Doubles])+(2)*[Triples])+(3)*[HomeRuns])/[AtBats] end)");
+                entity.Property(e => e.OnBasePlusSlugging).HasComputedColumnSql("(case when [AtBats]=(0) OR ((([AtBats]+[Walks])+[HitByPitch])+[SacrificeFlies])=(0) then (0) else (([Hits]+[Walks])+[HitByPitch])/(((CONVERT([float],[AtBats])+[Walks])+[HitByPitch])+[SacrificeFlies])+(((CONVERT([float],[Hits])+[Doubles])+(2)*[Triples])+(3)*[HomeRuns])/[AtBats] end)");
 
-                entity.Property(e => e.SluggingPercentage).HasComputedColumnSql("(case when [AtBats]=(0) then (0) else ((([Hits]+[Doubles])+(2)*[Triples])+(3)*[HomeRuns])/[AtBats] end)");
+                entity.Property(e => e.SluggingPercentage).HasComputedColumnSql("(case when [AtBats]=(0) then (0) else ((([Hits]+[Doubles])+(2)*[Triples])+(3)*[HomeRuns])/CONVERT([float],[AtBats]) end)");
 
                 entity.Property(e => e.TeamAbbreviation)
                     .HasMaxLength(3)
@@ -211,18 +213,18 @@ namespace FantasyBaseball.Entities.Models
                 entity.HasOne(d => d.League)
                     .WithMany(p => p.BattingStint)
                     .HasForeignKey(d => d.LeagueId)
-                    .HasConstraintName("FK__BattingSt__Leagu__40C49C62");
+                    .HasConstraintName("FK__BattingSt__Leagu__2B947552");
 
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.BattingStint)
                     .HasForeignKey(d => d.PersonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__BattingSt__Perso__42ACE4D4");
+                    .HasConstraintName("FK__BattingSt__Perso__2D7CBDC4");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.BattingStint)
                     .HasForeignKey(d => d.TeamId)
-                    .HasConstraintName("FK__BattingSt__TeamI__41B8C09B");
+                    .HasConstraintName("FK__BattingSt__TeamI__2C88998B");
             });
 
             modelBuilder.Entity<CollegeStint>(entity =>
@@ -231,12 +233,12 @@ namespace FantasyBaseball.Entities.Models
                     .WithMany(p => p.CollegeStint)
                     .HasForeignKey(d => d.PersonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__CollegeSt__Perso__44952D46");
+                    .HasConstraintName("FK__CollegeSt__Perso__2F650636");
 
                 entity.HasOne(d => d.School)
                     .WithMany(p => p.CollegeStint)
                     .HasForeignKey(d => d.SchoolId)
-                    .HasConstraintName("FK__CollegeSt__Schoo__43A1090D");
+                    .HasConstraintName("FK__CollegeSt__Schoo__2E70E1FD");
             });
 
             modelBuilder.Entity<Division>(entity =>
@@ -260,7 +262,7 @@ namespace FantasyBaseball.Entities.Models
                     .WithMany(p => p.Division)
                     .HasForeignKey(d => d.LeagueId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Division__League__4589517F");
+                    .HasConstraintName("FK__Division__League__30592A6F");
             });
 
             modelBuilder.Entity<FieldingOutfieldStint>(entity =>
@@ -273,7 +275,7 @@ namespace FantasyBaseball.Entities.Models
                     .WithMany(p => p.FieldingOutfieldStint)
                     .HasForeignKey(d => d.PersonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__FieldingO__Perso__467D75B8");
+                    .HasConstraintName("FK__FieldingO__Perso__314D4EA8");
             });
 
             modelBuilder.Entity<FieldingPostseasonRound>(entity =>
@@ -300,18 +302,18 @@ namespace FantasyBaseball.Entities.Models
                 entity.HasOne(d => d.League)
                     .WithMany(p => p.FieldingPostseasonRound)
                     .HasForeignKey(d => d.LeagueId)
-                    .HasConstraintName("FK__FieldingP__Leagu__477199F1");
+                    .HasConstraintName("FK__FieldingP__Leagu__324172E1");
 
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.FieldingPostseasonRound)
                     .HasForeignKey(d => d.PersonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__FieldingP__Perso__4959E263");
+                    .HasConstraintName("FK__FieldingP__Perso__3429BB53");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.FieldingPostseasonRound)
                     .HasForeignKey(d => d.TeamId)
-                    .HasConstraintName("FK__FieldingP__TeamI__4865BE2A");
+                    .HasConstraintName("FK__FieldingP__TeamI__3335971A");
             });
 
             modelBuilder.Entity<FieldingStint>(entity =>
@@ -333,18 +335,18 @@ namespace FantasyBaseball.Entities.Models
                 entity.HasOne(d => d.League)
                     .WithMany(p => p.FieldingStint)
                     .HasForeignKey(d => d.LeagueId)
-                    .HasConstraintName("FK__FieldingS__Leagu__4A4E069C");
+                    .HasConstraintName("FK__FieldingS__Leagu__351DDF8C");
 
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.FieldingStint)
                     .HasForeignKey(d => d.PersonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__FieldingS__Perso__4C364F0E");
+                    .HasConstraintName("FK__FieldingS__Perso__370627FE");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.FieldingStint)
                     .HasForeignKey(d => d.TeamId)
-                    .HasConstraintName("FK__FieldingS__TeamI__4B422AD5");
+                    .HasConstraintName("FK__FieldingS__TeamI__361203C5");
             });
 
             modelBuilder.Entity<Franchise>(entity =>
@@ -386,7 +388,7 @@ namespace FantasyBaseball.Entities.Models
                     .WithMany(p => p.HallOfFameMember)
                     .HasForeignKey(d => d.PersonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__HallOfFam__Perso__4D2A7347");
+                    .HasConstraintName("FK__HallOfFam__Perso__37FA4C37");
             });
 
             modelBuilder.Entity<League>(entity =>
@@ -418,17 +420,17 @@ namespace FantasyBaseball.Entities.Models
                 entity.HasOne(d => d.League)
                     .WithMany(p => p.ManagerStint)
                     .HasForeignKey(d => d.LeagueId)
-                    .HasConstraintName("FK__ManagerSt__Leagu__4E1E9780");
+                    .HasConstraintName("FK__ManagerSt__Leagu__38EE7070");
 
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.ManagerStint)
                     .HasForeignKey(d => d.PersonId)
-                    .HasConstraintName("FK__ManagerSt__Perso__5006DFF2");
+                    .HasConstraintName("FK__ManagerSt__Perso__3AD6B8E2");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.ManagerStint)
                     .HasForeignKey(d => d.TeamId)
-                    .HasConstraintName("FK__ManagerSt__TeamI__4F12BBB9");
+                    .HasConstraintName("FK__ManagerSt__TeamI__39E294A9");
             });
 
             modelBuilder.Entity<Park>(entity =>
@@ -484,17 +486,17 @@ namespace FantasyBaseball.Entities.Models
                 entity.HasOne(d => d.League)
                     .WithMany(p => p.ParkStint)
                     .HasForeignKey(d => d.LeagueId)
-                    .HasConstraintName("FK__ParkStint__Leagu__50FB042B");
+                    .HasConstraintName("FK__ParkStint__Leagu__3BCADD1B");
 
                 entity.HasOne(d => d.Park)
                     .WithMany(p => p.ParkStint)
                     .HasForeignKey(d => d.ParkId)
-                    .HasConstraintName("FK__ParkStint__ParkI__52E34C9D");
+                    .HasConstraintName("FK__ParkStint__ParkI__3DB3258D");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.ParkStint)
                     .HasForeignKey(d => d.TeamId)
-                    .HasConstraintName("FK__ParkStint__TeamI__51EF2864");
+                    .HasConstraintName("FK__ParkStint__TeamI__3CBF0154");
             });
 
             modelBuilder.Entity<Person>(entity =>
@@ -593,18 +595,18 @@ namespace FantasyBaseball.Entities.Models
                 entity.HasOne(d => d.League)
                     .WithMany(p => p.PitchingPostseasonRound)
                     .HasForeignKey(d => d.LeagueId)
-                    .HasConstraintName("FK__PitchingP__Leagu__53D770D6");
+                    .HasConstraintName("FK__PitchingP__Leagu__3EA749C6");
 
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.PitchingPostseasonRound)
                     .HasForeignKey(d => d.PersonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PitchingP__Perso__55BFB948");
+                    .HasConstraintName("FK__PitchingP__Perso__408F9238");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.PitchingPostseasonRound)
                     .HasForeignKey(d => d.TeamId)
-                    .HasConstraintName("FK__PitchingP__TeamI__54CB950F");
+                    .HasConstraintName("FK__PitchingP__TeamI__3F9B6DFF");
             });
 
             modelBuilder.Entity<PitchingStint>(entity =>
@@ -618,25 +620,25 @@ namespace FantasyBaseball.Entities.Models
                     .IsUnicode(false)
                     .IsFixedLength();
 
-                entity.Property(e => e.WalksAndHitsPerInningsPitched).HasComputedColumnSql("(case when [InningsPitchedOuts]=(0) then (0) else (([Walks]+[Hits])/[InningsPitchedOuts])/(3) end)");
+                entity.Property(e => e.WalksAndHitsPerInningsPitched).HasComputedColumnSql("(case when [InningsPitchedOuts]=(0) then (0) else (([Walks]+[Hits])/CONVERT([float],[InningsPitchedOuts]))/(3) end)");
 
-                entity.Property(e => e.WalksAndHitsPerInningsPitchedPlusEarnedRunAverage).HasComputedColumnSql("(case when [InningsPitchedOuts]=(0) then (0) else (([Walks]+[Hits])/[InningsPitchedOuts])/(3)+[EarnedRunAverage] end)");
+                entity.Property(e => e.WalksAndHitsPerInningsPitchedPlusEarnedRunAverage).HasComputedColumnSql("(case when [InningsPitchedOuts]=(0) then (0) else (([Walks]+[Hits])/CONVERT([float],[InningsPitchedOuts]))/(3)+[EarnedRunAverage] end)");
 
                 entity.HasOne(d => d.League)
                     .WithMany(p => p.PitchingStint)
                     .HasForeignKey(d => d.LeagueId)
-                    .HasConstraintName("FK__PitchingS__Leagu__56B3DD81");
+                    .HasConstraintName("FK__PitchingS__Leagu__4183B671");
 
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.PitchingStint)
                     .HasForeignKey(d => d.PersonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PitchingS__Perso__589C25F3");
+                    .HasConstraintName("FK__PitchingS__Perso__436BFEE3");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.PitchingStint)
                     .HasForeignKey(d => d.TeamId)
-                    .HasConstraintName("FK__PitchingS__TeamI__57A801BA");
+                    .HasConstraintName("FK__PitchingS__TeamI__4277DAAA");
             });
 
             modelBuilder.Entity<PostseasonSeries>(entity =>
@@ -661,22 +663,22 @@ namespace FantasyBaseball.Entities.Models
                 entity.HasOne(d => d.LosingTeam)
                     .WithMany(p => p.PostseasonSeriesLosingTeam)
                     .HasForeignKey(d => d.LosingTeamId)
-                    .HasConstraintName("FK__Postseaso__Losin__5C6CB6D7");
+                    .HasConstraintName("FK__Postseaso__Losin__473C8FC7");
 
                 entity.HasOne(d => d.LosingTeamLeague)
                     .WithMany(p => p.PostseasonSeriesLosingTeamLeague)
                     .HasForeignKey(d => d.LosingTeamLeagueId)
-                    .HasConstraintName("FK__Postseaso__Losin__5A846E65");
+                    .HasConstraintName("FK__Postseaso__Losin__45544755");
 
                 entity.HasOne(d => d.WinningTeam)
                     .WithMany(p => p.PostseasonSeriesWinningTeam)
                     .HasForeignKey(d => d.WinningTeamId)
-                    .HasConstraintName("FK__Postseaso__Winni__5B78929E");
+                    .HasConstraintName("FK__Postseaso__Winni__46486B8E");
 
                 entity.HasOne(d => d.WinningTeamLeague)
                     .WithMany(p => p.PostseasonSeriesWinningTeamLeague)
                     .HasForeignKey(d => d.WinningTeamLeagueId)
-                    .HasConstraintName("FK__Postseaso__Winni__59904A2C");
+                    .HasConstraintName("FK__Postseaso__Winni__4460231C");
             });
 
             modelBuilder.Entity<Salary>(entity =>
@@ -695,18 +697,18 @@ namespace FantasyBaseball.Entities.Models
                     .WithMany(p => p.Salary)
                     .HasForeignKey(d => d.LeagueId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Salary__LeagueId__5D60DB10");
+                    .HasConstraintName("FK__Salary__LeagueId__4830B400");
 
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.Salary)
                     .HasForeignKey(d => d.PersonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Salary__PersonId__5F492382");
+                    .HasConstraintName("FK__Salary__PersonId__4A18FC72");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.Salary)
                     .HasForeignKey(d => d.TeamId)
-                    .HasConstraintName("FK__Salary__TeamId__5E54FF49");
+                    .HasConstraintName("FK__Salary__TeamId__4924D839");
             });
 
             modelBuilder.Entity<School>(entity =>
@@ -780,17 +782,17 @@ namespace FantasyBaseball.Entities.Models
                 entity.HasOne(d => d.Division)
                     .WithMany(p => p.Team)
                     .HasForeignKey(d => d.DivisionId)
-                    .HasConstraintName("FK__Team__DivisionId__61316BF4");
+                    .HasConstraintName("FK__Team__DivisionId__4C0144E4");
 
                 entity.HasOne(d => d.Franchise)
                     .WithMany(p => p.Team)
                     .HasForeignKey(d => d.FranchiseId)
-                    .HasConstraintName("FK__Team__FranchiseI__6225902D");
+                    .HasConstraintName("FK__Team__FranchiseI__4CF5691D");
 
                 entity.HasOne(d => d.League)
                     .WithMany(p => p.Team)
                     .HasForeignKey(d => d.LeagueId)
-                    .HasConstraintName("FK__Team__LeagueId__603D47BB");
+                    .HasConstraintName("FK__Team__LeagueId__4B0D20AB");
             });
 
             OnModelCreatingPartial(modelBuilder);

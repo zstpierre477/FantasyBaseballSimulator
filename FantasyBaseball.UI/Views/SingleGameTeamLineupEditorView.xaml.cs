@@ -12,11 +12,11 @@ namespace FantasyBaseball.UI.Views
     {
         private IViewModelFactory ViewModelFactory { get; set; }
 
-        public SingleGameTeamLineupEditorView(IViewModelFactory viewModelFactory, TeamViewModel teamViewModel, bool isGameStarted = false)
+        public SingleGameTeamLineupEditorView(IViewModelFactory viewModelFactory, TeamViewModel teamViewModel, bool isGameStarted = false, bool sortLineup = true)
         {
             InitializeComponent();
             ViewModelFactory = viewModelFactory;
-            var viewModel = (SingleGameTeamLineupEditorViewModel)viewModelFactory.GetViewModel(GetType().ToString(), new List<ViewModelBase> { teamViewModel });
+            var viewModel = (SingleGameTeamLineupEditorViewModel)viewModelFactory.GetViewModel(GetType().ToString(), new List<ViewModelBase> { teamViewModel }, sortLineup);
             viewModel.IsGameStarted = isGameStarted;
             DataContext = viewModel;
         }
