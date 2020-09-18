@@ -27,6 +27,7 @@ namespace FantasyBaseball.Entities.Helpers
 
         public static BattingStint CombineSamePersonTeamAndYearBattingStints(this IEnumerable<BattingStint> battingStints)
         {
+            battingStints = battingStints.ToList();
             if (battingStints.Any() == false)
             {
                 return null;
@@ -56,7 +57,10 @@ namespace FantasyBaseball.Entities.Helpers
                 TeamId = battingStints.First().TeamId,
                 Triples = (short)battingStints.Sum(b => b.Triples),
                 Walks = (short)battingStints.Sum(b => b.Walks),
-                Year = battingStints.First().Year
+                Year = battingStints.First().Year,
+                OnBasePercentage = battingStints.Sum(b => b.AtBats + b.Walks + b.HitByPitch + b.SacrificeFlies) == 0 ? .000 : battingStints.Sum(b => b.Hits + b.Walks + b.HitByPitch)/(float)battingStints.Sum(b => b.AtBats + b.Walks + b.HitByPitch + b.SacrificeFlies),
+                SluggingPercentage = battingStints.Sum(b => b.AtBats) == 0 ? .000 : battingStints.Sum(b => b.Hits + b.Doubles + (2*b.Triples) + (3*b.HomeRuns))/(float)battingStints.Sum(b => b.AtBats),
+                OnBasePlusSlugging = battingStints.Sum(b => b.AtBats) == 0 || battingStints.Sum(b => b.AtBats + b.Walks + b.HitByPitch + b.SacrificeFlies) == 0 ? .000 : battingStints.Sum(b => b.Hits + b.Walks + b.HitByPitch) / (float)battingStints.Sum(b => b.AtBats + b.Walks + b.HitByPitch + b.SacrificeFlies) + battingStints.Sum(b => b.Hits + b.Doubles + (2 * b.Triples) + (3 * b.HomeRuns)) / (float)battingStints.Sum(b => b.AtBats)
             };
         }
     }

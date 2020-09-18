@@ -25,6 +25,8 @@ namespace FantasyBaseball.Entities.Helpers
 
         public static PitchingStint CombineSamePersonTeamAndYearPitchingStints(this IEnumerable<PitchingStint> pitchingStints)
         {
+            pitchingStints = pitchingStints.ToList();
+
             if (pitchingStints.Any() == false)
             {
                 return null;
@@ -59,7 +61,9 @@ namespace FantasyBaseball.Entities.Helpers
                 Walks = (short)pitchingStints.Sum(p => p.Walks),
                 WildPitches = (short)pitchingStints.Sum(p => p.WildPitches),
                 Wins = (short)pitchingStints.Sum(p => p.Wins),
-                Year = pitchingStints.First().Year
+                Year = pitchingStints.First().Year,
+                WalksAndHitsPerInningsPitched = pitchingStints.Sum(p => p.InningsPitchedOuts) == 0 ? .000 : pitchingStints.Sum(p => p.Walks + p.Hits)/(((float)pitchingStints.Sum(p => p.InningsPitchedOuts))/3),
+                WalksAndHitsPerInningsPitchedPlusEarnedRunAverage = pitchingStints.Sum(p => p.InningsPitchedOuts) == 0 ? .000 : pitchingStints.Sum(p => p.Walks + p.Hits) / (((float)pitchingStints.Sum(p => p.InningsPitchedOuts)) / 3) + (9*(pitchingStints.Sum(p => p.EarnedRuns)/(((float)pitchingStints.Sum(p => p.InningsPitchedOuts))/3)))
             };
         }
     }
